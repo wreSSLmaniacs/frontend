@@ -1,0 +1,7 @@
+<p>register works!</p>
+<form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+    <label>Name: <input type="text" formControlName="username"></label><br><br>
+    <label>Email Id: <input type="text" formControlName="email"></label>
+    <label>Password: <input type="password" formControlName="password"></label>
+  </form>
+<button class= "button" (click)="onSubmit()" type="submit" >Submit</button>
