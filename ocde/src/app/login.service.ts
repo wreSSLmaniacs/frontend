@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LoginService {
-  postUrl = ''
+  postUrl = 'http://127.0.0.1:8000/api/login'
   constructor(private http:HttpClient,private _router:Router) { }
 
   httpOptions = {

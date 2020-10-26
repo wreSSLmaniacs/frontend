@@ -7,7 +7,7 @@ import { NewUser } from './register/newuser';
   providedIn: 'root'
 })
 export class RegService {
-  postUrl = ''
+  postUrl = 'http://127.0.0.1:8000/api/profile/add'
   constructor(private http:HttpClient) { }
 
   httpOptions = {
