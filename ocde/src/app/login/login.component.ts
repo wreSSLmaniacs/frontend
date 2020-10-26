@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   myuser : User;
 
   loginForm = new FormGroup({
-    useremail:new FormControl('', Validators.required),
+    username:new FormControl('', Validators.required),
     password:new FormControl('',Validators.required)
   })
 
@@ -27,20 +27,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.myuser={
-      email: this.loginForm.get('useremail').value,
+      username: this.loginForm.get('username').value,
       password: this.loginForm.get('password').value
     }
 
     this.logserv.trylogin(this.myuser)
       .subscribe(
         res => {
-          console.log(res)
           localStorage.setItem('token',"Active")
           this._router.navigate(['/profile']);
         },
         err => console.log(err)
       )
-    console.log(this.myuser);
   }
 
 }

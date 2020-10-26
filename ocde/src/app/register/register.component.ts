@@ -46,8 +46,6 @@ export class RegisterComponent implements OnInit {
         },
         err => console.log(err)
       )
-
-    console.log(this.mynewuser);
   }
 
 }
