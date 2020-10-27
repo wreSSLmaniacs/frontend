@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import 'ace-builds/src-noconflict/theme-ambiance';
 
-const THEME = 'ace/theme/ambiance';
+const THEME = 'ace/theme/github';
 const LANG = 'ace/mode/c_cpp';
 
 @Component({
@@ -13,29 +13,23 @@ const LANG = 'ace/mode/c_cpp';
   styleUrls: ['./editor.component.scss']
 })
 
-export class EditorComponent implements OnInit {
+export class EditorComponent implements AfterViewInit {
 
-  @ViewChild('codeEditor') codeEditorElmRef : ElementRef;
-  private codeEditor : ace.Ace.Editor;
+  @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
+  private aceEditor : ace.Ace.Editor;
 
   constructor() { }
 
-  ngOnInit(): void {
-    const element = this.codeEditorElmRef.nativeElement;
-    const editorOptions: Partial<ace.Ace.EditorOptions> = {
-      highlightActiveLine: true,
-      minLines: 10,
-      maxLines: Infinity,
-    };
-    this.codeEditor = ace.edit(element,editorOptions);
-    this.codeEditor.setTheme(THEME);
-    this.codeEditor.session.setMode(LANG);
-    this.codeEditor.setValue("the new text here");
-    this.codeEditor.setShowFoldWidgets(true);
+  ngAfterViewInit(): void {
+    ace.config.set("fontSize", "14px");
+    this.aceEditor = ace.edit(this.editor.nativeElement);
+    this.aceEditor.session.setValue("#include<bits/stdc++.h>");
+    this.aceEditor.setTheme(THEME);
+    this.aceEditor.session.setMode(LANG);
   }
 
   public getCode() {
-    const code = this.codeEditor.getValue();
+    const code = this.aceEditor.getValue();
     console.log(code);
   }
 
