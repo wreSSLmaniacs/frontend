@@ -2,20 +2,20 @@
 
     <div>
         <select [(ngModel)]="THEME" (ngModelChange)="updateTheme()" class="form-control-mb-12">
-            <option value="ace/theme/github">Github Theme</option>
-            <option value="ace/theme/ambiance">Ambiance Theme</option>
+            <option value="github">Github Theme</option>
+            <option value="ambiance">Ambiance Theme</option>
          </select>
     
          <select [(ngModel)]="LANG" (ngModelChange)="updateLang()" class="form-control-mb-12">
-            <option value="ace/mode/c_cpp">C++</option>
-            <option value="ace/mode/python">Python</option>
+            <option value="c_cpp">C++</option>
+            <option value="python">Python</option>
          </select>
     </div>
 
     <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
     
     <div class="cbutton">
-        <button type="button" class="btn btn-dark btn-sm btn-block px-4 mx-2" (click)="getCode()">
+        <button type="button" class="btn btn-dark btn-sm btn-block px-4 mx-2" (click)="runCode()">
             Run
         </button>
     </div>
@@ -23,11 +23,11 @@
     <div class="row mt-4">
         <div class="col">
             <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
-            <textarea class="form-control output" rows="6" aria-label="output-textarea"></textarea>
+            <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
         </div>
         <div class="col">
             <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
-            <textarea class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
+            <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
         </div>
     </div>
 </div>
