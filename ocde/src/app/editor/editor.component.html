@@ -1,5 +1,17 @@
 <div class="container h-100 mt-4">
 
+    <div>
+        <select [(ngModel)]="THEME" (ngModelChange)="updateTheme()" class="form-control-mb-12">
+            <option value="ace/theme/github">Github Theme</option>
+            <option value="ace/theme/ambiance">Ambiance Theme</option>
+         </select>
+    
+         <select [(ngModel)]="LANG" (ngModelChange)="updateLang()" class="form-control-mb-12">
+            <option value="ace/mode/c_cpp">C++</option>
+            <option value="ace/mode/python">Python</option>
+         </select>
+    </div>
+
     <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
     
     <div class="cbutton">
