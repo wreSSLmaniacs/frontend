@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,7 +34,9 @@ import { EditorComponent } from './editor/editor.component';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [RegService,LoginService,AuthGuard],
   bootstrap: [AppComponent]

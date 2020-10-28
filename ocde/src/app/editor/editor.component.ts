@@ -51,7 +51,7 @@ export class EditorComponent implements AfterViewInit {
             this.output = receivied.output;
           }   
           else {
-            this.output = "Some Error Occured";
+            this.output = "Error: " + receivied.output;
           }
         });
   }
