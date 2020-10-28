@@ -2,12 +2,17 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RunService } from '../run.service';
 import { RunInput } from '../run_input';
 import { RunOutput } from '../run_output';
+import { MatDialog } from '@angular/material/dialog'
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';
+import { EditorDialogComponent } from '../editor-dialog/editor-dialog.component';
+import { FileService } from '../file.service';
+
+import { File } from '../file';
 
 @Component({
   selector: 'app-editor',
@@ -20,6 +25,9 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
   private aceEditor : ace.Ace.Editor;
 
+  files: File[] = [];
+  currentfile: string = '';
+
   THEME : string = 'github';
   LANG : string = 'c_cpp';
 
@@ -27,7 +35,11 @@ export class EditorComponent implements AfterViewInit {
   input : string = '';
   output : string = '';
 
-  constructor(private runscript : RunService) { }
+  constructor(
+    private runscript : RunService,
+    public dialog: MatDialog,
+    private fileService: FileService
+    ) { }
 
   ngAfterViewInit(): void {
     ace.config.set("fontSize", "16px");
@@ -72,6 +84,40 @@ export class EditorComponent implements AfterViewInit {
         break;
       }
     }
+  }
+
+  openDialog(){
+    var filename;
+    let dialogRef = this.dialog.open(EditorDialogComponent, {
+      data: {filename: filename}});
+
+    dialogRef.afterClosed().subscribe(result=>{
+      if(!result){return;}
+      console.log(`Dialog Result: ${result}`);
+      this.currentfile = result;
+      this.saveFile(result);
+    });
+  }
+
+  saveFile(filename = this.currentfile): void{
+    if(!filename){return;}
+      this.code = this.aceEditor.session.getValue();
+      this.fileService.saveFile({filename: filename, script: this.code} as File).subscribe(
+        file=>{
+          console.log(file);
+          for(let item in this.files){
+            if(this.files[item].filename == file.filename){
+              this.files[item] = file;
+              return;
+            }
+          }
+          this.files.push(file)
+        }); 
+  }
+
+  setFile(file: File){
+    this.currentfile = file.filename;
+    this.aceEditor.session.setValue(file.script);
   }
 
 } 

@@ -4,6 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,6 +23,7 @@ import { RegService } from './reg.service';
 import { LoginService } from './login.service';
 import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
+import { EditorDialogComponent } from './editor-dialog/editor-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +32,10 @@ import { EditorComponent } from './editor/editor.component';
     RegisterComponent,
     ProfileComponent,
     HomeComponent,
-    EditorComponent
+    EditorComponent,
+    EditorDialogComponent
   ],
+  entryComponents: [EditorDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +44,12 @@ import { EditorComponent } from './editor/editor.component';
     BrowserAnimationsModule,
     FormsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [RegService,LoginService,AuthGuard],
   bootstrap: [AppComponent]
