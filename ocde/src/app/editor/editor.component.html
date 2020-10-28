@@ -1,0 +1,42 @@
+<div class="container h-100 mt-4">
+
+    <div class="row mt-4 justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Theme</mat-label>
+                <mat-select [(ngModel)]="THEME" (ngModelChange)="updateTheme()">
+                <mat-option value="github">Github Theme</mat-option>
+                <mat-option value="ambiance">Ambiance Theme</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Language</mat-label>
+                <mat-select [(ngModel)]="LANG" (ngModelChange)="updateLang()">
+                <mat-option value="c_cpp">C++</mat-option>
+                <mat-option value="python">Python</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+    </div>
+
+    <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
+    
+    <div class="cbutton">
+        <button type="button" class="btn btn-dark btn-sm btn-block px-4 mx-2" (click)="runCode()">
+            Run
+        </button>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col">
+            <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
+            <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
+        </div>
+        <div class="col">
+            <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
+            <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
+        </div>
+    </div>
+</div>

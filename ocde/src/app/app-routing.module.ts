@@ -7,12 +7,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthGuard } from './auth.guard';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   { path: 'login',component:LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent,canActivate:[ AuthGuard ]},
+  { path: 'editor', component: EditorComponent},
   { path: '**', redirectTo:'home',pathMatch:'full'}
 ];
 
