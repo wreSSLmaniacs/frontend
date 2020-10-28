@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +19,6 @@ import { LoginService } from './login.service';
 import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,11 @@ import { EditorComponent } from './editor/editor.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [RegService,LoginService,AuthGuard],
   bootstrap: [AppComponent]
