@@ -1,0 +1,5 @@
+Editor :
+1. Add multilanguage, multitheme dropbox support
+2. Add advanced code editing options
+3. Add input field (forgot, sleepy rn XD)
+4. Create GET, POST requests for actual compilation

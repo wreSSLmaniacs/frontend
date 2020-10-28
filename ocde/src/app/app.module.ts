@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { RegService } from './reg.service';
 import { LoginService } from './login.service';
 import { AuthGuard } from './auth.guard';
+import { EditorComponent } from './editor/editor.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthGuard } from './auth.guard';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
