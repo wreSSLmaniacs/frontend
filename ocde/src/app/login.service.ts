@@ -28,4 +28,8 @@ export class LoginService {
     localStorage.removeItem('token')
     this._router.navigate(['/home'])
   }
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
 }

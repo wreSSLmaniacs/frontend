@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { LoginService } from './login.service';
 import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
 import { EditorDialogComponent } from './editor-dialog/editor-dialog.component';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,12 @@ import { EditorDialogComponent } from './editor-dialog/editor-dialog.component';
     MatDialogModule,
     MatButtonModule
   ],
-  providers: [RegService,LoginService,AuthGuard],
+  providers: [RegService,LoginService,AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
 
     this.logserv.trylogin(this.myuser)
       .subscribe(
-        res => {
-          localStorage.setItem('token',"Active")
+        (res:any) => {
+          console.log(res)
+          localStorage.setItem('token',res.token)
           this._router.navigate(['/profile']);
         },
         err => console.log(err)
