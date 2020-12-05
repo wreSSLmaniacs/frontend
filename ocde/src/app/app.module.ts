@@ -25,6 +25,9 @@ import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
 import { EditorDialogComponent } from './editor-dialog/editor-dialog.component';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { CompDashboardComponent } from './comp-dashboard/comp-dashboard.component';
+import { CompCreateComponent } from './comp-create/comp-create.component';
+import { CompetitionComponent } from './competition/competition.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { TokenInterceptorService } from './token-interceptor.service';
     ProfileComponent,
     HomeComponent,
     EditorComponent,
-    EditorDialogComponent
+    EditorDialogComponent,
+    CompDashboardComponent,
+    CompCreateComponent,
+    CompetitionComponent
   ],
   entryComponents: [EditorDialogComponent],
   imports: [

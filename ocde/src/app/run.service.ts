@@ -19,6 +19,6 @@ export class RunService {
 
   runScript(input : RunInput) : Observable<RunOutput> {
     return this.http.post<RunOutput>(this.postUrl,input,this.httpOptions);
-  } 
+  }
 
 }

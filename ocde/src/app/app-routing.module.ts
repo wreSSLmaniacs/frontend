@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
+import { CompCreateComponent } from './comp-create/comp-create.component';
 
 const routes: Routes = [
   { path: 'login',component:LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent,canActivate:[ AuthGuard ]},
   { path: 'editor', component: EditorComponent, canActivate:[ AuthGuard ]},
+  { path: 'filecheck', component: CompCreateComponent },
   { path: '**', redirectTo:'home',pathMatch:'full'}
 ];
 
