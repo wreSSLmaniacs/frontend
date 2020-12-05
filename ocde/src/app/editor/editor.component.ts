@@ -1,14 +1,19 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RunService } from '../run.service';
 import { RunInput } from '../run_input';
-import { RunOutput } from '../run_output';
 import { MatDialog } from '@angular/material/dialog'
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
+import 'ace-builds/src-noconflict/mode-java';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-chaos';
+import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/src-noconflict/theme-cobalt';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/ext-beautify';
 import { EditorDialogComponent } from '../editor-dialog/editor-dialog.component';
 import { FileService } from '../file.service';
 
@@ -24,6 +29,7 @@ export class EditorComponent implements AfterViewInit {
 
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
   private aceEditor : ace.Ace.Editor;
+  private editorBeautify;
 
   files: File[] = [];
   currentfile: string = '';
@@ -43,10 +49,30 @@ export class EditorComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     ace.config.set("fontSize", "16px");
-    this.aceEditor = ace.edit(this.editor.nativeElement);
+    ace.require('ace/ext/language_tools');
+    this.editorBeautify = ace.require('ace/ext/beautify');
+    const basicEditorOptions: Partial<ace.Ace.EditorOptions> = {
+      highlightActiveLine: true,
+      minLines: 14,
+      maxLines: Infinity,
+    };
+    const extraEditorOptions = {
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    };
+    const editorOptions = Object.assign(basicEditorOptions, extraEditorOptions);
+    this.aceEditor = ace.edit(this.editor.nativeElement, editorOptions);
     this.aceEditor.setTheme('ace/theme/'+this.THEME);
     this.aceEditor.session.setMode('ace/mode/'+this.LANG);
-    this.aceEditor.session.setValue("#include<bits/stdc++.h>");
+    this.aceEditor.session.setValue(
+`#include<bits/stdc++.h>
+using namespace std;
+int main() {
+  // code goes here
+  return 0;
+}`    
+    );
   }
 
   public runCode() {
@@ -68,6 +94,13 @@ export class EditorComponent implements AfterViewInit {
         });
   }
 
+  public beautifyContents() {
+    if (this.aceEditor && this.editorBeautify) {
+      const session = this.aceEditor.getSession();
+      this.editorBeautify.beautify(session);
+   }
+  }
+
   public updateTheme() {
     this.aceEditor.setTheme('ace/theme/'+this.THEME);
   }
@@ -76,12 +109,21 @@ export class EditorComponent implements AfterViewInit {
     this.aceEditor.session.setMode('ace/mode/'+this.LANG);
     switch(this.LANG) {
       case 'c_cpp': {
-        this.aceEditor.session.setValue("#include<bits/stdc++.h>");
+        this.aceEditor.session.setValue(
+`#include<bits/stdc++.h>
+using namespace std;
+int main() {
+  // code goes here
+  return 0;
+}`
+        );
         break;
       }
       case 'python': {
-        this.aceEditor.session.setValue("import os");
-        break;
+        this.aceEditor.session.setValue("");
+      }
+      case 'java': {
+        this.aceEditor.session.setValue("");
       }
     }
   }

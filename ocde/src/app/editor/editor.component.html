@@ -21,6 +21,9 @@
                 <mat-select [(ngModel)]="THEME" (ngModelChange)="updateTheme()">
                 <mat-option value="github">Github Theme</mat-option>
                 <mat-option value="ambiance">Ambiance Theme</mat-option>
+                <mat-option value="chaos">Chaos Theme</mat-option>
+                <mat-option value="chrome">Chrome Theme</mat-option>
+                <mat-option value="cobalt">Cobalt Theme</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -30,6 +33,7 @@
                 <mat-select [(ngModel)]="LANG" (ngModelChange)="updateLang()">
                 <mat-option value="c_cpp">C++</mat-option>
                 <mat-option value="python">Python</mat-option>
+                <mat-option value="java">Java</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -40,6 +44,9 @@
     <div class="cbutton">
         <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
             Run
+        </button>
+        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
+            Align
         </button>
         <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
             Save
