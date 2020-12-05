@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup,FormBuilder } from "@angular/forms";
 import { RunService } from '../run.service';
 import { RunInput } from '../run_input';
 import { MatDialog } from '@angular/material/dialog'
@@ -33,6 +34,7 @@ export class EditorComponent implements AfterViewInit {
 
   files: File[] = [];
   currentfile: string = '';
+  form: FormGroup;
 
   THEME : string = 'github';
   LANG : string = 'c_cpp';
@@ -42,12 +44,20 @@ export class EditorComponent implements AfterViewInit {
   output : string = '';
 
   constructor(
+    public fb: FormBuilder,
     private runscript : RunService,
     public dialog: MatDialog,
     private fileService: FileService
-    ) { }
+    ) { 
+      this.form = this.fb.group({
+        script: [null],
+        language: [''],
+        input: ['']
+      });
+    }
 
   ngAfterViewInit(): void {
+    ace.config.set('basePath', 'path');
     ace.config.set("fontSize", "16px");
     ace.require('ace/ext/language_tools');
     this.editorBeautify = ace.require('ace/ext/beautify');
@@ -58,7 +68,6 @@ export class EditorComponent implements AfterViewInit {
     };
     const extraEditorOptions = {
         enableBasicAutocompletion: true,
-        enableSnippets: true,
         enableLiveAutocompletion: true
     };
     const editorOptions = Object.assign(basicEditorOptions, extraEditorOptions);
@@ -161,5 +170,28 @@ int main() {
     this.currentfile = file.filename;
     this.aceEditor.session.setValue(file.script);
   }
+
+  uploadSource(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({
+      script: file,
+      language: this.LANG,
+      input: this.input
+    });
+    this.form.get('script').updateValueAndValidity();
+    this.form.get('language').updateValueAndValidity();
+    this.form.get('input').updateValueAndValidity();
+  }
+
+  runFile() {
+    var formData: any = new FormData();
+    formData.append("script", this.form.get('script').value);
+    formData.append("language", this.form.get('language').value);
+    formData.append("input", this.form.get('input').value);
+    this.runscript.runFile(formData).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
+  } 
 
 } 
