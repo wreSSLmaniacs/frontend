@@ -19,7 +19,10 @@ export class LoginComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
 
-  constructor(private logserv:LoginService, private _router:Router) { }
+  constructor(
+    private logserv:LoginService,
+    private _router:Router,
+  ) { }
 
   ngOnInit(): void {
     
@@ -35,7 +38,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res:any) => {
           console.log(res)
-          localStorage.setItem('token',res.token)
+          localStorage.setItem('token',res.token);
+          localStorage.setItem('username',this.myuser.username);
           this._router.navigate(['/profile']);
         },
         err => console.log(err)

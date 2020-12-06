@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent,canActivate:[ AuthGuard ]},
   { path: 'editor', component: EditorComponent, canActivate:[ AuthGuard ]},
-  { path: 'filecheck', component: CompCreateComponent },
+  { path: 'create', component: CompCreateComponent, canActivate:[ AuthGuard ] },
   { path: '**', redirectTo:'home',pathMatch:'full'}
 ];
 
