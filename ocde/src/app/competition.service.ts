@@ -17,8 +17,8 @@ export class CompetitionService {
     headers : new HttpHeaders({'Content-Type':'application/json'})
   };
 
-  fetchCompetetions() : Observable<Comp> {
-    return this.http.post<Comp>(this.postUrl,this.httpOptions);
+  fetchCompetetions() : Observable<Comp[]> {
+    return this.http.post<Comp[]>(this.postUrl,this.httpOptions);
   }
 
 }

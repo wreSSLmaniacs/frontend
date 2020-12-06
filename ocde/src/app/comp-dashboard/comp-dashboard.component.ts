@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompetitionService } from '../competition.service';
 
 @Component({
   selector: 'app-comp-dashboard',
@@ -7,17 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompDashboardComponent implements OnInit {
 
-  comps = [
-    {
-      "title":"Competition 1",
-      "body":"This competition has a moderate difficulty level and focusses on fast fourier transforms",
-      "url":"/profile"
-    }
-  ];
+  comps = [];
   
-  constructor() { }
+  constructor(
+    private cpservice : CompetitionService
+  ) { }
 
   ngOnInit(): void {
+    this.cpservice.fetchCompetetions().subscribe(
+      running => {
+        this.comps = running;
+        alert("New competitions loaded!!")
+      }
+    );
   }
 
 }
