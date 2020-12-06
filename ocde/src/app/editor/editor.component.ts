@@ -162,7 +162,9 @@ int main() {
   }
 
   saveFile(filename = this.currentfile): void{
-    if(!filename){return;}
+    if(!filename){
+      return this.openDialog();
+    }
       this.code = this.aceEditor.session.getValue();
       this.fileService.saveFile(
         {
