@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompDashboardComponent implements OnInit {
 
+  comps = [
+    {
+      "title":"Competition 1",
+      "body":"This competition has a moderate difficulty level and focusses on fast fourier transforms",
+      "url":"/profile"
+    }
+  ];
+  
   constructor() { }
 
   ngOnInit(): void {

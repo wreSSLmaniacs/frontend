@@ -1,1 +1,13 @@
-<p>comp-dashboard works!</p>
+<h1>Running Competitions</h1>
+
+<div style="padding: 10px 0px;" *ngFor="let comp of comps">
+    <div class="card">
+        <div class="card-header">
+            {{comp.title}}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{comp.body.substr(0,100)}}</p>
+            <a routerLink={{comp.url}} class="btn btn-primary">Participate</a>
+        </div>
+    </div>
+</div>
