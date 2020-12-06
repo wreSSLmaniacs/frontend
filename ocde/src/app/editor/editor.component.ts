@@ -7,7 +7,7 @@ import { LoginService } from "../login.service";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
-import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/mode-r';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';
@@ -142,7 +142,7 @@ int main() {
       case 'python': {
         this.aceEditor.session.setValue("");
       }
-      case 'java': {
+      case 'r': {
         this.aceEditor.session.setValue("");
       }
     }
@@ -165,22 +165,22 @@ int main() {
     if(!filename){
       return this.openDialog();
     }
-      this.code = this.aceEditor.session.getValue();
-      this.fileService.saveFile(
-        {
-          filename: filename,
-          script: this.code
-        } as File, this.uservice.getUser()).subscribe(
-        file=>{
-          console.log(file);
-          for(let item in this.files){
-            if(this.files[item].filename == file.filename){
-              this.files[item] = file;
-              return;
-            }
+    this.code = this.aceEditor.session.getValue();
+    this.fileService.saveFile(
+      {
+        filename: filename,
+        script: this.code
+      } as File, this.uservice.getUser()).subscribe(
+      file=>{
+        console.log(file);
+        for(let item in this.files){
+          if(this.files[item].filename == file.filename){
+            this.files[item] = file;
+            return;
           }
-          this.files.push(file)
-        }); 
+        }
+        this.files.push(file)
+      }); 
   }
 
   setFile(file: File){
