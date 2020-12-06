@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   postUrl = 'http://127.0.0.1:8000/api/login'
+
   constructor(private http:HttpClient,private _router:Router) { }
 
   httpOptions = {
@@ -21,15 +22,20 @@ export class LoginService {
   }
 
   loggedIn(){
-    return !!localStorage.getItem('token')
+    return !!localStorage.getItem('token');
   }
 
   logoutUser(){
-    localStorage.removeItem('token')
-    this._router.navigate(['/home'])
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    this._router.navigate(['/home']);
   }
 
   getToken(){
     return localStorage.getItem('token');
+  }
+
+  getUser() {
+    return localStorage.getItem('username');
   }
 }

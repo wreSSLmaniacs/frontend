@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../login.service';
-import { UsernameService } from "../username.service";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private logserv:LoginService,
     private _router:Router,
-    private uservice: UsernameService
   ) { }
 
   ngOnInit(): void {
@@ -36,13 +34,12 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password').value
     }
 
-    this.uservice.regUser(this.myuser.username);
-
     this.logserv.trylogin(this.myuser)
       .subscribe(
         (res:any) => {
           console.log(res)
-          localStorage.setItem('token',res.token)
+          localStorage.setItem('token',res.token);
+          localStorage.setItem('username',this.myuser.username);
           this._router.navigate(['/profile']);
         },
         err => console.log(err)
