@@ -2,7 +2,8 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
 import { RunService } from '../run.service';
 import { RunInput } from '../run_input';
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog';
+import { LoginService } from "../login.service";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
@@ -47,7 +48,8 @@ export class EditorComponent implements AfterViewInit {
     public fb: FormBuilder,
     private runscript : RunService,
     public dialog: MatDialog,
-    private fileService: FileService
+    private fileService: FileService,
+    private uservice: LoginService
     ) { 
       this.form = this.fb.group({
         script: [null],
@@ -87,6 +89,7 @@ int main() {
   public runCode() {
       this.code = this.aceEditor.session.getValue();
       const send : RunInput = {
+        username : this.uservice.getUser(),
         script : this.code,
         language : this.LANG,
         input : this.input
@@ -153,7 +156,12 @@ int main() {
   saveFile(filename = this.currentfile): void{
     if(!filename){return;}
       this.code = this.aceEditor.session.getValue();
-      this.fileService.saveFile({filename: filename, script: this.code} as File).subscribe(
+      this.fileService.saveFile(
+        {
+          username: this.uservice.getUser(),
+          filename: filename,
+          script: this.code
+        } as File).subscribe(
         file=>{
           console.log(file);
           for(let item in this.files){
@@ -185,6 +193,7 @@ int main() {
 
   runFile() {
     var formData: any = new FormData();
+    formData.append("username", this.uservice.getUser());
     formData.append("script", this.form.get('script').value);
     formData.append("language", this.form.get('language').value);
     formData.append("input", this.form.get('input').value);
