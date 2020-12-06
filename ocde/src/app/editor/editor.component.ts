@@ -78,7 +78,7 @@ export class EditorComponent implements AfterViewInit {
 `#include<bits/stdc++.h>
 using namespace std;
 int main() {
-  // code goes here
+  cout << "Hello World" << endl;
   return 0;
 }`    
     );
@@ -122,7 +122,7 @@ int main() {
 `#include<bits/stdc++.h>
 using namespace std;
 int main() {
-  // code goes here
+  cout << "Hello World" << endl;
   return 0;
 }`
         );
