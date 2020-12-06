@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class FileService {
 
-  postUrl = 'http://127.0.0.1:8000/api/file';
+  postUrl = 'http://127.0.0.1:8000/api/display';
 
   constructor(private http : HttpClient) { }
 
@@ -16,7 +16,24 @@ export class FileService {
     headers : new HttpHeaders({'Content-Type':'application/json'})
   };
 
-  saveFile(input: File): Observable<File>{
-    return this.http.post<File>(this.postUrl,input,this.httpOptions);
+  saveFile(input: File, username: String): Observable<File>{
+    const url = `${this.postUrl}/${username}`;
+    return this.http.post<File>(url,input,this.httpOptions);
+  }
+
+  getFiles(username: String): Observable<File[]> {
+    const url = `${this.postUrl}/${username}`;
+    console.log(url);
+    return this.http.get<File[]>(url);
+  }
+
+  getFile(id: String, username: String): Observable<File> {
+    const url = `${this.postUrl}/${username}/${id}`;
+    return this.http.get<File>(url)
+  }
+
+  deleteFile(id: String, username: String): Observable<File> {
+    const url = `${this.postUrl}/${username}/${id}`;
+    return this.http.delete<File>(url);
   }
 }

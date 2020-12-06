@@ -58,6 +58,14 @@ export class EditorComponent implements AfterViewInit {
       });
     }
 
+  ngOnInit() {
+      this.getFiles();
+  }
+
+  getFiles(): void {
+      this.fileService.getFiles(this.uservice.getUser()).subscribe(files => this.files=files);
+  }
+
   ngAfterViewInit(): void {
     ace.config.set('basePath', 'path');
     ace.config.set("fontSize", "16px");
@@ -158,10 +166,9 @@ int main() {
       this.code = this.aceEditor.session.getValue();
       this.fileService.saveFile(
         {
-          username: this.uservice.getUser(),
           filename: filename,
           script: this.code
-        } as File).subscribe(
+        } as File, this.uservice.getUser()).subscribe(
         file=>{
           console.log(file);
           for(let item in this.files){
@@ -202,5 +209,10 @@ int main() {
       (error) => console.log(error)
     )
   } 
+
+  delete(file: File): void {
+    this.files = this.files.filter(f => f !== file);
+    this.fileService.deleteFile(file.filename,this.uservice.getUser()).subscribe();
+  }
 
 } 

@@ -1,13 +1,26 @@
 <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
-      <mat-selection-list [multiple]='false'>
+        <button mat-raised-button (click)=openDialog()>New File</button>
+      <!-- <mat-selection-list [multiple]='false'>
           <button mat-raised-button (click)=openDialog()>New File</button>
           <mat-selection-list [multiple]='false'>
               <mat-list-option *ngFor="let file of files" (click)="setFile(file)">
-                  {{file.filename}}
+                <span> {{file.filename}}</span>
+                <button mat-icon-button (click)="delete(file.filename)">
+                  <mat-icon>edit</mat-icon>
+                </button>
               </mat-list-option>
           </mat-selection-list>
-      </mat-selection-list>
+      </mat-selection-list> -->
+
+      <ul style="list-style-type:none;">
+        <mat-list-item *ngFor="let file of files">
+            <button mat-icon-button (click)="setFile(file)">{{file.filename}}</button>
+           <button mat-icon-button (click)="delete(file)">
+              <mat-icon>delete</mat-icon>
+           </button>
+        </mat-list-item>
+    </ul>
     </mat-drawer>
 
 <div class="container h-100 mt-4">
