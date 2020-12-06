@@ -34,7 +34,9 @@ export class EditorComponent implements AfterViewInit {
   private editorBeautify;
 
   files: File[] = [];
+  folders: String[] = [];
   currentfile: string = '';
+  dirk: string = '.';
   form: FormGroup;
 
   THEME : string = 'github';
@@ -63,7 +65,12 @@ export class EditorComponent implements AfterViewInit {
   }
 
   getFiles(): void {
-      this.fileService.getFiles(this.uservice.getUser()).subscribe(files => this.files=files);
+      this.fileService.getFiles(this.uservice.getUser(),this.dirk).subscribe(
+        files => {this.files=files;
+        this.folders = this.files.filter(f=> f.filename === "trash.trash").map(f=>f.script)
+        this.files = this.files.filter(f => f.filename !== "trash.trash");}
+      );
+
   }
 
   ngAfterViewInit(): void {
@@ -115,6 +122,9 @@ int main() {
   }
 
   public beautifyContents() {
+    for (var val of this.files) {
+      console.log(val.filename === "trash.trash");
+    }
     if (this.aceEditor && this.editorBeautify) {
       const session = this.aceEditor.getSession();
       this.editorBeautify.beautify(session);
@@ -148,10 +158,10 @@ int main() {
     }
   }
 
-  openDialog(){
+  openDialog(text: String){
     var filename;
     let dialogRef = this.dialog.open(EditorDialogComponent, {
-      data: {filename: filename}});
+      data: {filename: filename, text: text}});
 
     dialogRef.afterClosed().subscribe(result=>{
       if(!result){return;}
@@ -163,14 +173,14 @@ int main() {
 
   saveFile(filename = this.currentfile): void{
     if(!filename){
-      return this.openDialog();
+      return this.openDialog("File");
     }
     this.code = this.aceEditor.session.getValue();
     this.fileService.saveFile(
       {
         filename: filename,
         script: this.code
-      } as File, this.uservice.getUser()).subscribe(
+      } as File, this.uservice.getUser(), this.dirk).subscribe(
       file=>{
         console.log(file);
         for(let item in this.files){
@@ -186,6 +196,11 @@ int main() {
   setFile(file: File){
     this.currentfile = file.filename;
     this.aceEditor.session.setValue(file.script);
+  }
+
+  setFolder(folder: String){
+    this.dirk = this.dirk + '/' + folder;
+    this.getFiles();
   }
 
   uploadSource(event) {
@@ -212,9 +227,22 @@ int main() {
     )
   } 
 
-  delete(file: File): void {
+  deleteFile(file: File): void {
     this.files = this.files.filter(f => f !== file);
-    this.fileService.deleteFile(file.filename,this.uservice.getUser()).subscribe();
+    this.fileService.deleteFile(file.filename,this.uservice.getUser(), this.dirk).subscribe();
   }
 
+  deleteFolder(folder: String): void {
+    this.folders = this.folders.filter(f=> f !== folder);
+    this.fileService.deleteFolder(this.uservice.getUser(), this.dirk);
+  }
+
+  goBack(): void {
+    var loc = this.dirk.lastIndexOf("/");
+    if(loc !== -1) {
+      this.dirk = this.dirk.substring(0,loc);
+    }
+    console.log(this.dirk);
+    this.getFiles();
+  }
 } 

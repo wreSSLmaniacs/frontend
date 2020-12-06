@@ -1,10 +1,18 @@
 <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
-        <button mat-raised-button (click)=openDialog()>New File</button>
+        <button mat-raised-button (click)="openDialog('File')"><mat-icon> insert_drive_file</mat-icon></button>
+        <button mat-raised-button (click)="openDialog('Folder')">	<mat-icon>create_new_folder</mat-icon></button>
+        <button mat-raised-button (click)="goBack()"> <mat-icon>keyboard_backspace</mat-icon></button>
       <ul style="list-style-type:none;">
+        <mat-list-item *ngFor="let folder of folders">
+            <button mat-icon-button (click)="setFolder(folder)"><mat-icon>folder</mat-icon>  {{folder}}  </button>
+           <button mat-icon-button (click)="deleteFolder(folder)">
+              <mat-icon>delete</mat-icon>
+           </button>
+        </mat-list-item>
         <mat-list-item *ngFor="let file of files">
-            <button mat-icon-button (click)="setFile(file)">{{file.filename}}</button>
-           <button mat-icon-button (click)="delete(file)">
+            <button mat-icon-button (click)="setFile(file)">    {{file.filename}}     </button>
+           <button mat-icon-button (click)="deleteFile(file)">
               <mat-icon>delete</mat-icon>
            </button>
         </mat-list-item>
@@ -15,6 +23,7 @@
     <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+    <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">

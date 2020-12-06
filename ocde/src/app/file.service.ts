@@ -16,24 +16,28 @@ export class FileService {
     headers : new HttpHeaders({'Content-Type':'application/json'})
   };
 
-  saveFile(input: File, username: String): Observable<File>{
-    const url = `${this.postUrl}/${username}`;
+  saveFile(input: File, username: String, dirk: String): Observable<File>{
+    const url = `${this.postUrl}/${username}/${dirk}`;
     return this.http.post<File>(url,input,this.httpOptions);
   }
 
-  getFiles(username: String): Observable<File[]> {
-    const url = `${this.postUrl}/${username}`;
-    console.log(url);
+  getFiles(username: String, dirk: String): Observable<File[]> {
+    const url = `${this.postUrl}/${username}/${dirk}`;
     return this.http.get<File[]>(url);
   }
 
-  getFile(id: String, username: String): Observable<File> {
-    const url = `${this.postUrl}/${username}/${id}`;
+  getFile(id: String, username: String, dirk: String): Observable<File> {
+    const url = `${this.postUrl}/${username}/${dirk}/${id}`;
     return this.http.get<File>(url)
   }
 
-  deleteFile(id: String, username: String): Observable<File> {
-    const url = `${this.postUrl}/${username}/${id}`;
+  deleteFile(id: String, username: String, dirk: String): Observable<File> {
+    const url = `${this.postUrl}/${username}/${dirk}/${id}`;
     return this.http.delete<File>(url);
+  }
+
+  deleteFolder(username: String, dirk: String): void {
+    const url = `${this.postUrl}/${username}/${dirk}`;
+    this.http.delete(url);
   }
 }
