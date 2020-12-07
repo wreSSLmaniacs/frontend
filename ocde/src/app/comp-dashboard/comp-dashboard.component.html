@@ -1,13 +1,15 @@
 <h1>Running Competitions</h1>
-
+<div *ngIf="comps.length==0">
+    No Competitions Running! Visit again later or Create your own!
+</div>
 <div style="padding: 10px 0px;" *ngFor="let comp of comps">
     <div class="card">
         <div class="card-header">
             {{comp.title}}
         </div>
         <div class="card-body">
-            <p class="card-text">{{comp.body.substr(0,100)}}</p>
-            <a routerLink={{comp.url}} class="btn btn-primary">Participate</a>
+            <p class="card-text">{{comp.problem.substr(0,100)}}</p>
+            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
         </div>
     </div>
 </div>

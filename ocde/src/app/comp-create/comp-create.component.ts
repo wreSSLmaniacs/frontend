@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
 import { CompetitionService } from "../competition.service";
 
@@ -9,13 +9,13 @@ import { CompetitionService } from "../competition.service";
 })
 
 export class CompCreateComponent implements OnInit {
-  
+  @ViewChild('inAcceptor',{static: false}) inbutton : ElementRef;
+  @ViewChild('outAcceptor',{static: false}) outbutton : ElementRef;
+
   form: FormGroup;
 
-  tcarray = [];
-
-  in_tc = [];
-  out_tc = [];
+  inputReady : Boolean = false;
+  outputReady : Boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -24,35 +24,59 @@ export class CompCreateComponent implements OnInit {
     this.form = this.fb.group({
       title: [''],
       problem_st: [''],
-      N: 1
+      infile :[null],
+      outfile: [null]
     })
   }
 
-  ngOnInit() { 
-    this.onTCUpdate();
+  validate(): Boolean {
+    if(this.form.get('title').value=='') return false;
+    if(this.form.get('problem_st').value=='') return false;
+    return true && this.inputReady && this.outputReady;
   }
 
-  onTCUpdate() {
-    let n = this.form.get('N').value;
-    this.tcarray = [...Array(n).keys()].map( i => i+1);
+  ngOnInit() { }
+
+  uploadInput(files) {
+    if(files.length>0) {
+      const file = files.item(0);
+      this.form.get('infile').setValue(file);
+      this.inputReady = true;
+    }
+    else {
+      this.inputReady = false;
+    }
   }
 
-  uploadInput(file) {
-    this.in_tc.push(file.item(0));
-  }
-
-  uploadOutput(file) {
-    this.out_tc.push(file.item(0));
+  uploadOutput(files) {
+    if(files.length>0) {
+      const file = files.item(0);
+      this.form.get('outfile').setValue(file);
+      this.outputReady = true;
+    }
+    else {
+      this.outputReady = false;
+    }
   }
 
   submitForm() {
-    this.cpservice.regContest({
-      "title" : this.form.get('title').value,
-      "problem_st" : this.form.get('problem_st').value,
-      "in_tc" : this.in_tc,
-      "out_tc" : this.out_tc
-    }).subscribe(
-      response => alert(response)
-    )
+    const formData = new FormData();
+    formData.append('title',this.form.get('title').value);
+    formData.append('problem_st',this.form.get('problem_st').value);
+    formData.append('infile',this.form.get('infile').value);
+    formData.append('outfile',this.form.get('outfile').value);
+    this.cpservice.regContest(formData).subscribe(
+      (response) => alert(response),
+      (err) => console.log(console.error()
+      )
+    );
+    this.form.setValue({
+      title: [''],
+      problem_st: [''],
+      infile :[null],
+      outfile: [null]
+    });
+    this.inbutton.nativeElement.value = null;
+    this.outbutton.nativeElement.value = null;
   }
 }
