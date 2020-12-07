@@ -25,20 +25,14 @@
             </ul>
             </li>
         </ng-template>
-        <mat-selection-list [multiple]='false'>
-            <button mat-raised-button (click)=openDialog()>New File</button>
-            <mat-selection-list [multiple]='false'>
-                <mat-list-option *ngFor="let file of files" (click)="setFile(file)">
-                    {{file.filename}}
-                </mat-list-option>
-            </mat-selection-list>
-        </mat-selection-list>
+        
     </mat-drawer>
 
     <div class="container h-100 mt-4">
         <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+    </div>
     <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
