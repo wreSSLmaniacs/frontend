@@ -3,20 +3,30 @@
         <button mat-raised-button (click)="openDialog('File')"><mat-icon> insert_drive_file</mat-icon></button>
         <button mat-raised-button (click)="openDialog('Folder')">	<mat-icon>create_new_folder</mat-icon></button>
         <button mat-raised-button (click)="goBack()"> <mat-icon>keyboard_backspace</mat-icon></button>
-      <ul style="list-style-type:none;">
-        <mat-list-item *ngFor="let folder of folders">
-            <button mat-icon-button (click)="setFolder(folder)"><mat-icon>folder</mat-icon>  {{folder}}  </button>
-           <button mat-icon-button (click)="deleteFolder(folder)">
-              <mat-icon>delete</mat-icon>
-           </button>
-        </mat-list-item>
-        <mat-list-item *ngFor="let file of files">
-            <button mat-icon-button (click)="setFile(file)">    {{file.filename}}     </button>
-           <button mat-icon-button (click)="deleteFile(file)">
-              <mat-icon>delete</mat-icon>
-           </button>
-        </mat-list-item>
-    </ul>
+        <ul>
+            <ng-container
+            *ngTemplateOutlet="recursiveListTmpl; context:{ list: list }"
+            ></ng-container>
+        </ul>
+        
+        <ng-template #recursiveListTmpl let-list="list">
+            <li *ngFor="let item of list">
+                <button *ngIf="!item.isFile" mat-icon-button (click)="setFolder(item)"><mat-icon>folder</mat-icon> {{item.title}}</button>
+                <button *ngIf="item.isFile" mat-icon-button (click)="setFile(item)"> {{ item.title }}</button>
+                
+                <button *ngIf="!item.isFile" mat-icon-button (click)="deleteFolder(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+                 <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+            <ul *ngIf="item.children.length > 0">
+                <ng-container
+                *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"
+                ></ng-container>
+            </ul>
+            </li>
+        </ng-template>
     </mat-drawer>
 
 <div class="container h-100 mt-4">

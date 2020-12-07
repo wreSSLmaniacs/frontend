@@ -23,6 +23,7 @@ export class FileService {
 
   getFiles(username: String, dirk: String): Observable<File[]> {
     const url = `${this.postUrl}/${username}/${dirk}`;
+    console.log(url);
     return this.http.get<File[]>(url);
   }
 
@@ -33,11 +34,13 @@ export class FileService {
 
   deleteFile(id: String, username: String, dirk: String): Observable<File> {
     const url = `${this.postUrl}/${username}/${dirk}/${id}`;
+    console.log(url);
     return this.http.delete<File>(url);
   }
 
-  deleteFolder(username: String, dirk: String): void {
+  deleteFolder(username: String, dirk: String): Observable<File> {
     const url = `${this.postUrl}/${username}/${dirk}`;
-    this.http.delete(url);
+    console.log(url);
+    return this.http.delete<File>(url);
   }
 }
