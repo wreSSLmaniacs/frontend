@@ -43,7 +43,6 @@ export class RegisterComponent implements OnInit {
     this.regserv.tryreg(this.mynewuser)
       .subscribe(
         res => {
-          localStorage.setItem('userimage', res.image)
           this._router.navigate(['/login'])
         },
         err => console.log(err)
