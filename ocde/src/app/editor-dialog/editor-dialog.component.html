@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Create New File</h2>
+<h2 mat-dialog-title>Create New {{data.text}}</h2>
 <mat-dialog-content>
-        <mat-label>File Name: </mat-label>
+        <mat-label> {{data.text}} name </mat-label>
         <input matInput [(ngModel)]="data.file">
 </mat-dialog-content>
 <mat-dialog-actions>

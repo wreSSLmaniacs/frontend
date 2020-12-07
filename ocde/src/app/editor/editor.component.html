@@ -1,5 +1,30 @@
 <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
+        <button mat-raised-button (click)="openDialog('File')"><mat-icon> insert_drive_file</mat-icon></button>
+        <button mat-raised-button (click)="openDialog('Folder')">	<mat-icon>create_new_folder</mat-icon></button>
+        <button mat-raised-button (click)="goBack()"> <mat-icon>keyboard_backspace</mat-icon></button>
+        <ul>
+            <ng-container
+            *ngTemplateOutlet="recursiveListTmpl; context:{ list: list }"
+            ></ng-container>
+        </ul>
+        
+        <ng-template #recursiveListTmpl let-list="list">
+            <li *ngFor="let item of list">
+                <button *ngIf="!item.isFile" mat-icon-button (click)="setFolder(item)"><mat-icon>folder</mat-icon> {{item.title}}</button>
+                <button *ngIf="item.isFile" mat-icon-button (click)="setFile(item)"> {{ item.title }}</button>
+                
+                <button *ngIf="!item.isFile" mat-icon-button (click)="deleteFolder(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+                 <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+            <ul *ngIf="item.children.length > 0">
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
+            </ul>
+            </li>
+        </ng-template>
         <mat-selection-list [multiple]='false'>
             <button mat-raised-button (click)=openDialog()>New File</button>
             <mat-selection-list [multiple]='false'>
@@ -14,6 +39,7 @@
         <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+    <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">

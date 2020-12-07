@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
+import { CompetitionService } from "../competition.service";
 
 @Component({
   selector: 'app-comp-create',
@@ -9,45 +9,50 @@ import { HttpClient } from "@angular/common/http";
 })
 
 export class CompCreateComponent implements OnInit {
+  
   form: FormGroup;
+
+  tcarray = [];
+
+  in_tc = [];
+  out_tc = [];
 
   constructor(
     public fb: FormBuilder,
-    private http : HttpClient
+    private cpservice: CompetitionService
     ) {
     this.form = this.fb.group({
+      title: [''],
       problem_st: [''],
-      input_tc: [null],
-      output_tc: [null]
+      N: 1
     })
   }
 
-  ngOnInit() { }
-
-  uploadInput(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({
-      input_tc: file
-    });
-    this.form.get('input_tc').updateValueAndValidity()
+  ngOnInit() { 
+    this.onTCUpdate();
   }
 
-  uploadOutput(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({
-      output_tc: file
-    });
-    this.form.get('output_tc').updateValueAndValidity()
+  onTCUpdate() {
+    let n = this.form.get('N').value;
+    this.tcarray = [...Array(n).keys()].map( i => i+1);
+  }
+
+  uploadInput(file) {
+    this.in_tc.push(file.item(0));
+  }
+
+  uploadOutput(file) {
+    this.out_tc.push(file.item(0));
   }
 
   submitForm() {
-    var formData: any = new FormData();
-    formData.append("problem_st", this.form.get('problem_st').value);
-    formData.append("input_tc", this.form.get('input_tc').value);
-    formData.append("output_tc", this.form.get('output_tc').value);
-    this.http.post('http://localhost:4000/api/create-user', formData).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+    this.cpservice.regContest({
+      "title" : this.form.get('title').value,
+      "problem_st" : this.form.get('problem_st').value,
+      "in_tc" : this.in_tc,
+      "out_tc" : this.out_tc
+    }).subscribe(
+      response => alert(response)
     )
   }
 }
