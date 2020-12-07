@@ -28,6 +28,7 @@ export class LoginService {
   logoutUser(){
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('userimage');
     this._router.navigate(['/home']);
   }
 

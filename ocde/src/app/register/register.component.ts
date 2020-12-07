@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
     username:new FormControl('', Validators.required),
     email: new FormControl('',Validators.required),
     password:new FormControl('',Validators.required),
+    image:new FormControl('')
   })
 
   httpOptions = {
@@ -35,13 +36,14 @@ export class RegisterComponent implements OnInit {
     this.mynewuser={
       username: this.regForm.get('username').value,
       email: this.regForm.get('email').value,
-      password: this.regForm.get('password').value
+      password: this.regForm.get('password').value,
+      image: this.regForm.get('image').value
     }
 
     this.regserv.tryreg(this.mynewuser)
       .subscribe(
         res => {
-          console.log(res)
+          localStorage.setItem('userimage', res.image)
           this._router.navigate(['/login'])
         },
         err => console.log(err)

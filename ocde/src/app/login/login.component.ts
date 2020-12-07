@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.myuser={
       username: this.loginForm.get('username').value,
-      password: this.loginForm.get('password').value
+      password: this.loginForm.get('password').value,
     }
 
     this.logserv.trylogin(this.myuser)
       .subscribe(
         (res:any) => {
-          console.log(res)
+          // console.log(res)
           localStorage.setItem('token',res.token);
           localStorage.setItem('username',this.myuser.username);
           this._router.navigate(['/profile']);
