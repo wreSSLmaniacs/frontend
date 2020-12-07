@@ -14,8 +14,8 @@ export class CompCreateComponent implements OnInit {
 
   tcarray = [];
 
-  in_tc = [];
-  out_tc = [];
+  in_tc: File[] = [];
+  out_tc: File[] = [];
 
   constructor(
     public fb: FormBuilder,
@@ -28,21 +28,40 @@ export class CompCreateComponent implements OnInit {
     })
   }
 
+  validate(): Boolean {
+    if(this.form.get('title').value=='') return false;
+    if(this.form.get('problem_st').value=='') return false;
+    if(this.in_tc.includes(null)) return false;
+    if(this.out_tc.includes(null)) return false;
+    return true;
+  }
+
   ngOnInit() { 
     this.onTCUpdate();
+  }
+
+  resize(arr: File[],n: number) {
+    while(arr.length<n) {
+      arr.push(null);
+    }
+    while(arr.length>n) {
+      arr.pop();
+    }
   }
 
   onTCUpdate() {
     let n = this.form.get('N').value;
     this.tcarray = [...Array(n).keys()].map( i => i+1);
+    this.resize(this.in_tc,n);
+    this.resize(this.out_tc,n);
   }
 
-  uploadInput(file) {
-    this.in_tc.push(file.item(0));
+  uploadInput(file,index) {
+    this.in_tc[index-1] = file.item(0);
   }
 
-  uploadOutput(file) {
-    this.out_tc.push(file.item(0));
+  uploadOutput(file,index) {
+    this.out_tc[index-1] = file.item(0);
   }
 
   submitForm() {

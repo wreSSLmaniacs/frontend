@@ -16,17 +16,17 @@
         <div *ngFor="let x of tcarray">
             <div style="margin: 5px 0px;">
                 <label for="tcinput">Input Testcase {{x}}</label><br>
-                <input type="file" accept=".txt" (change)="uploadInput($event.target.files)" id="tcinput">
+                <input type="file" accept=".txt" (change)="uploadInput($event.target.files,x)" id="tcinput">
             </div>
 
             <div style="margin: 5px 0px;">
                 <label for="tcoutput">Output Testcase {{x}}</label><br>
-                <input type="file" accept=".txt" (change)="uploadOutput($event.target.files)" id="tcoutput">
+                <input type="file" accept=".txt" (change)="uploadOutput($event.target.files,x)" id="tcoutput">
             </div>
         </div>
 
         <div class="form-group">
-            <button type="button" class="btn btn-dark btn-sm" (click)="submitForm()">
+            <button type="button" class="btn btn-dark btn-sm" [disabled]="!validate()" (click)="submitForm()">
                 Create
             </button>
         </div>

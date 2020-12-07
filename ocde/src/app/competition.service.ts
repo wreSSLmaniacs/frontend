@@ -10,8 +10,8 @@ import { Contest } from "./contest";
 
 export class CompetitionService {
 
-  postUrl = 'http://127.0.0.1:8000/api/-fill-here-';
-  getUrl = 'http://127.0.0.1:8000/api/-fill-here-';
+  postUrl = 'http://127.0.0.1:8000/api/contest/postcontest';
+  getUrl = 'http://127.0.0.1:8000/api/contest/getall';
 
   constructor(private http : HttpClient) { }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompetitionService } from "../competition.service";
+import { Comp } from "../comp"
 
 @Component({
   selector: 'app-comp-dashboard',
@@ -8,7 +9,7 @@ import { CompetitionService } from "../competition.service";
 })
 export class CompDashboardComponent implements OnInit {
 
-  comps = [];
+  comps : Comp[] = [];
   
   constructor(
     private cpservice : CompetitionService
