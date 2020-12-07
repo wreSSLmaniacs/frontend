@@ -5,7 +5,6 @@ export class NewUser{
 	image = '';
 
 	constructor(
-		image:string,
 		username:string,
 		email:string,
 		password:string,
