@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
 import { CompetitionService } from "../competition.service";
 
@@ -9,13 +9,13 @@ import { CompetitionService } from "../competition.service";
 })
 
 export class CompCreateComponent implements OnInit {
-  
+  @ViewChild('inAcceptor',{static: false}) inbutton : ElementRef;
+  @ViewChild('outAcceptor',{static: false}) outbutton : ElementRef;
+
   form: FormGroup;
 
-  tcarray = [];
-
-  in_tc: File[] = [];
-  out_tc: File[] = [];
+  inputReady : Boolean = false;
+  outputReady : Boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -24,54 +24,59 @@ export class CompCreateComponent implements OnInit {
     this.form = this.fb.group({
       title: [''],
       problem_st: [''],
-      N: 1
+      infile :[null],
+      outfile: [null]
     })
   }
 
   validate(): Boolean {
     if(this.form.get('title').value=='') return false;
     if(this.form.get('problem_st').value=='') return false;
-    if(this.in_tc.includes(null)) return false;
-    if(this.out_tc.includes(null)) return false;
-    return true;
+    return true && this.inputReady && this.outputReady;
   }
 
-  ngOnInit() { 
-    this.onTCUpdate();
-  }
+  ngOnInit() { }
 
-  resize(arr: File[],n: number) {
-    while(arr.length<n) {
-      arr.push(null);
+  uploadInput(files) {
+    if(files.length>0) {
+      const file = files.item(0);
+      this.form.get('infile').setValue(file);
+      this.inputReady = true;
     }
-    while(arr.length>n) {
-      arr.pop();
+    else {
+      this.inputReady = false;
     }
   }
 
-  onTCUpdate() {
-    let n = this.form.get('N').value;
-    this.tcarray = [...Array(n).keys()].map( i => i+1);
-    this.resize(this.in_tc,n);
-    this.resize(this.out_tc,n);
-  }
-
-  uploadInput(file,index) {
-    this.in_tc[index-1] = file.item(0);
-  }
-
-  uploadOutput(file,index) {
-    this.out_tc[index-1] = file.item(0);
+  uploadOutput(files) {
+    if(files.length>0) {
+      const file = files.item(0);
+      this.form.get('outfile').setValue(file);
+      this.outputReady = true;
+    }
+    else {
+      this.outputReady = false;
+    }
   }
 
   submitForm() {
-    this.cpservice.regContest({
-      "title" : this.form.get('title').value,
-      "problem_st" : this.form.get('problem_st').value,
-      "in_tc" : this.in_tc,
-      "out_tc" : this.out_tc
-    }).subscribe(
-      response => alert(response)
-    )
+    const formData = new FormData();
+    formData.append('title',this.form.get('title').value);
+    formData.append('problem_st',this.form.get('problem_st').value);
+    formData.append('infile',this.form.get('infile').value);
+    formData.append('outfile',this.form.get('outfile').value);
+    this.cpservice.regContest(formData).subscribe(
+      (response) => alert(response),
+      (err) => console.log(console.error()
+      )
+    );
+    this.form.setValue({
+      title: [''],
+      problem_st: [''],
+      infile :[null],
+      outfile: [null]
+    });
+    this.inbutton.nativeElement.value = null;
+    this.outbutton.nativeElement.value = null;
   }
 }
