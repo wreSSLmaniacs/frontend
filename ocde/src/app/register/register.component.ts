@@ -80,8 +80,7 @@ export class RegisterComponent implements OnInit {
       image: this.link,
       username: this.regForm.get('username').value,
       email: this.regForm.get('email').value,
-      password: this.regForm.get('password').value,
-      image: this.regForm.get('image').value
+      password: this.regForm.get('password').value
     }
 
     this.regserv.tryreg(this.mynewuser)
