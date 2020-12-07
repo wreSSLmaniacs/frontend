@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompetitionService } from '../competition.service';
 
 @Component({
   selector: 'app-comp-dashboard',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompDashboardComponent implements OnInit {
 
-  constructor() { }
+  comps = [];
+  
+  constructor(
+    private cpservice : CompetitionService
+  ) { }
 
   ngOnInit(): void {
+    this.cpservice.fetchCompetetions().subscribe(
+      running => {
+        this.comps = running;
+        alert("New competitions loaded!!")
+      }
+    );
   }
 
 }

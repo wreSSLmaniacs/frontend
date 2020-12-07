@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RunInput } from './run_input';
 import { RunOutput } from './run_output';
-// import { RunFile } from "./run_file";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,8 +21,8 @@ export class RunService {
     return this.http.post<RunOutput>(this.postUrl,input,this.httpOptions);
   }
 
-  // runFile(infile : FormData) : Observable<RunOutput> {
-  //   return this.http.post<RunOutput>(this.postUrl,infile,this.httpOptions);
-  // }
+  runFile(infile : FormData) : Observable<RunOutput> {
+    return this.http.post<RunOutput>(this.postUrl,infile,this.httpOptions);
+  }
 
 }

@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthGuard } from './auth.guard';
 import { EditorComponent } from './editor/editor.component';
 import { CompCreateComponent } from './comp-create/comp-create.component';
+import { CompDashboardComponent } from "./comp-dashboard/comp-dashboard.component";
 
 const routes: Routes = [
   { path: 'login',component:LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent,canActivate:[ AuthGuard ]},
   { path: 'editor', component: EditorComponent, canActivate:[ AuthGuard ]},
   { path: 'create', component: CompCreateComponent, canActivate:[ AuthGuard ] },
+  { path: 'dashboard', component: CompDashboardComponent, canActivate:[ AuthGuard ] },
   { path: '**', redirectTo:'home',pathMatch:'full'}
 ];
 

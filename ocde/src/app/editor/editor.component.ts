@@ -7,7 +7,7 @@ import { LoginService } from "../login.service";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
-import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/mode-r';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';
@@ -60,6 +60,14 @@ export class EditorComponent implements AfterViewInit {
         input: ['']
       });
     }
+
+  ngOnInit() {
+      this.getFiles();
+  }
+
+  getFiles(): void {
+      this.fileService.getFiles(this.uservice.getUser()).subscribe(files => this.files=files);
+  }
 
   ngAfterViewInit(): void {
     ace.config.set('basePath', 'path');
@@ -137,7 +145,7 @@ int main() {
       case 'python': {
         this.aceEditor.session.setValue("");
       }
-      case 'java': {
+      case 'r': {
         this.aceEditor.session.setValue("");
       }
     }
@@ -157,24 +165,25 @@ int main() {
   }
 
   saveFile(filename = this.currentfile): void{
-    if(!filename){return;}
-      this.code = this.aceEditor.session.getValue();
-      this.fileService.saveFile(
-        {
-          username: this.uservice.getUser(),
-          filename: filename,
-          script: this.code
-        } as File).subscribe(
-        file=>{
-          console.log(file);
-          for(let item in this.files){
-            if(this.files[item].filename == file.filename){
-              this.files[item] = file;
-              return;
-            }
+    if(!filename){
+      return this.openDialog();
+    }
+    this.code = this.aceEditor.session.getValue();
+    this.fileService.saveFile(
+      {
+        filename: filename,
+        script: this.code
+      } as File, this.uservice.getUser()).subscribe(
+      file=>{
+        console.log(file);
+        for(let item in this.files){
+          if(this.files[item].filename == file.filename){
+            this.files[item] = file;
+            return;
           }
-          this.files.push(file)
-        }); 
+        }
+        this.files.push(file)
+      }); 
   }
 
   setFile(file: File){
@@ -221,5 +230,9 @@ int main() {
       }); 
   } 
 
+  delete(file: File): void {
+    this.files = this.files.filter(f => f !== file);
+    this.fileService.deleteFile(file.filename,this.uservice.getUser()).subscribe();
+  }
 
 } 
