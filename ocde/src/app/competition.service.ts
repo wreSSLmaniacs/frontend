@@ -20,11 +20,15 @@ export class CompetitionService {
   };
 
   fetchCompetetions() : Observable<Comp[]> {
+<<<<<<< HEAD
     return this.http.get<Comp[]>(this.getUrl,this.httpOptions);
   }
 
   regContest(contest : Contest) : Observable<String> {
     return this.http.post<String>(this.postUrl,contest,this.httpOptions);
+=======
+    return this.http.post<Comp[]>(this.postUrl,this.httpOptions);
+>>>>>>> master
   }
 
 }

@@ -21,16 +21,22 @@
                     <mat-icon>delete</mat-icon>
                  </button>
             <ul *ngIf="item.children.length > 0">
-                <ng-container
-                *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"
-                ></ng-container>
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
             </ul>
             </li>
         </ng-template>
+        <mat-selection-list [multiple]='false'>
+            <button mat-raised-button (click)=openDialog()>New File</button>
+            <mat-selection-list [multiple]='false'>
+                <mat-list-option *ngFor="let file of files" (click)="setFile(file)">
+                    {{file.filename}}
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-selection-list>
     </mat-drawer>
 
-<div class="container h-100 mt-4">
-    <button type="button" mat-button (click)="drawer.toggle()">
+    <div class="container h-100 mt-4">
+        <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
     <p>Current Directory: {{dirk}}</p>
@@ -57,48 +63,47 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
 
-    <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
-    
-    <div class="cbutton">
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
+        <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
+
+        <div class="cbutton">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
             Run
         </button>
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
             Align
         </button>
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
             Save
         </button>
-    </div>
-    
-    <div class="row mt-4">
-        <div class="col">
-            <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
-            <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
         </div>
-        <div class="col">
-            <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
-            <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
-        </div>
-    </div>
 
-    <div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
-        <div class="row" style="margin-bottom:20px">Run a Script</div>
-        <form [formGroup]="form">
-
-            <div class="form-group">
-                <input type="file" (change)="uploadSource($event)">
+        <div class="row mt-4">
+            <div class="col">
+                <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
+                <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
             </div>
-    
-            <div class="form-group">
-                <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runFile()">
+            <div class="col">
+                <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
+                <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
+            <div class="row" style="margin-bottom:20px">Run a Script</div>
+            <form [formGroup]="form">
+
+                <div class="form-group">
+                    <input type="file" (change)="uploadSource($event)">
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runFile()">
                     Run File
                 </button>
-            </div>
-        </form>
-    </div>
+                </div>
+            </form>
+        </div>
 
-</div>
+    </div>
 </mat-drawer-container>

@@ -20,6 +20,8 @@ import { EditorDialogComponent } from '../editor-dialog/editor-dialog.component'
 import { FileService } from '../file.service';
 
 import { File } from '../file';
+// import { CompileShallowModuleMetadata } from '@angular/compiler';
+// import { resolve } from 'dns';
 
 @Component({
   selector: 'app-editor',
@@ -32,6 +34,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
   private aceEditor : ace.Ace.Editor;
   private editorBeautify;
+  public fileString;
 
   files: File[] = [];
   folders: string[] = [];
@@ -91,7 +94,7 @@ export class EditorComponent implements AfterViewInit {
 `#include<bits/stdc++.h>
 using namespace std;
 int main() {
-  // code goes here
+  cout << "Hello World" << endl;
   return 0;
 }`    
     );
@@ -116,7 +119,7 @@ int main() {
 `#include<bits/stdc++.h>
 using namespace std;
 int main() {
-  // code goes here
+  cout << "Hello World" << endl;
   return 0;
 }`
         );
@@ -414,8 +417,16 @@ int main() {
 
   uploadSource(event) {
     const file = (event.target as HTMLInputElement).files[0];
+
+    let fileReader = new FileReader();
+    fileReader.onloadend = (e) => {
+      this.fileString = fileReader.result;
+    }
+
+    fileReader.readAsText(file)
+    
     this.form.patchValue({
-      script: file,
+      script: this.fileString,
       language: this.LANG,
       input: this.input
     });
@@ -445,15 +456,22 @@ int main() {
 }
 
   runFile() {
-    var formData: any = new FormData();
-    formData.append("username", this.uservice.getUser());
-    formData.append("script", this.form.get('script').value);
-    formData.append("language", this.form.get('language').value);
-    formData.append("input", this.form.get('input').value);
-    this.runscript.runFile(formData).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-    )
+    const send : RunInput = {
+      username : this.uservice.getUser(),
+      script : this.fileString,
+      language : this.LANG,
+      input : this.input
+    };
+    console.log(send);
+    this.runscript.runScript(send).subscribe(receivied =>
+      {
+        if(receivied.success==true) {
+          this.output = receivied.output;
+        }   
+        else {
+          this.output = "Error: " + receivied.output;
+        }
+      }); 
   } 
 } 
 

@@ -9,6 +9,7 @@ import { LoginService } from "../login.service";
 export class ProfileComponent implements OnInit {
 
   user: String;
+  image: String;
 
   constructor(
     private uservice: LoginService
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.uservice.getUser();
+    this.image = localStorage.getItem('userimage')
   }
 
 }
