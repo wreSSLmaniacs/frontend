@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   postUrl = 'http://127.0.0.1:8000/api/login'
-  firstry = 'http://127.0.0.1:8000/auth/'
+  firstry = 'http://127.0.0.1:8000/api/auth/'
 
   constructor(private http:HttpClient,private _router:Router) { }
 
@@ -33,6 +33,8 @@ export class LoginService {
   logoutUser(){
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('userimage');
+    localStorage.removeItem('userid');
     this._router.navigate(['/home']);
   }
 
@@ -42,5 +44,13 @@ export class LoginService {
 
   getUser() {
     return localStorage.getItem('username');
+  }
+
+  getImage(){
+    return localStorage.getItem('userimage');
+  }
+
+  getUserId(){
+    return localStorage.getItem('userid');
   }
 }

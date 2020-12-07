@@ -1,20 +1,39 @@
 <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side">
-        <button mat-raised-button (click)=openDialog()>New File</button>
-      <ul style="list-style-type:none;">
-        <mat-list-item *ngFor="let file of files">
-            <button mat-icon-button (click)="setFile(file)">{{file.filename}}</button>
-           <button mat-icon-button (click)="delete(file)">
-              <mat-icon>delete</mat-icon>
-           </button>
-        </mat-list-item>
-    </ul>
+        <button mat-raised-button (click)="openDialog('File')"><mat-icon> insert_drive_file</mat-icon></button>
+        <button mat-raised-button (click)="openDialog('Folder')">	<mat-icon>create_new_folder</mat-icon></button>
+        <button mat-raised-button (click)="goBack()"> <mat-icon>keyboard_backspace</mat-icon></button>
+        <ul>
+            <ng-container
+            *ngTemplateOutlet="recursiveListTmpl; context:{ list: list }"
+            ></ng-container>
+        </ul>
+        
+        <ng-template #recursiveListTmpl let-list="list">
+            <li *ngFor="let item of list">
+                <button *ngIf="!item.isFile" mat-icon-button (click)="setFolder(item)"><mat-icon>folder</mat-icon> {{item.title}}</button>
+                <button *ngIf="item.isFile" mat-icon-button (click)="setFile(item)"> {{ item.title }}</button>
+                
+                <button *ngIf="!item.isFile" mat-icon-button (click)="deleteFolder(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+                 <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
+                    <mat-icon>delete</mat-icon>
+                 </button>
+            <ul *ngIf="item.children.length > 0">
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
+            </ul>
+            </li>
+        </ng-template>
+        
     </mat-drawer>
 
-<div class="container h-100 mt-4">
-    <button type="button" mat-button (click)="drawer.toggle()">
+    <div class="container h-100 mt-4">
+        <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+    </div>
+    <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">
@@ -38,48 +57,47 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
 
-    <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
-    
-    <div class="cbutton">
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
+        <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
+
+        <div class="cbutton">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
             Run
         </button>
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
             Align
         </button>
-        <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
             Save
         </button>
-    </div>
-    
-    <div class="row mt-4">
-        <div class="col">
-            <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
-            <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
         </div>
-        <div class="col">
-            <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
-            <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
-        </div>
-    </div>
 
-    <div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
-        <div class="row" style="margin-bottom:20px">Run a Script</div>
-        <form [formGroup]="form">
-
-            <div class="form-group">
-                <input type="file" (change)="uploadSource($event)">
+        <div class="row mt-4">
+            <div class="col">
+                <div class="label-box border"><span class="mx-4 font-weight-light">Input</span></div>
+                <textarea [(ngModel)]="input" class="form-control output" rows="6" aria-label="output-textarea"></textarea>
             </div>
-    
-            <div class="form-group">
-                <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runFile()">
+            <div class="col">
+                <div class="label-box border"><span class="mx-4 font-weight-light">Output</span></div>
+                <textarea [(ngModel)]="output" class="form-control output" rows="6" disabled="true" aria-label="output-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
+            <div class="row" style="margin-bottom:20px">Run a Script</div>
+            <form [formGroup]="form">
+
+                <div class="form-group">
+                    <input type="file" (change)="uploadSource($event)">
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runFile()">
                     Run File
                 </button>
-            </div>
-        </form>
-    </div>
+                </div>
+            </form>
+        </div>
 
-</div>
+    </div>
 </mat-drawer-container>

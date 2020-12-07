@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CompetitionService } from "../competition.service";
+import { CompetitionService } from '../competition.service';
 
 @Component({
   selector: 'app-comp-dashboard',
@@ -18,8 +18,9 @@ export class CompDashboardComponent implements OnInit {
     this.cpservice.fetchCompetetions().subscribe(
       running => {
         this.comps = running;
+        alert("New competitions loaded!!")
       }
-    )
+    );
   }
 
 }
