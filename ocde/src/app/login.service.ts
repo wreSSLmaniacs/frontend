@@ -28,6 +28,8 @@ export class LoginService {
   logoutUser(){
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('userimage');
+    localStorage.removeItem('userid');
     this._router.navigate(['/home']);
   }
 
@@ -37,5 +39,13 @@ export class LoginService {
 
   getUser() {
     return localStorage.getItem('username');
+  }
+
+  getImage(){
+    return localStorage.getItem('userimage');
+  }
+
+  getUserId(){
+    return localStorage.getItem('userid');
   }
 }
