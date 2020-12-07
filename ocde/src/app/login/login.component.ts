@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password').value,
     }
 
-    this.logserv.trylogin(this.myuser)
+    this.logserv.trytoken(this.myuser)
       .subscribe(
         (res:any) => {
           // console.log(res)

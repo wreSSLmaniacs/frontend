@@ -1,8 +1,50 @@
-<br> <h1>Register Yourself</h1> <br>
+<!-- <br> <h1>Register Yourself</h1> <br>
 <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
     <label>Name: <input type="text" formControlName="username"></label><br><br>
     <label>Email Id: <input type="text" formControlName="email"></label>
     <label>Password: <input type="password" formControlName="password"></label>
     <label>Image: <input type="text" formControlName="image"></label>
   </form>
-<button class= "button" (click)="onSubmit()" type="submit" >Submit</button>
+<button class= "button" (click)="onSubmit()" type="submit" >Submit</button> -->
+
+<div class="container h-100">
+  <div class="row h-100">
+  <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+    <div class="d-table-cell align-middle">
+
+      <div class="text-center mt-4">
+        <h1 class="h2">Hello</h1>
+        <p class="lead">
+          Register yourself here.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="m-sm-4">
+            <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter your name">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input class="form-control form-control-lg" type="email" formControlName="email" placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input class="form-control form-control-lg" type="password" fromControlName="password" name="password" placeholder="Enter password">
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <button class= "btn btn-lg btn-primary" (click)="onSubmit()" type="submit" >Register</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
