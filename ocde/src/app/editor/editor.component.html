@@ -6,7 +6,7 @@
         <ul>
             <ng-container
             *ngTemplateOutlet="recursiveListTmpl; context:{ list: list }"
-            ></ng-container>
+          ></ng-container>
         </ul>
         
         <ng-template #recursiveListTmpl let-list="list">
@@ -32,7 +32,6 @@
         <button type="button" mat-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-    </div>
     <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
@@ -98,6 +97,6 @@
                 </div>
             </form>
         </div>
-
+        </div>
     </div>
 </mat-drawer-container>
