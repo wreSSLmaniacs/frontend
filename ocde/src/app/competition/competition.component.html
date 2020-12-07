@@ -1,2 +1,54 @@
 <h1>{{title}}</h1>
-<p>{{body}}</p>
+<p style="margin-bottom: 50px;">{{body}}</p>
+
+<div class="row mt-4 justify-content-center">
+    <div class="col-auto">
+        <mat-form-field appearance="fill">
+            <mat-label>Select Theme</mat-label>
+            <mat-select [(ngModel)]="THEME" (ngModelChange)="updateTheme()">
+            <mat-option value="github">Github Theme</mat-option>
+            <mat-option value="ambiance">Ambiance Theme</mat-option>
+            <mat-option value="chaos">Chaos Theme</mat-option>
+            <mat-option value="chrome">Chrome Theme</mat-option>
+            <mat-option value="cobalt">Cobalt Theme</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-auto">
+        <mat-form-field appearance="fill">
+            <mat-label>Select Language</mat-label>
+            <mat-select [(ngModel)]="LANG" (ngModelChange)="updateLang()">
+            <mat-option value="c_cpp">C++</mat-option>
+            <mat-option value="python">Python</mat-option>
+            <mat-option value="r">R</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
+
+<div class="cbutton">
+    <button type="button" class="btn btn-dark btn-sm" (click)="runCode()">
+        Run
+    </button>
+    <button type="button" class="btn btn-dark btn-sm" (click)="beautifyContents()">
+        Align
+    </button>
+</div>
+
+<div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
+    <div class="row" style="margin-bottom:20px">Run a Script</div>
+    <form [formGroup]="form">
+
+        <div class="form-group">
+            <input type="file" (change)="uploadSource($event)">
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-dark btn-sm" (click)="runFile()">
+                Run File
+            </button>
+        </div>
+    </form>
+</div>
