@@ -13,11 +13,21 @@ export class TokenInterceptorService implements HttpInterceptor{
 
   intercept(req,next){
     let logser = this.injector.get(LoginService);
-    let tokenizedReq   = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${logser.getToken()}`
-      }
-    })
+    let tokenizedReq:any;
+    if(logser.getToken() == null){
+        tokenizedReq   = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${logser.getToken()}`
+        }
+      })
+    }
+    else{
+        tokenizedReq   = req.clone({
+        setHeaders: {
+          Authorization: `token ${logser.getToken()}`
+        }
+      })
+    }
     return next.handle(tokenizedReq)
   }
 }
