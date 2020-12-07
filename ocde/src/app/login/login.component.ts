@@ -13,7 +13,7 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
 
   myuser : User;
-
+  
   loginForm = new FormGroup({
     username:new FormControl('', Validators.required),
     password:new FormControl('',Validators.required)
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.get('username').value,
       password: this.loginForm.get('password').value
     }
+    console.log(this.myuser);
 
     this.logserv.trytoken(this.myuser)
       .subscribe(
