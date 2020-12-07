@@ -10,12 +10,17 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   postUrl = 'http://127.0.0.1:8000/api/login'
+  firstry = 'http://127.0.0.1:8000/auth/'
 
   constructor(private http:HttpClient,private _router:Router) { }
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
   };
+
+  trytoken(user:User):Observable<any>{
+    return this.http.post(this.firstry, user, this.httpOptions)
+  }
 
   trylogin(user:User):Observable<User>{
     return this.http.post<User>(this.postUrl, user, this.httpOptions)
