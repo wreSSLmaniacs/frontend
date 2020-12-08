@@ -1,58 +1,82 @@
-<h1>Welcome {{user}}!</h1>
+<!-- <h1>Welcome {{user}}!</h1> -->
 
-<h2>Points : {{points}}</h2>
+<!-- <h2>Points : {{points}}</h2> -->
+
+<!-- <div class="container">
+    <div class="jumbotron">
+        <h1>Bootstrap Tutorial</h1>      
+        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
+    </div>
+    <p>This is some text.</p>      
+    <p>This is another text.</p>      
+</div> -->
+
+<header class="w3-container w3-center w3-light-grey" style="padding:50px 12px">
+    <h1 class="w3-margin w3-large">Welcome {{user}} !</h1>
+    <p class="w3-xlarge">Code, compile, create and participate</p>
+</header>
 
 <div class="container">
     <div class="main-body">
 
         <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li> -->
+                <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
                 <li class="breadcrumb-item active" aria-current="page">User Profile</li>
             </ol>
-        </nav>
+        </nav> -->
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <div class="card-body">
+                    <!-- <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src={{image}} alt="Admin" class="rounded-circle" width="150" height="150">
-                            <div class="mt-3">
-                                <h4>{{user}}</h4>
-                                <p class="text-secondary mb-1">Email Id: {{email}}</p>
-                                <p class="text-muted font-size-sm">User Bio</p>
+                            <div class="mt-3"> -->
+                                <!-- <h4>{{user}}</h4>
+                                <p class="text-secondary mb-1">Email Id: {{email}}</p> -->
+                                <!-- <p class="text-muted font-size-sm">User Bio</p> -->
                                 <!-- <button class="btn btn-primary">Follow</button>
                                 <button class="btn btn-outline-primary">Message</button> -->
+                            <!-- </div>
+                        </div>
+                    </div> -->
+                    <div>
+                        <div class="w3-card">
+                            <img src={{image}} alt="user" style="width:100%">
+                            <div class="w3-container align-items-center">
+                            <h3>{{user}}</h3>
+                            <p class="w3-opacity">WreSSLer</p>
+                            <p><a routerLink="/home" routerLinkActive="active"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-lightbulb-o"></i> Resources </button> </a></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card mt-3 ">
                     <ul class="list-group list-group-flush ">
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap "> -->
                             <!-- <i class="fa fa-globe"></i> -->
-                            <h4 class="mb-0 ">Website</h4>
+                            <!-- <h4 class="mb-0 ">Website</h4>
                             <span class="text-secondary ">None</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                        </li> -->
+                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap "> -->
                             <!-- <i class="fa fa-mail-reply"></i> -->
-                            <h4 class="mb-0 ">Email</h4>
+                            <!-- <h4 class="mb-0 ">Email</h4>
                             <span class="text-secondary ">{{email}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                        </li> -->
+                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap "> -->
                             <!-- <i class="fa fa-github"></i> -->
-                            <h4 class="mb-0 ">Github</h4>
-                            <span class="text-secondary "><a href="http://github.com/wreSSLmaniacs/ ">wreSSLmaniacs</a></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
+                            <!-- <h4 class="mb-0 ">Github</h4> -->
+                            <!-- <span class="text-secondary "><a href="http://github.com/wreSSLmaniacs/ ">wreSSLmaniacs</a></span> -->
+                        <!-- </li> -->
+                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap "> -->
                             <!-- <i class="fa fa-twitter"></i> -->
-                            <h4 class="mb-0 ">Twitter</h4>
+                            <!-- <h4 class="mb-0 ">Twitter</h4>
                             <span class="text-secondary ">{{user}}</span>
-                        </li>
+                        </li> -->
                         <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ">
                             <h4 class="mb-0 "><svg xmlns="http://www.w3.org/2000/svg " width="24 " height="24 " viewBox="0 0 24 24 " fill="none " stroke="currentColor " stroke-width="2 " stroke-linecap="round " stroke-linejoin="round " class="feather
                                     feather-facebook mr-2 icon-inline text-primary "><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z "></path></svg>Facebook</h4>
@@ -65,52 +89,60 @@
                 <div class="card mb-3 ">
                     <div class="card-body ">
                         <div class="row ">
-                            <div class="col-sm-3 ">
-                                <h4 class="mb-0 ">Full Name</h4>
+                            <div class="col-md-3 ">
+                                <h4 class="mb-0 ">Name</h4>
                             </div>
-                            <div class="col-sm-9 text-secondary ">
+                            <div class="col-md-9">
                                 {{first_name}} {{last_name}}
                             </div>
                         </div>
                         <hr>
                         <div class="row ">
-                            <div class="col-sm-3 ">
+                            <div class="col-md-3 ">
                                 <h4 class="mb-0 ">Email</h4>
                             </div>
-                            <div class="col-sm-9 text-secondary ">
+                            <div class="col-md-9">
                                 {{email}}
                             </div>
                         </div>
                         <hr>
                         <div class="row ">
-                            <div class="col-sm-3 ">
-                                <h4 class="mb-0 ">Phone</h4>
+                            <div class="col-md-3 ">
+                                <h4 class="mb-0 ">Points</h4>
                             </div>
-                            <div class="col-sm-9 text-secondary ">
-                                999 999 9999
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row ">
-                            <div class="col-sm-3 ">
-                                <h4 class="mb-0 ">Mobile</h4>
-                            </div>
-                            <div class="col-sm-9 text-secondary ">
-                                999 999 9999
+                            <div class="col-md-9">
+                                {{points}}
                             </div>
                         </div>
                         <hr>
+                        
                         <div class="row ">
+                            <div class="col">
+                                <a routerLink="/editor" routerLinkActive="active" target="_blank" ><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Code Editor</button></a>
+
+                            </div>
+                            <div class="col">
+                                <a routerLink="/create" routerLinkActive="active" target="_blank"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Create a Contest</button></a>
+
+                            </div>
+                            <div class="col">
+                                <a routerLink="/dashboard" routerLinkActive="active" target="_blank"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Contest Dashboard</button></a>
+
+                            </div>
+                        </div> 
+                        <!-- <hr>  -->
+                        
+                        <!-- <div class="row ">
                             <div class="col-sm-3 ">
                                 <h4 class="mb-0 ">Address</h4>
                             </div>
                             <div class="col-sm-9 text-secondary ">
                                 IIT Bombay, Powai, Mumbai, Maharashtra
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <div class="row gutters-sm text-center " style="margin-left: 31%; margin-bottom: 0.5cm; margin-top: 0.7cm;">
+                <!-- <div class="row gutters-sm text-center " style="margin-left: 31%; margin-bottom: 0.5cm; margin-top: 0.7cm;">
                     <div>
                         <a class="btn btn-primary button3" routerLink="/editor" routerLinkActive="active">Code Editor</a><br>
                     </div>
@@ -124,7 +156,7 @@
                     <div>
                         <a class="btn btn-primary button3" routerLink="/dashboard" routerLinkActive="active">Contest Dashboard</a><br>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
