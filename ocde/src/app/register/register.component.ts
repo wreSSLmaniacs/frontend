@@ -68,6 +68,15 @@ export class RegisterComponent implements OnInit {
     }
   };
 
+  validate(): Boolean {
+    if(this.regForm.get('first_name').value=='') return false;
+    if(this.regForm.get('last_name').value=='') return false;
+    if(this.regForm.get('username').value=='') return false;
+    if(this.regForm.get('email').value=='') return false;
+    if(this.regForm.get('password').value=='') return false;
+    if(this.link=='') return false;
+    return true;
+  }
 
   onUpload(){
     this.visible=false;
@@ -80,6 +89,7 @@ export class RegisterComponent implements OnInit {
         // console.log(res);
         this.imgerr="";
         this.link = res.url;
+
       },
       err => {
         console.log(err);
