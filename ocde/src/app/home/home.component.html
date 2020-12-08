@@ -1,1 +1,143 @@
-<h1>Welcome to WreSSLmaniacs homepage!</h1>
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/back");
+  min-height: 100%;
+}
+
+.w3-bar .w3-button {
+  padding: 16px;
+}
+</style>
+<body>
+
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+    <h1 class="w3-margin w3-jumbo">WELCOME WreSSLers</h1>
+    <p class="w3-xlarge">New to codeing ? Here are some useful sites.</p>
+    <a href="https://www.cplusplus.com/"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">C++</button></a>
+    <a href="https://www.python.org/"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Python</button></a>
+    <a href="https://www.ruby-lang.org/en/"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Ruby</button></a>
+</header>
+
+<!-- About Section -->
+<div class="w3-container" style="padding:60px 16px" id="about">
+  <h3 class="w3-center">KEY FEATURES OF WreSSLemaniacs</h3>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter">
+      <i class="fa fa-trophy w3-margin-bottom w3-jumbo w3-center"></i>
+      <p class="w3-large">Competition Environment</p>
+      <p>Programming contest platform C++,Python,Ruby compatible and supported by an online IDE</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-clipboard w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Directory Support</p>
+      <p>Directory support for every user synced with backend, with options to add and delete files and folder.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Environment Isolation</p>
+      <p>Environment isolation on the server side to improve the robustness of individual workspaces.</p>
+    </div>
+    <div class="w3-quarter">
+        <i class="fa fa-lock w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Authenticated</p>
+        <p>Authenticated API end-points with Django Rest Framework tokens and Http Interceptors</p>
+    </div>
+  </div>
+</div>
+
+<!-- Team Section -->
+<div class="w3-container"  id="team">
+    <h3 class="w3-center">THE TEAM</h3>
+    <div class="w3-row-padding " style="margin-top:64px">
+      
+      <div class="w3-col l3 m4 w3-margin-bottom">
+        <div class="w3-card">
+          <img src="../../assets/pic1.png" style="width:100%">
+          <div class="w3-container">
+            <h3>Dhruv Arora</h3>
+            <p class="w3-opacity">WreSSLemaniacs</p>
+            <p><a href = "https://github.com/maverick61303"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-github"></i> Contact</button></a></p>
+          </div>
+        </div>
+      </div>
+      <div class="w3-col l3 m4 w3-margin-bottom">
+            <div class="w3-card">
+              <img src="../../assets/pic4.png" alt="Siba" style="width:100%">
+              <div class="w3-container">
+                <h3>Sibasis Nayak</h3>
+                <p class="w3-opacity">WreSSLemaniacs</p>
+                <p><a href ="https://github.com/Siba-07"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-github"></i> Contact</button></a></p>
+              </div>
+            </div>
+          </div>
+      <div class="w3-col l3 m4 w3-margin-bottom">
+        <div class="w3-card">
+          <img src="../../assets/pic2.png" alt="Gucci" style="width:100%">
+          <div class="w3-container">
+            <h3>Raj Aryan Agrawal</h3>
+            <p class="w3-opacity">WreSSLemaniacs</p>
+            <p><a href="https://github.com/Anon258"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-github"></i> Contact</button></a></p>
+          </div>
+        </div>
+      </div>
+      <div class="w3-col l3 m4 w3-margin-bottom">
+        <div class="w3-card">
+          <img src="../../assets/pic3.png" alt="Shotu" style="width:100%">
+          <div class="w3-container">
+            <h3>Sahasra Ranjan</h3>
+            <p class="w3-opacity">WreSSLemaniacs</p>
+            <p><a href="https://github.com/sahasrarjn"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-github"></i> Github</button> </a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>
