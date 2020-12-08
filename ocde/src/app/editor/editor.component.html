@@ -23,9 +23,6 @@
                  <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
                     <mat-icon>delete</mat-icon>
                  </button>
-                <ul *ngIf="item.children.length > 0">
-                    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
-                </ul>
                  <button *ngIf="item.isFile" mat-icon-button (click)="renameFile(item)">
                     <mat-icon>edit</mat-icon>
                  </button>
@@ -35,17 +32,6 @@
                 </ul>
             </li>
         </ng-template>
-
-        <!-- bug -->
-        <mat-selection-list [multiple]='false'>
-            <button mat-raised-button (click)="openDialog('File')">New File</button>
-            <mat-selection-list [multiple]='false'>
-                <mat-list-option *ngFor="let file of files" (click)="setFile(file)">
-                    {{file.filename}}
-                </mat-list-option>
-            </mat-selection-list>
-        </mat-selection-list>
-        
     </mat-drawer>
 
     <div class="container h-100 mt-4">
@@ -53,7 +39,6 @@
             <mat-icon>menu</mat-icon>
         </button>
         <p>Current Directory: {{dirk}}</p>
-    </div>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">
@@ -112,5 +97,6 @@
                 </div>
             </form>
         </div>
+    </div>
     </div>
 </mat-drawer-container>
