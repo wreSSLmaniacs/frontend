@@ -28,6 +28,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { CompDashboardComponent } from './comp-dashboard/comp-dashboard.component';
 import { CompCreateComponent } from './comp-create/comp-create.component';
 import { CompetitionComponent } from './competition/competition.component';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from "@angular-material-components/moment-adapter";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -56,7 +59,11 @@ import { CompetitionComponent } from './competition/competition.component';
     MatListModule,
     MatIconModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule,
+    MatDatepickerModule
   ],
   providers: [RegService,LoginService,AuthGuard,
   {

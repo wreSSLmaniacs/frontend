@@ -25,13 +25,17 @@ export class CompCreateComponent implements OnInit {
       title: [''],
       problem_st: [''],
       infile :[null],
-      outfile: [null]
+      outfile: [null],
+      start: [''],
+      end: [''],
     })
   }
 
   validate(): Boolean {
     if(this.form.get('title').value=='') return false;
     if(this.form.get('problem_st').value=='') return false;
+    if(this.form.get('start').value=='') return false;
+    if(this.form.get('end').value=='') return false;
     return true && this.inputReady && this.outputReady;
   }
 
@@ -65,6 +69,8 @@ export class CompCreateComponent implements OnInit {
     formData.append('problem_st',this.form.get('problem_st').value);
     formData.append('infile',this.form.get('infile').value);
     formData.append('outfile',this.form.get('outfile').value);
+    formData.append('start',this.form.get('start').value.format());
+    formData.append('end',this.form.get('end').value.format());
     this.cpservice.regContest(formData).subscribe(
       (response) => alert(response),
       (err) => console.log(console.error()
@@ -79,4 +85,5 @@ export class CompCreateComponent implements OnInit {
     this.inbutton.nativeElement.value = null;
     this.outbutton.nativeElement.value = null;
   }
+
 }

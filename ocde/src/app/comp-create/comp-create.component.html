@@ -21,11 +21,18 @@
             <input type="file" accept=".txt" (change)="uploadOutput($event.target.files)" id="tcoutput" #outAcceptor>
         </div>
         
+        <input matInput [ngxMatDatetimePicker]="start" placeholder="Time of Start" formControlName="start">
+        <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #start></ngx-mat-datetime-picker>
+
+        <input matInput [ngxMatDatetimePicker]="end" placeholder="Time to End" formControlName="end">
+        <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #end></ngx-mat-datetime-picker>
+
         <div class="form-group">
             <button type="button" class="btn btn-dark btn-sm" [disabled]="!validate()" (click)="submitForm()">
                 Create
             </button>
         </div>
-    
     </form>
 </div>

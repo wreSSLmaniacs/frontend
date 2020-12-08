@@ -10,15 +10,25 @@ import { Comp } from './comp';
 export class CompetitionService {
 
   postUrl = 'http://127.0.0.1:8000/api/contest/postcontest';
-  getallUrl = 'http://127.0.0.1:8000/api/contest/getall';
+  getRUrl = 'http://127.0.0.1:8000/api/contest/get/running';
+  getUUrl = 'http://127.0.0.1:8000/api/contest/get/upcoming';
+  getPUrl = 'http://127.0.0.1:8000/api/contest/get/past';
   getUrl = 'http://127.0.0.1:8000/api/competition'
   submitCodeUrl = 'http://127.0.0.1:8000/api/submit/code'
   submitFileUrl = 'http://127.0.0.1:8000/api/submit/file'
 
   constructor(private http : HttpClient) { }
 
-  fetchCompetetions() : Observable<Comp[]> {
-    return this.http.get<Comp[]>(this.getallUrl);
+  fetchRunningCompetetions() : Observable<Comp[]> {
+    return this.http.get<Comp[]>(this.getRUrl);
+  }
+
+  fetchUpcomingCompetetions() : Observable<Comp[]> {
+    return this.http.get<Comp[]>(this.getUUrl);
+  }
+
+  fetchPastCompetetions() : Observable<Comp[]> {
+    return this.http.get<Comp[]>(this.getPUrl);
   }
 
   regContest(formData) {

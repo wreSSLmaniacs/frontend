@@ -1,8 +1,42 @@
 <h1>Running Competitions</h1>
-<div *ngIf="comps.length==0">
-    No Competitions Running! Visit again later or Create your own!
+
+<div *ngIf="rcomps.length==0">
+    No Competitions Running! Visit again later!
 </div>
-<div style="padding: 10px 0px;" *ngFor="let comp of comps">
+
+<div style="padding: 10px 0px;" *ngFor="let comp of rcomps">
+    <div class="card">
+        <div class="card-header">
+            {{comp.title}}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{comp.problem.substr(0,100)}}</p>
+            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
+        </div>
+    </div>
+</div>
+
+<h1>Upcoming Competitions</h1>
+
+<div *ngIf="ucomps.length==0">
+    No Upcoming Competitions! Create your own!
+</div>
+
+<div style="padding: 10px 0px;" *ngFor="let comp of ucomps">
+    <div class="card">
+        <div class="card-header">
+            {{comp.title}}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{comp.problem.substr(0,100)}}</p>
+            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
+        </div>
+    </div>
+</div>
+
+<h1>Past Competitions</h1>
+
+<div style="padding: 10px 0px;" *ngFor="let comp of pcomps">
     <div class="card">
         <div class="card-header">
             {{comp.title}}
