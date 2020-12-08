@@ -4,7 +4,7 @@ import { LoginService } from "../login.service";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
-import 'ace-builds/src-noconflict/mode-r';
+import 'ace-builds/src-noconflict/mode-ruby';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';

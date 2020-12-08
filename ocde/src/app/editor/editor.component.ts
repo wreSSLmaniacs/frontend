@@ -8,7 +8,7 @@ import { LoginService } from "../login.service";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
-import 'ace-builds/src-noconflict/mode-r';
+import 'ace-builds/src-noconflict/mode-ruby';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-github';
@@ -130,7 +130,7 @@ int main() {
       case 'python': {
         this.aceEditor.session.setValue("");
       }
-      case 'r': {
+      case 'ruby': {
         this.aceEditor.session.setValue("");
       }
     }
