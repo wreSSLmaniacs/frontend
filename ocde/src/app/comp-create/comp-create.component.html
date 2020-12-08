@@ -1,34 +1,31 @@
 <div class="container" style="margin-top:50px">
     <form [formGroup]="form">
+        
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" formControlName="title">
         </div>
+        
         <div class="form-group">
             <div class="label-box border"><span class="mx-4 font-weight-light">Problem Statement</span></div>
             <textarea class="form-control" rows="6" formControlName="problem_st"></textarea>
         </div>
-        <div>
-            <label for="tc_no">Number of Testcases</label>
-            <input type="number" min=1 max=6 class="form-control" id="tc_no" onkeydown="return false" (ngModelChange)="onTCUpdate()" formControlName="N">
+        
+        <div style="margin: 5px 0px;">
+            <label for="tcinput">Input</label><br>
+            <input type="file" accept=".txt" (change)="uploadInput($event.target.files)" id="tcinput" #inAcceptor>
         </div>
 
-        <div *ngFor="let x of tcarray">
-            <div style="margin: 5px 0px;">
-                <label for="tcinput">Input Testcase {{x}}</label><br>
-                <input type="file" accept=".txt" (change)="uploadInput($event.target.files)" id="tcinput">
-            </div>
-
-            <div style="margin: 5px 0px;">
-                <label for="tcoutput">Output Testcase {{x}}</label><br>
-                <input type="file" accept=".txt" (change)="uploadOutput($event.target.files)" id="tcoutput">
-            </div>
+        <div style="margin: 5px 0px;">
+            <label for="tcoutput">Expected Output</label><br>
+            <input type="file" accept=".txt" (change)="uploadOutput($event.target.files)" id="tcoutput" #outAcceptor>
         </div>
-
+        
         <div class="form-group">
-            <button type="button" class="btn btn-dark btn-sm" (click)="submitForm()">
+            <button type="button" class="btn btn-dark btn-sm" [disabled]="!validate()" (click)="submitForm()">
                 Create
             </button>
         </div>
+    
     </form>
 </div>

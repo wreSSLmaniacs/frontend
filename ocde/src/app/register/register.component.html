@@ -1,8 +1,60 @@
-<br> <h1>Register Yourself</h1> <br>
+<!-- <br> <h1>Register Yourself</h1> <br>
 <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
     <label>Name: <input type="text" formControlName="username"></label><br><br>
     <label>Email Id: <input type="text" formControlName="email"></label>
     <label>Password: <input type="password" formControlName="password"></label>
     <label>Image: <input type="text" formControlName="image"></label>
   </form>
-<button class= "button" (click)="onSubmit()" type="submit" >Submit</button>
+<button class= "button" (click)="onSubmit()" type="submit" >Submit</button> -->
+<!-- <input #file type="file" accept='image/*' (change)="preview(file.files)" (change)="onFileListener($event)"/>
+     <img [src]="imgURL" height="200" *ngIf="imgURL"> -->
+    <!-- <img [src]="imgURL" alt="Avatar" *ngIf="imgURL" class="avatar">
+    <button type= "button" style="margin:5px;" class="btn btn-success" (click)="onUpload()" >Upload</button> -->
+  
+<div class="container h-100">
+  <div class="row h-100">
+  <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+    <div class="d-table-cell align-middle">
+
+      <div class="text-center mt-4">
+        <h1 class="h2">Hello</h1>
+        <p class="lead">
+          Register yourself here.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="m-sm-4">
+              <label>Upload Avatar</label>
+              <input #file type="file" accept='image/*' (change)="preview(file.files)" (change)="onFileListener($event)" /><br><br>
+              <div *ngIf="link" class="alert alert-success" role="alert">
+                  Avatar Uploaded successfully!
+              </div>
+              <button class= "btn btn-sm btn-primary" (click)="onUpload()" type="submit" >Upload</button>
+            <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+               <div class="form-group">
+                <label>Name</label>
+                <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter your name">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input class="form-control form-control-lg" type="email" formControlName="email" placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" formControlName="password" class="form-control form-control-lg" placeholder="Enter password">
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <button class= "btn btn-lg btn-primary" (click)="onSubmit()" type="submit" >Register</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

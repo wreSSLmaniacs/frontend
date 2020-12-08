@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { File } from './file';
+import { RenameFile } from './renameFile';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 export class FileService {
 
   postUrl = 'http://127.0.0.1:8000/api/display';
+  renameUrl = 'http://127.0.0.1:8000/api/rename';
 
   constructor(private http : HttpClient) { }
 
@@ -42,5 +44,11 @@ export class FileService {
     const url = `${this.postUrl}/${username}/${dirk}`;
     console.log(url);
     return this.http.delete<File>(url);
+  }
+
+  renameFile(input: RenameFile, dirk: string, username:string): Observable<RenameFile>{
+    const url = `${this.renameUrl}/${username}/${dirk}`;
+    console.log(input);
+    return this.http.post<RenameFile>(url,input,this.httpOptions);
   }
 }
