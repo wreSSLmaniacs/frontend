@@ -25,6 +25,10 @@
                             </form>
                             <div class="text-center mt-3">
                                 <button class="btn btn-lg btn-primary" (click)="onSubmit()" type="submit">Login</button>
+                                <div *ngIf="notsuccess" class="alert alert-danger" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    Incorrect username/password! Try again.
+                                </div>
                             </div>
 
                         </div>

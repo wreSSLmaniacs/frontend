@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   myfile : File = null;
   link:string="";
   visible = true;
+  errormessage:String="";
+  imgerr:String="";
 
   regForm = new FormGroup({
     first_name: new FormControl('',Validators.required),
@@ -71,9 +73,15 @@ export class RegisterComponent implements OnInit {
     fd.append('image',this.myfile,this.myfile.name);
 
     this.http.post('http://127.0.0.1:8000/api/image',fd)
-      .subscribe((res:any) => {
-        console.log(res);
+      .subscribe(
+        (res:any) => {
+        // console.log(res);
+        this.imgerr="";
         this.link = res.url;
+      },
+      err => {
+        console.log(err);
+        this.imgerr="Invalid upload! Please upload again.";
       });
   };
 
@@ -90,9 +98,13 @@ export class RegisterComponent implements OnInit {
     this.regserv.tryreg(this.mynewuser)
       .subscribe(
         res => {
+          this.errormessage="";
           this._router.navigate(['/login'])
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          this.errormessage = err;
+        }
       )
   }
 
