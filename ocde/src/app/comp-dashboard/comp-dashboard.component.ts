@@ -9,6 +9,9 @@ import { Comp } from "../comp"
 })
 export class CompDashboardComponent implements OnInit {
 
+  upcoming: String = "start:";
+  running: String = "end:";
+
   rcomps : Comp[] = [];
   ucomps : Comp[] = [];
   pcomps : Comp[] = [];

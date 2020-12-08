@@ -31,6 +31,7 @@ import { CompetitionComponent } from './competition/competition.component';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from "@angular-material-components/moment-adapter";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     EditorDialogComponent,
     CompDashboardComponent,
     CompCreateComponent,
-    CompetitionComponent
+    CompetitionComponent,
+    TimerComponent
   ],
   entryComponents: [EditorDialogComponent],
   imports: [
