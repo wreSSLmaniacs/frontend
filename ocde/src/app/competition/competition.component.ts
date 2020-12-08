@@ -1,6 +1,9 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { LoginService } from "../login.service";
+
+import { interval, Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
@@ -25,12 +28,15 @@ import { CompetitionService } from '../competition.service';
 export class CompetitionComponent implements AfterViewInit {
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
 
+  private subscription : Subscription;
+
   private aceEditor: ace.Ace.Editor;
   private editorBeautify;
 
   passed: Boolean = false;
   points: number;
   allowed: Boolean = false;
+  working: Boolean = true;
 
   form: FormGroup;
 
@@ -45,7 +51,8 @@ export class CompetitionComponent implements AfterViewInit {
   constructor(
     public fb: FormBuilder,
     private uservice: LoginService,
-    private cpservice: CompetitionService
+    private cpservice: CompetitionService,
+    private _router: Router
   ) {
     this.form = this.fb.group({
       script: [null],
@@ -53,8 +60,9 @@ export class CompetitionComponent implements AfterViewInit {
     });
   }
 
-
   ngAfterViewInit(): void {
+    this.subscription = interval(1000)
+      .subscribe(x => { this.validate(); });
     this.cpservice.fetchCompetitionbyId(
       localStorage.getItem('running')
     ).subscribe(
@@ -63,19 +71,8 @@ export class CompetitionComponent implements AfterViewInit {
         this.body = comp.problem;
       }
     );
-    this.cpservice.isContestRunning(
-      localStorage.getItem('running')
-    ).subscribe(
-      (res) => this.allowed = res
-    );
-    this.cpservice.contestPassed(
-      localStorage.getItem('running')
-    ).subscribe(
-      (res) => {
-        this.passed = res.passed;
-        this.points = res.points;
-      }
-    );
+    this.checkRunning();
+    this.getPoints();
     ace.config.set('basePath', 'path');
     ace.config.set("fontSize", "16px");
     ace.require('ace/ext/language_tools');
@@ -95,6 +92,39 @@ export class CompetitionComponent implements AfterViewInit {
     this.aceEditor.session.setMode('ace/mode/' + this.LANG);
   }
 
+
+  // Helpers //
+  getPoints() {
+    this.cpservice.contestPassed(
+      localStorage.getItem('running')
+    ).subscribe(
+      (res) => {
+        this.passed = res.passed;
+        this.points = res.points;
+      }
+    );
+  }
+
+  checkRunning() {
+    this.cpservice.isContestRunning(
+      localStorage.getItem('running')
+    ).subscribe(
+      (res) => {
+        this.allowed = res;
+        this.working = res;
+      }
+    );
+  }
+
+  validate() {
+    this.checkRunning();
+    if(!this.working) {
+      alert("Competition Expired! You're being taken to your profile!");
+      this._router.navigate(['/profile']);
+    }
+  }
+  // // 
+
   public runCode() {
     this.code = this.aceEditor.session.getValue();
     this.cpservice.submitCode(
@@ -107,14 +137,7 @@ export class CompetitionComponent implements AfterViewInit {
     ).subscribe(
       (response) => {
         alert(response);
-        this.cpservice.contestPassed(
-          localStorage.getItem('running')
-        ).subscribe(
-          (res) => {
-            this.passed = res.passed;
-            this.points = res.points;
-          }
-        );
+        this.getPoints();
       },
       (error) => {
         alert("Something went wrong, we are fixing the issue!");
@@ -164,20 +187,17 @@ export class CompetitionComponent implements AfterViewInit {
     ).subscribe(
       (response) => {
         alert(response);
-        this.cpservice.contestPassed(
-          localStorage.getItem('running')
-        ).subscribe(
-          (res) => {
-            this.passed = res.passed;
-            this.points = res.points;
-          }
-        );
+        this.getPoints();
       },
       (error) => {
         alert("Something went wrong, we are fixing the issue!");
         console.log(error);
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
