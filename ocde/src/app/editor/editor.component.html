@@ -20,13 +20,15 @@
                  <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
                     <mat-icon>delete</mat-icon>
                  </button>
-            <ul *ngIf="item.children.length > 0">
-                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
-            </ul>
+                <ul *ngIf="item.children.length > 0">
+                    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
+                </ul>
             </li>
         </ng-template>
+
+        <!-- bug -->
         <mat-selection-list [multiple]='false'>
-            <button mat-raised-button (click)=openDialog()>New File</button>
+            <button mat-raised-button (click)="openDialog('File')">New File</button>
             <mat-selection-list [multiple]='false'>
                 <mat-list-option *ngFor="let file of files" (click)="setFile(file)">
                     {{file.filename}}
@@ -37,9 +39,10 @@
 
     <div class="container h-100 mt-4">
         <button type="button" mat-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-    <p>Current Directory: {{dirk}}</p>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <p>Current Directory: {{dirk}}</p>
+    </div>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">
@@ -67,15 +70,9 @@
         <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
 
         <div class="cbutton">
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
-            Run
-        </button>
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
-            Align
-        </button>
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
-            Save
-        </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()"> Run </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()"> Align </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()"> Save </button>
         </div>
 
         <div class="row mt-4">
@@ -104,6 +101,5 @@
                 </div>
             </form>
         </div>
-
     </div>
 </mat-drawer-container>
