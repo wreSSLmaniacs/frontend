@@ -18,6 +18,9 @@ export class PastcontestComponent implements OnInit {
   title: String;
   body: String;
 
+  gotContest: Boolean = false;
+  gotPoints: Boolean = false;
+
   constructor(
     private cpservice : CompetitionService,
     private route : ActivatedRoute
@@ -36,14 +39,20 @@ export class PastcontestComponent implements OnInit {
       (comp) => {
         this.title = comp.title;
         this.body = comp.problem;
+        this.gotContest = true;
       }
     );
     this.cpservice.contestPassed(this.id).subscribe(
       (res) => {
         this.passed = res.passed;
         this.points = res.points;
+        this.gotPoints = true;
       }
     );
+  }
+
+  loaded(): Boolean {
+    return this.gotContest && this.gotPoints;
   }
 
 }

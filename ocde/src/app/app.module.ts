@@ -33,6 +33,7 @@ import { NgxMatMomentModule } from "@angular-material-components/moment-adapter"
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { TimerComponent } from './timer/timer.component';
 import { PastcontestComponent } from './pastcontest/pastcontest.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PastcontestComponent } from './pastcontest/pastcontest.component';
     CompCreateComponent,
     CompetitionComponent,
     TimerComponent,
-    PastcontestComponent
+    PastcontestComponent,
+    LoadingComponent
   ],
   entryComponents: [EditorDialogComponent],
   imports: [

@@ -1,3 +1,8 @@
+<div *ngIf="!loaded()">
+    <app-loading></app-loading>
+</div>
+
+<div *ngIf="loaded()">
 <div *ngIf ="title">
     <div class="w3-card-4 w3-margin w3-white">
         <div class="w3-container">
@@ -75,3 +80,4 @@
             </form>
         </div>
     </div>
+</div>

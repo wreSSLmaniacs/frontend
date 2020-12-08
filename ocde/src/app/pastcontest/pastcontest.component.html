@@ -1,18 +1,24 @@
-<div class="w3-card-4 w3-margin w3-white">
-    <div class="w3-container">
-        <h1>{{title}}</h1>
-        <hr class="new1">
-        <!-- <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5> -->
-    </div>
+<div *ngIf="!loaded()">
+    <app-loading></app-loading>
+</div>
 
-    <div class="w3-container">
-        <p>{{body}}</p>
-        <div class="w3-row">
-            <div *ngIf="passed" class="alert alert-success" role="alert">
-                You passed with {{points}} points!
-            </div>
-            <div *ngIf="!passed" class="alert alert-danger" role="alert">
-                You could not solve this problem!
+<div *ngIf="loaded()">
+    <div class="w3-card-4 w3-margin w3-white">
+        <div class="w3-container">
+            <h1>{{title}}</h1>
+            <hr class="new1">
+            <!-- <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5> -->
+        </div>
+
+        <div class="w3-container">
+            <p>{{body}}</p>
+            <div class="w3-row">
+                <div *ngIf="passed" class="alert alert-success" role="alert">
+                    You passed with {{points}} points!
+                </div>
+                <div *ngIf="!passed" class="alert alert-danger" role="alert">
+                    You could not solve this problem!
+                </div>
             </div>
         </div>
     </div>

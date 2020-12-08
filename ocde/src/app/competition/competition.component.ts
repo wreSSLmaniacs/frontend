@@ -102,6 +102,9 @@ export class CompetitionComponent implements AfterViewInit {
     this.aceEditor.session.setMode('ace/mode/' + this.LANG);
   }
 
+  loaded() : Boolean {
+    return true;
+  }
 
   // Helpers //
   getPoints() {
