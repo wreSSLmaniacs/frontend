@@ -1,0 +1,17 @@
+{
+    "id": 65,
+    "image": "http://127.0.0.1:8000/media/profile.png",
+    "user_fk": {
+        "id": 66,
+        "password": "pbkdf2_sha256$216000$Yhzm6eBBo2nA$5MscxldX2zZDlnaNXKrtAZJr4ARbX697NRrYCgypC4s=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "test13",
+        "first_name": "",
+        "last_name": "",
+        "email": "test13@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-12-07T18:40:09.385465Z"
+    }
+}
