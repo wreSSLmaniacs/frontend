@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">{{comp.problem.substr(0,100)}}</p>
-                <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
+                <a routerLink="/competition/{{comp.id}}" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
                 <app-timer [type]="running" [endsAt]="comp.endtime"></app-timer>
             </div>
         </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">{{comp.problem.substr(0,100)}}</p>
-                <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">See Your Performance</a>
+                <a routerLink="/pastcompetition/{{comp.id}}" (click)="initCompetition(comp.id)" class="btn btn-primary">See Your Performance</a>
             </div>
         </div>
     </div>

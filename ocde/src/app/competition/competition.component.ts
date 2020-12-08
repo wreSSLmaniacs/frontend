@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { LoginService } from "../login.service";
 
 import { interval, Subscription } from "rxjs";
-import { Router } from "@angular/router";
+import { ActivatedRoute,Router } from "@angular/router";
 
 import * as ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-c_cpp';
@@ -28,6 +28,9 @@ import { CompetitionService } from '../competition.service';
 export class CompetitionComponent implements AfterViewInit {
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
 
+  id: number;
+  startexecution: Boolean = false;
+
   private subscription : Subscription;
 
   private aceEditor: ace.Ace.Editor;
@@ -35,6 +38,7 @@ export class CompetitionComponent implements AfterViewInit {
 
   passed: Boolean = false;
   points: number;
+
   allowed: Boolean = false;
   working: Boolean = true;
 
@@ -52,20 +56,26 @@ export class CompetitionComponent implements AfterViewInit {
     public fb: FormBuilder,
     private uservice: LoginService,
     private cpservice: CompetitionService,
-    private _router: Router
+    private _router: Router,
+    private route: ActivatedRoute
   ) {
     this.form = this.fb.group({
       script: [null],
       language: [''],
     });
+    this.route.params.subscribe(
+      (params) => {
+        this.id = params.id;
+        this.startexecution = true;
+      }
+    )
   }
 
   ngAfterViewInit(): void {
+    while(!this.startexecution) {;}
     this.subscription = interval(1000)
       .subscribe(x => { this.validate(); });
-    this.cpservice.fetchCompetitionbyId(
-      localStorage.getItem('running')
-    ).subscribe(
+    this.cpservice.fetchCompetitionbyId(this.id).subscribe(
       (comp) => {
         this.title = comp.title;
         this.body = comp.problem;
@@ -95,9 +105,7 @@ export class CompetitionComponent implements AfterViewInit {
 
   // Helpers //
   getPoints() {
-    this.cpservice.contestPassed(
-      localStorage.getItem('running')
-    ).subscribe(
+    this.cpservice.contestPassed(this.id).subscribe(
       (res) => {
         this.passed = res.passed;
         this.points = res.points;
@@ -106,9 +114,7 @@ export class CompetitionComponent implements AfterViewInit {
   }
 
   checkRunning() {
-    this.cpservice.isContestRunning(
-      localStorage.getItem('running')
-    ).subscribe(
+    this.cpservice.isContestRunning(this.id).subscribe(
       (res) => {
         this.allowed = res;
         this.working = res;
@@ -128,7 +134,7 @@ export class CompetitionComponent implements AfterViewInit {
   public runCode() {
     this.code = this.aceEditor.session.getValue();
     this.cpservice.submitCode(
-      localStorage.getItem('running'),
+      this.id,
       {
         'username' : this.uservice.getUser(),
         'script' : this.code,
@@ -182,7 +188,7 @@ export class CompetitionComponent implements AfterViewInit {
     formData.append("script", this.form.get('script').value);
     formData.append("language", this.form.get('language').value);
     this.cpservice.submitFile(
-      localStorage.getItem('running'),
+      this.id,
       formData
     ).subscribe(
       (response) => {
