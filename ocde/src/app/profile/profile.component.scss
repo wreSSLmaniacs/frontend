@@ -140,37 +140,6 @@ fill: #4b4b4b;
 -webkit-animation-name: cycle3;
         animation-name: cycle3; }
 
-h1 {
-text-align: center;
-color: #aaa;
-font-family: Helvetica, Arial, Sans-serif;
-margin: 2em 0 2em;
-font-size: 1.5em; }
-
-a {
-color: #999; }
-
-button {
-font-size: 1.25em;
-display: block;
-margin: 1em auto;
-border: none;
-color: #fff;
-padding: 1em 2em;
--webkit-transition: all 0.4s ease-out;
-        transition: all 0.4s ease-out;
-background: #4ea493;
--webkit-box-shadow: 0 0.4em 0 -0.2em #2d5f55;
-        box-shadow: 0 0.4em 0 -0.2em #2d5f55; }
-
-button.go {
-background: #4b4b4b;
--webkit-box-shadow: 0 0.4em 0 -0.2em #181818;
-        box-shadow: 0 0.4em 0 -0.2em #181818; }
-
-button:focus {
-outline: none; }
-
 @-webkit-keyframes cycle1 {
 0%, 65% {
     fill: #b2b2b2; }
@@ -218,4 +187,5 @@ outline: none; }
     fill: #4b4b4b; }
 100% {
     fill: #b2b2b2; } }
-  
+
+//some parts of the styling of lot of components has been taken from w3-schools templates

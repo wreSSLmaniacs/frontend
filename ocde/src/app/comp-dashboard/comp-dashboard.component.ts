@@ -15,6 +15,7 @@ export class CompDashboardComponent implements OnInit {
   rcomps : Comp[] = [];
   ucomps : Comp[] = [];
   pcomps : Comp[] = [];
+  load: boolean= true;
   
   constructor(
     private cpservice : CompetitionService
@@ -29,6 +30,7 @@ export class CompDashboardComponent implements OnInit {
     this.cpservice.fetchUpcomingCompetetions().subscribe(
       running => {
         this.ucomps = running;
+        this.load = false;
       }
     );
     this.cpservice.fetchPastCompetetions().subscribe(
