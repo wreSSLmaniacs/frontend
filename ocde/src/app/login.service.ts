@@ -35,6 +35,7 @@ export class LoginService {
     localStorage.removeItem('username');
     localStorage.removeItem('userimage');
     localStorage.removeItem('userid');
+    localStorage.removeItem('running');
     this._router.navigate(['/home']);
   }
 
