@@ -59,7 +59,7 @@
                                 </div>
                             </form>
                             <div class="text-center mt-3">
-                                <button class="btn btn-lg btn-primary" (click)="onSubmit()" type="submit">Register</button>
+                                <button class="btn btn-lg btn-dark" [disabled]="!validate()" (click)="onSubmit()" type="submit">Register</button>
                             </div>
                             <br>
                             <div *ngIf="errormessage" class="alert alert-danger" role="alert">
