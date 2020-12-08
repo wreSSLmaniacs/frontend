@@ -37,9 +37,4 @@ export class CompDashboardComponent implements OnInit {
       }
     );
   }
-
-  initCompetition(x: number) {
-    localStorage.setItem('running',x.toString());
-  }
-
 }

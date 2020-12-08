@@ -11,6 +11,7 @@ import { EditorComponent } from './editor/editor.component';
 import { CompCreateComponent } from './comp-create/comp-create.component';
 import { CompDashboardComponent } from "./comp-dashboard/comp-dashboard.component";
 import { CompetitionComponent } from "./competition/competition.component";
+import { PastcontestComponent } from "./pastcontest/pastcontest.component";
 
 const routes: Routes = [
   { path: 'login',component:LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'editor', component: EditorComponent, canActivate:[ AuthGuard ]},
   { path: 'create', component: CompCreateComponent, canActivate:[ AuthGuard ] },
   { path: 'dashboard', component: CompDashboardComponent, canActivate:[ AuthGuard ] },
-  { path: 'competition', component: CompetitionComponent, canActivate:[ AuthGuard ] },
+  { path: 'competition/:id', component: CompetitionComponent, canActivate:[ AuthGuard ] },
+  { path: 'pastcompetition/:id', component: PastcontestComponent, canActivate:[ AuthGuard ] },
   { path: '**', redirectTo:'home',pathMatch:'full'}
 ];
 
