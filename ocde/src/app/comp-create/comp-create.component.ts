@@ -80,7 +80,9 @@ export class CompCreateComponent implements OnInit {
       title: [''],
       problem_st: [''],
       infile :[null],
-      outfile: [null]
+      outfile: [null],
+      start: [''],
+      end: ['']
     });
     this.inbutton.nativeElement.value = null;
     this.outbutton.nativeElement.value = null;
