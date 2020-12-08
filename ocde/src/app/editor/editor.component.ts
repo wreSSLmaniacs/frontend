@@ -136,10 +136,10 @@ int main() {
     }
   }
 
-  openDialog(text: String, rename = false,oldName='',url=''){
+  openDialog(text: String, text2:String, rename = false,oldName='',url=''){
     var filename;
     let dialogRef = this.dialog.open(EditorDialogComponent, {
-      data: {filename: filename, text: text}});
+      data: {filename: filename, text: text, text2: text2}});
 
     dialogRef.afterClosed().subscribe(result=>{
       if(!result){return;}
@@ -172,6 +172,9 @@ int main() {
           this.newNameFolder(oldName,result,url)
         }
       }
+    },err=>{
+      alert("An error occurred");
+      console.log(err);
     });
   }
 
@@ -317,6 +320,10 @@ int main() {
         var dirs: string[] = this.dirk.split('/')
         dirs = dirs.splice(1);
         this.list = this.editFolder(this.list, dirs, foldername.title);
+      },
+      err=>{
+        alert("An error occurred");
+        console.log(err);
       }); 
   }
 
@@ -330,6 +337,10 @@ int main() {
         var dirs: string[] = url.split('/')
         dirs = dirs.splice(1);
         this.list = this.renameListFolder(this.list, dirs, newName, oldName);
+      },
+      err=>{
+        alert("An error occurred");
+        console.log(err);
       });
   }
 
@@ -406,7 +417,7 @@ int main() {
 
   saveFile(filename = this.currentfile): void{
     if(!filename){
-      return this.openDialog("File");
+      return this.openDialog("File","Create New File");
     }
     this.code = this.aceEditor.session.getValue();
     this.fileService.saveFile(
@@ -421,6 +432,9 @@ int main() {
         dirs = dirs.splice(1);
         this.list = this.editFile(this.list, dirs,file);
         console.log(this.list);
+      },err=>{
+        alert("An error occurred");
+        console.log(err);
       }); 
   }
 
@@ -434,6 +448,10 @@ int main() {
         var dirs: string[] = url.split('/')
         dirs = dirs.splice(1);
         this.list = this.renameListFile(this.list, dirs, newName, oldName);
+      },
+      err=>{
+        alert("An error occurred");
+        console.log(err);
       });
   }
 
@@ -463,6 +481,9 @@ int main() {
         this.list = this.insert(this.dirk);
       }
       console.log(this.list);
+    },err=>{
+      alert("An error occurred");
+      console.log(err);
     }
     );
 }
@@ -487,7 +508,10 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFileStruc(this.list,dirs,file.file);
-    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe();
+    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe(err=>{
+      alert("An error occurred");
+      console.log(err);
+    });
   }
 
   deleteFolder(folder: NavigationModel): void {
@@ -496,15 +520,18 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFolderStruc(this.list,dirs, folder.title);
-    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe();
+    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe(err=>{
+      alert("An error occurred");
+      console.log(err);
+    });
   }
 
   renameFile(file: NavigationModel): void {
-    this.openDialog("File",true,file.title, file.url);
+    this.openDialog("File","Rename File",true,file.title, file.url);
   }
 
   renameFolder(folder: NavigationModel): void {
-    this.openDialog("Folder",true, folder.title, folder.url);
+    this.openDialog("Folder","Rename Folder",true, folder.title, folder.url);
   }
 
   goBack(): void {
@@ -551,6 +578,9 @@ int main() {
         else {
           this.output = "Error: " + receivied.output;
         }
+      },err=>{
+        alert("An error occurred");
+        console.log(err);
       });
 }
 
@@ -570,6 +600,9 @@ int main() {
         else {
           this.output = "Error: " + receivied.output;
         }
+      },err=>{
+        alert("An error occurred");
+        console.log(err);
       }); 
   } 
 } 

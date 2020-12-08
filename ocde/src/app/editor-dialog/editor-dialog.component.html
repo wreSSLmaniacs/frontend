@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Create New {{data.text}}</h2>
+<h2 mat-dialog-title>{{data.text2}}</h2>
 <mat-dialog-content>
         <mat-label> {{data.text}} name </mat-label>
         <input matInput [(ngModel)]="data.file">
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button [mat-dialog-close]> Cancel</button>
-    <button mat-button [mat-dialog-close]="data.file"> Create </button>
+    <button mat-button [mat-dialog-close]="data.file"> Done </button>
 </mat-dialog-actions>
