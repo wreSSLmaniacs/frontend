@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
 import { RunService } from '../run.service';
 import { RunInput } from '../run_input';
+import { RenameFile } from '../renameFile';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from "../login.service";
 
@@ -20,6 +21,7 @@ import { EditorDialogComponent } from '../editor-dialog/editor-dialog.component'
 import { FileService } from '../file.service';
 
 import { File } from '../file';
+import { Navigation } from '@angular/router';
 // import { CompileShallowModuleMetadata } from '@angular/compiler';
 // import { resolve } from 'dns';
 
@@ -134,7 +136,7 @@ int main() {
     }
   }
 
-  openDialog(text: String){
+  openDialog(text: String, rename = false,oldName='',url=''){
     var filename;
     let dialogRef = this.dialog.open(EditorDialogComponent, {
       data: {filename: filename, text: text}});
@@ -142,23 +144,33 @@ int main() {
     dialogRef.afterClosed().subscribe(result=>{
       if(!result){return;}
       console.log(`Dialog Result: ${result}`);
-      if(text == "File") {
-        const file: NavigationModel = {
-          title: result,
-          isFile: true,
-          children: [],
-          url: this.dirk
+      if(!rename){
+        if(text == "File") {
+          const file: NavigationModel = {
+            title: result,
+            isFile: true,
+            children: [],
+            url: this.dirk
+          }
+          this.saveFile(file);
         }
-        this.saveFile(file);
+        else {
+          const folder: NavigationModel = {
+            title: result,
+            isFile: false,
+            children: [],
+            url: this.dirk
+          }
+          this.saveFolder(folder);
+        }
       }
-      else {
-        const folder: NavigationModel = {
-          title: result,
-          isFile: false,
-          children: [],
-          url: this.dirk
+      else{
+        if(text=="File") {
+          this.newNameFile(oldName,result,url)
         }
-        this.saveFolder(folder);
+        else {
+          this.newNameFolder(oldName,result,url)
+        }
       }
     });
   }
@@ -260,6 +272,39 @@ int main() {
     return table;
   }
 
+  fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
+    console.log(url);
+    for(var item of table){
+      item.url = url;
+      if(!item.isFile) {
+        item.children = this.fixUrl(item.children, url + "/" + item.title)
+      }
+    }
+    return table;
+  }
+
+  renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
+    if(dir.length == 0) {
+      for(var item of table){
+        if(!item.isFile && item.title == oldName){
+          item.title = newName;
+          item.children = this.fixUrl(item.children,item.url + "/" + newName);
+          break;
+        }
+      } 
+      return table;
+    }
+
+    for(var item of table){
+      if(!item.isFile && item.title==dir[0]) {
+        dir = dir.splice(1);
+        item.children = this.renameListFolder(item.children, dir, newName,oldName);
+        break;
+      }
+    }
+    return table;
+  }
+
   saveFolder(foldername: NavigationModel): void{
     this.fileService.saveFile(
       {
@@ -273,6 +318,19 @@ int main() {
         dirs = dirs.splice(1);
         this.list = this.editFolder(this.list, dirs, foldername.title);
       }); 
+  }
+
+  newNameFolder(oldName: string, newName: string, url: string): void {
+    this.fileService.renameFile(
+      {
+        newName: newName, 
+        oldName: oldName,
+        file: false} as RenameFile, url,this.uservice.getUser()).subscribe(
+      file=>{
+        var dirs: string[] = url.split('/')
+        dirs = dirs.splice(1);
+        this.list = this.renameListFolder(this.list, dirs, newName, oldName);
+      });
   }
 
   // ------------------------ FILE HELPERS -------------------
@@ -326,6 +384,26 @@ int main() {
     return table;
   }
 
+  renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
+    if(dir.length == 0) {
+      for(var item of table){
+        if(item.isFile && item.title == oldName){
+          item.title = newName;
+        }
+      }
+      return table;
+    }
+
+    for(var item of table){
+      if(!item.isFile && item.title==dir[0]) {
+        dir = dir.splice(1);
+        item.children = this.renameListFile(item.children, dir, newName,oldName);
+        break;
+      }
+    }
+    return table;
+  }
+
   saveFile(filename = this.currentfile): void{
     if(!filename){
       return this.openDialog("File");
@@ -344,6 +422,19 @@ int main() {
         this.list = this.editFile(this.list, dirs,file);
         console.log(this.list);
       }); 
+  }
+
+  newNameFile(oldName: string, newName: string, url: string): void {
+    this.fileService.renameFile(
+      {
+        newName: newName, 
+        oldName: oldName,
+        file: true} as RenameFile, url,this.uservice.getUser()).subscribe(
+      file=>{
+        var dirs: string[] = url.split('/')
+        dirs = dirs.splice(1);
+        this.list = this.renameListFile(this.list, dirs, newName, oldName);
+      });
   }
 
   getFiles(newFolder: boolean, deleteFolder: boolean): void {
@@ -406,6 +497,14 @@ int main() {
     dirs = dirs.splice(1);
     this.list = this.deleteFolderStruc(this.list,dirs, folder.title);
     this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe();
+  }
+
+  renameFile(file: NavigationModel): void {
+    this.openDialog("File",true,file.title, file.url);
+  }
+
+  renameFolder(folder: NavigationModel): void {
+    this.openDialog("Folder",true, folder.title, folder.url);
   }
 
   goBack(): void {
