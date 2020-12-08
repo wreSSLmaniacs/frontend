@@ -6,3 +6,70 @@
     width: 75px;
     margin: auto;
 }
+
+.list_item {
+    width: 80px;
+}
+
+.mat_drawer {
+    max-width: 200px;
+}
+
+ul.tree, ul.tree ul {
+    list-style: none;
+     margin: 0;
+     padding: 0;
+   } 
+   ul.tree ul {
+     margin-left: 10px;
+   }
+   ul.tree li {
+     margin: 0;
+     padding: 0 7px;
+     line-height: 20px;
+     color: rgb(50,50,50);
+     font-weight: bold;
+     border-left:1px solid rgb(100,100,100);
+
+   }
+   ul.tree li:last-child {
+       border-left:none;
+   }
+   ul.tree li:before {
+      position:relative;
+      top:-0.3em;
+      height:1em;
+      width:12px;
+      color:white;
+      border-bottom:1px solid rgb(100,100,100);
+      content:"";
+      display:inline-block;
+      left:-7px;
+   }
+   ul.tree li:last-child:before {
+      border-left:1px solid rgb(100,100,100);   
+   }
+
+   li {
+    position: relative;
+    margin-top: 5px; /* Added this to prevent some dead-zones triggering the ul:hover */
+  }
+  
+  li::before, ul::before {
+    content: '';
+    display: none;
+    position: absolute;
+    height: 1em;
+    top: -1px;
+    left: -4px;
+    right: 0;
+    padding: 1px 0;
+  }
+  
+  li:hover::before {
+    background-color: rgba(100,100,100);
+  }
+  
+  li ul:hover::before {
+    background-color: rgba(100,100,100);
+  }

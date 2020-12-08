@@ -3,7 +3,7 @@
         <button mat-raised-button (click)="openDialog('File')"><mat-icon> insert_drive_file</mat-icon></button>
         <button mat-raised-button (click)="openDialog('Folder')">	<mat-icon>create_new_folder</mat-icon></button>
         <button mat-raised-button (click)="goBack()"> <mat-icon>keyboard_backspace</mat-icon></button>
-        <ul>
+        <ul style="list-style-type:none;" class="tree">
             <ng-container
             *ngTemplateOutlet="recursiveListTmpl; context:{ list: list }"
           ></ng-container>
@@ -11,28 +11,34 @@
         
         <ng-template #recursiveListTmpl let-list="list">
             <li *ngFor="let item of list">
-                <button *ngIf="!item.isFile" mat-icon-button (click)="setFolder(item)"><mat-icon>folder</mat-icon> {{item.title}}</button>
-                <button *ngIf="item.isFile" mat-icon-button (click)="setFile(item)"> {{ item.title }}</button>
+                <button class="list_item" *ngIf="!item.isFile" mat-icon-button (click)="setFolder(item)"><mat-icon>folder</mat-icon> {{item.title}}</button>
+                <button class="list_item" *ngIf="item.isFile" mat-icon-button (click)="setFile(item)"> <mat-icon>insert_drive_file</mat-icon>{{ item.title }}</button>
                 
                 <button *ngIf="!item.isFile" mat-icon-button (click)="deleteFolder(item)">
                     <mat-icon>delete</mat-icon>
                  </button>
+                 <button *ngIf="!item.isFile" mat-icon-button (click)="renameFolder(item)">
+                    <mat-icon>edit</mat-icon>
+                 </button>
                  <button *ngIf="item.isFile" mat-icon-button (click)="deleteFile(item)">
                     <mat-icon>delete</mat-icon>
                  </button>
-            <ul *ngIf="item.children.length > 0">
-                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
-            </ul>
+                 <button *ngIf="item.isFile" mat-icon-button (click)="renameFile(item)">
+                    <mat-icon>edit</mat-icon>
+                 </button>
+                 
+                <ul *ngIf="item.children.length > 0" style="list-style-type:none;" class="tree">
+                    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
+                </ul>
             </li>
         </ng-template>
-        
     </mat-drawer>
 
     <div class="container h-100 mt-4">
         <button type="button" mat-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-    <p>Current Directory: {{dirk}}</p>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <p>Current Directory: {{dirk}}</p>
     <div class="row mt-4 justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="fill">
@@ -60,15 +66,9 @@
         <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
 
         <div class="cbutton">
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()">
-            Run
-        </button>
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
-            Align
-        </button>
-            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()">
-            Save
-        </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="runCode()"> Run </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()"> Align </button>
+            <button type="button" class="btn btn-dark btn-sm btn-block" (click)="saveFile()"> Save </button>
         </div>
 
         <div class="row mt-4">
@@ -97,6 +97,6 @@
                 </div>
             </form>
         </div>
-        </div>
+    </div>
     </div>
 </mat-drawer-container>
