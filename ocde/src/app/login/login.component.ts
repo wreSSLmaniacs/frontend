@@ -61,7 +61,8 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/profile']);
         },
         err => {
-          this.notsuccess = "fail";
+          // this.notsuccess = "fail";
+          alert("Invalid credentials. Try Again!")
           console.log(err);
 
         }
