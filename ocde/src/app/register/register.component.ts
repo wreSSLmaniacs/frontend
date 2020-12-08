@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
   visible = true;
 
   regForm = new FormGroup({
+    first_name: new FormControl('',Validators.required),
+    last_name: new FormControl('',Validators.required),
     username:new FormControl('', Validators.required),
     email: new FormControl('',Validators.required),
     password:new FormControl('',Validators.required),
@@ -80,7 +82,9 @@ export class RegisterComponent implements OnInit {
       image: this.link,
       username: this.regForm.get('username').value,
       email: this.regForm.get('email').value,
-      password: this.regForm.get('password').value
+      password: this.regForm.get('password').value,
+      first_name: this.regForm.get('first_name').value,
+      last_name: this.regForm.get('last_name').value,
     }
 
     this.regserv.tryreg(this.mynewuser)
