@@ -20,12 +20,6 @@ export class CompDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.cpservice.fetchRunningCompetetions().subscribe(
       running => {
-<<<<<<< HEAD
-        this.comps = running;
-        alert("New competitions loaded!!")
-      }
-    );
-=======
         this.rcomps = running;
       }
     );
@@ -39,7 +33,6 @@ export class CompDashboardComponent implements OnInit {
         this.pcomps = running;
       }
     );
->>>>>>> competetions
   }
 
   initCompetition(x: number) {

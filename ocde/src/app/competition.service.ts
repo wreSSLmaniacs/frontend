@@ -13,9 +13,10 @@ export class CompetitionService {
   getRUrl = 'http://127.0.0.1:8000/api/contest/get/running';
   getUUrl = 'http://127.0.0.1:8000/api/contest/get/upcoming';
   getPUrl = 'http://127.0.0.1:8000/api/contest/get/past';
-  getUrl = 'http://127.0.0.1:8000/api/competition'
-  submitCodeUrl = 'http://127.0.0.1:8000/api/submit/code'
-  submitFileUrl = 'http://127.0.0.1:8000/api/submit/file'
+  getUrl = 'http://127.0.0.1:8000/api/competition';
+  submitCodeUrl = 'http://127.0.0.1:8000/api/submit/code';
+  submitFileUrl = 'http://127.0.0.1:8000/api/submit/file';
+  getPointsUrl = 'http://127.0.0.1:8000/api/points';
 
   constructor(private http : HttpClient) { }
 
@@ -45,6 +46,10 @@ export class CompetitionService {
 
   submitFile(id,code) : Observable<String> {
     return this.http.post<String>(`${this.submitFileUrl}/${id}`,code);
+  }
+
+  fetchPoints() : Observable<number> {
+    return this.http.get<number>(`${this.getPointsUrl}/${localStorage.getItem('username')}`);
   }
 
 }
