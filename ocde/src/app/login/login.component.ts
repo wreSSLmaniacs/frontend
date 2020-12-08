@@ -22,10 +22,23 @@ export class LoginComponent implements OnInit {
   constructor(
     private logserv:LoginService,
     private _router:Router,
+    private locallogserv:LoginService,
   ) { }
 
   ngOnInit(): void {
     
+  }
+
+  localcall(){
+    this.locallogserv.trylogin(this.myuser).subscribe(
+      (res:any)=>{
+        localStorage.setItem('userimage',res.image);
+        localStorage.setItem('userid',res.userid);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
   onSubmit(){
@@ -33,19 +46,22 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.get('username').value,
       password: this.loginForm.get('password').value,
     }
-    console.log(this.myuser);
 
     this.logserv.trytoken(this.myuser)
       .subscribe(
         (res:any) => {
           // console.log(res)
+          this.localcall();
           localStorage.setItem('token',res.token);
-          localStorage.setItem('userimage',res.image);
-          localStorage.setItem('userid', res.userid);
+          // localStorage.setItem('userimage',res.image);
+          // localStorage.setItem('userid', res.userid);
           localStorage.setItem('username',this.myuser.username);
           this._router.navigate(['/profile']);
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+
+        }
       )
   }
 
