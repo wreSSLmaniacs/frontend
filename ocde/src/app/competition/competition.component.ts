@@ -105,12 +105,22 @@ export class CompetitionComponent implements AfterViewInit {
         'language' : this.LANG
       }
     ).subscribe(
-      (response) => alert(response),
+      (response) => {
+        alert(response);
+        this.cpservice.contestPassed(
+          localStorage.getItem('running')
+        ).subscribe(
+          (res) => {
+            this.passed = res.passed;
+            this.points = res.points;
+          }
+        );
+      },
       (error) => {
         alert("Something went wrong, we are fixing the issue!");
         console.log(error);
       }
-    )
+    );
   }
 
   public beautifyContents() {
@@ -152,12 +162,22 @@ export class CompetitionComponent implements AfterViewInit {
       localStorage.getItem('running'),
       formData
     ).subscribe(
-      (response) => alert(response),
+      (response) => {
+        alert(response);
+        this.cpservice.contestPassed(
+          localStorage.getItem('running')
+        ).subscribe(
+          (res) => {
+            this.passed = res.passed;
+            this.points = res.points;
+          }
+        );
+      },
       (error) => {
         alert("Something went wrong, we are fixing the issue!");
         console.log(error);
       }
-    )
+    );
   }
 
 }
