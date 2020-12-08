@@ -17,12 +17,15 @@ export class RunService {
     headers : new HttpHeaders({'Content-Type':'application/json'})
   };
 
-  runScript(input : RunInput) : Observable<RunOutput> {
-    return this.http.post<RunOutput>(this.postUrl,input,this.httpOptions);
+  runScript(input : RunInput, username:string, dirk: string) : Observable<RunOutput> {
+    const url = `${this.postUrl}/${username}/${dirk}`;
+    console.log(input);
+    return this.http.post<RunOutput>(url,input,this.httpOptions);
   }
 
-  runFile(infile : FormData) : Observable<RunOutput> {
-    return this.http.post<RunOutput>(this.postUrl,infile,this.httpOptions);
+  runFile(infile : FormData, username:string, dirk: string) : Observable<RunOutput> {
+    const url = `${this.postUrl}/${username}/${dirk}`;
+    return this.http.post<RunOutput>(url,infile,this.httpOptions);
   }
 
 }

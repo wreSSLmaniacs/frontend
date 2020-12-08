@@ -543,7 +543,7 @@ int main() {
       input : this.input
     };
     console.log(send);
-    this.runscript.runScript(send).subscribe(receivied =>
+    this.runscript.runScript(send,this.uservice.getUser(),this.currentfile.url).subscribe(receivied =>
       {
         if(receivied.success==true) {
           this.output = receivied.output;
@@ -562,7 +562,7 @@ int main() {
       input : this.input
     };
     console.log(send);
-    this.runscript.runScript(send).subscribe(receivied =>
+    this.runscript.runScript(send,this.uservice.getUser(), "").subscribe(receivied =>
       {
         if(receivied.success==true) {
           this.output = receivied.output;
