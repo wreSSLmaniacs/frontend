@@ -31,6 +31,10 @@
                             <div *ngIf="link" class="alert alert-success" role="alert">
                                 Avatar Uploaded successfully!
                             </div>
+                            <div *ngIf="imgerr" class="alert alert-danger" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ imgerr }}
+                            </div>
                             <button class="btn btn-sm btn-primary" (click)="onUpload()" type="submit">Upload</button>
                             <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
                                 <div class="form-group">
@@ -56,6 +60,11 @@
                             </form>
                             <div class="text-center mt-3">
                                 <button class="btn btn-lg btn-primary" (click)="onSubmit()" type="submit">Register</button>
+                            </div>
+                            <br>
+                            <div *ngIf="errormessage" class="alert alert-danger" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Could not register! Try again with non-empty credentials.
                             </div>
 
                         </div>

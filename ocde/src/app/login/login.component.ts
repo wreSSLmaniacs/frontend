@@ -13,6 +13,7 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
 
   myuser : User;
+  notsuccess :string="";
   
   loginForm = new FormGroup({
     username:new FormControl('', Validators.required),
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res:any) => {
           // console.log(res)
+          this.notsuccess ="";
           this.localcall();
           localStorage.setItem('token',res.token);
           // localStorage.setItem('userimage',res.image);
@@ -59,6 +61,7 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/profile']);
         },
         err => {
+          this.notsuccess = "fail";
           console.log(err);
 
         }
