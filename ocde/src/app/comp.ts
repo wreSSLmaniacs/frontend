@@ -1,5 +1,5 @@
 export interface Comp {
     title : String,
     problem : String,
-    id : number
+    id : number,
 }

@@ -29,7 +29,7 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{comp.problem.substr(0,100)}}</p>
-            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
+            <button disabled class="btn btn-primary">Participate</button>
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{comp.problem.substr(0,100)}}</p>
-            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">Participate</a>
+            <a routerLink="/competition" (click)="initCompetition(comp.id)" class="btn btn-primary">See Your Performance</a>
         </div>
     </div>
 </div>

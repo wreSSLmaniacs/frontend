@@ -28,6 +28,10 @@ export class CompetitionComponent implements AfterViewInit {
   private aceEditor: ace.Ace.Editor;
   private editorBeautify;
 
+  passed: Boolean = false;
+  points: number;
+  allowed: Boolean = false;
+
   form: FormGroup;
 
   title: String;
@@ -57,6 +61,19 @@ export class CompetitionComponent implements AfterViewInit {
       (comp) => {
         this.title = comp.title;
         this.body = comp.problem;
+      }
+    );
+    this.cpservice.isContestRunning(
+      localStorage.getItem('running')
+    ).subscribe(
+      (res) => this.allowed = res
+    );
+    this.cpservice.contestPassed(
+      localStorage.getItem('running')
+    ).subscribe(
+      (res) => {
+        this.passed = res.passed;
+        this.points = res.points;
       }
     );
     ace.config.set('basePath', 'path');

@@ -17,6 +17,8 @@ export class CompetitionService {
   submitCodeUrl = 'http://127.0.0.1:8000/api/submit/code';
   submitFileUrl = 'http://127.0.0.1:8000/api/submit/file';
   getPointsUrl = 'http://127.0.0.1:8000/api/points';
+  isRunningUrl = 'http://127.0.0.1:8000/api/contest/isrunning';
+  passUrl = 'http://127.0.0.1:8000/api/contest/passed';
 
   constructor(private http : HttpClient) { }
 
@@ -50,6 +52,14 @@ export class CompetitionService {
 
   fetchPoints() : Observable<number> {
     return this.http.get<number>(`${this.getPointsUrl}/${localStorage.getItem('username')}`);
+  }
+
+  isContestRunning(id): Observable<Boolean> {
+    return this.http.get<Boolean>(`${this.isRunningUrl}/${id}`);
+  }
+
+  contestPassed(id) {
+    return this.http.get<any>(`${this.passUrl}/${id}/${localStorage.getItem('username')}`);
   }
 
 }
