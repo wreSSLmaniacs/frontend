@@ -1,57 +1,98 @@
-<h1>{{title}}</h1>
-<p style="margin-bottom: 50px;">{{body}}</p>
-
-<h5 *ngIf="!passed">No Successful Attempt</h5>
-<h5 *ngIf="passed">Passed with {{points}} points!</h5>
-
-<div class="row mt-4 justify-content-center">
-    <div class="col-auto">
-        <mat-form-field appearance="fill">
-            <mat-label>Select Theme</mat-label>
-            <mat-select [(ngModel)]="THEME" (ngModelChange)="updateTheme()">
-            <mat-option value="github">Github Theme</mat-option>
-            <mat-option value="ambiance">Ambiance Theme</mat-option>
-            <mat-option value="chaos">Chaos Theme</mat-option>
-            <mat-option value="chrome">Chrome Theme</mat-option>
-            <mat-option value="cobalt">Cobalt Theme</mat-option>
-            </mat-select>
-        </mat-form-field>
+<!-- <div class="large-12 columns">
+        <h1>{{title}}</h1>
     </div>
-    <div class="col-auto">
-        <mat-form-field appearance="fill">
-            <mat-label>Select Language</mat-label>
-            <mat-select [(ngModel)]="LANG" (ngModelChange)="updateLang()">
-            <mat-option value="c_cpp">C++</mat-option>
-            <mat-option value="python">Python</mat-option>
-            <mat-option value="ruby">Ruby</mat-option>
-            </mat-select>
-        </mat-form-field>
+    
+    <p style="margin-bottom: 50px;">{{body}}</p> -->
+
+    <div class="w3-card-4 w3-margin w3-white">
+            <div class="w3-container">
+              <h3>{{title}}</h3>
+              <hr class="new1">
+              <!-- <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5> -->
+            </div>
+            
+            <div class="w3-container">
+              <p>{{body}}</p>
+              <div class="w3-row">
+                <div *ngIf="passed" class="alert alert-success" role="alert">
+                    Passed with {{points}} points!
+                </div>
+                <div *ngIf="!passed" class="alert alert-danger" role="alert">
+                    Yet to solve!
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    <!-- <h5 *ngIf="!passed">No Successful Attempt</h5> -->
+    <!-- <h5 *ngIf="passed">Passed with {{points}} points!</h5> -->
+    
+    
+    <div class="row mt-4 justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Theme</mat-label>
+                <mat-select [(ngModel)]="THEME" (ngModelChange)="updateTheme()">
+                <mat-option value="github">Github Theme</mat-option>
+                <mat-option value="ambiance">Ambiance Theme</mat-option>
+                <mat-option value="chaos">Chaos Theme</mat-option>
+                <mat-option value="chrome">Chrome Theme</mat-option>
+                <mat-option value="cobalt">Cobalt Theme</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Language</mat-label>
+                <mat-select [(ngModel)]="LANG" (ngModelChange)="updateLang()">
+                <mat-option value="c_cpp">C++</mat-option>
+                <mat-option value="python">Python</mat-option>
+                <mat-option value="ruby">Ruby</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
-</div>
+    
+    <div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
+    <br>
 
-<div class="code-editor" #codeEditor style="width : 100%; min-height : 500px;"></div>
-
-<div class="cbutton">
-    <button type="button" class="btn btn-dark btn-sm" [disabled]="!allowed" (click)="runCode()">
-        Run
-    </button>
-    <button type="button" class="btn btn-dark btn-sm" (click)="beautifyContents()">
-        Align
-    </button>
-</div>
-
-<div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
-    <div class="row" style="margin-bottom:20px">Run a Script</div>
-    <form [formGroup]="form">
-
-        <div class="form-group">
-            <input type="file" (change)="uploadSource($event)">
+    <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half w3-center">
+            <div class="w3-second">
+                <button type="button" class="btn btn-dark btn-sm btn-block" [disabled]="!allowed" (click)="runCode()">
+                        Run
+                </button>
+            </div>
+            <br>
+            <div class="w3-second">
+                <button type="button" class="btn btn-dark btn-sm btn-block" (click)="beautifyContents()">
+                    Align
+                </button>
+            </div>
         </div>
+        <div class="w3-half w3-center">
+            <form [formGroup]="form">
+                <!-- <a routerLink="/editor" routerLinkActive="active" target="_blank" ><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Code Editor</button></a> -->
+                <!-- <div class="row" style="margin-bottom:20px">Run a Script</div> -->
 
-        <div class="form-group">
-            <button type="button" class="btn btn-dark btn-sm" [disabled]="!allowed" (click)="runFile()">
-                Run File
-            </button>
+                <div class="form-group">
+                    <input type="file" (change)="uploadSource($event)">
+                </div>
+                
+                <div class="form-group">
+                    <button type="button" class="btn btn-dark btn-sm btn-block" [disabled]="!allowed" (click)="runFile()">
+                        Run File
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+
+    <div class="cbutton w3-row w3-center">
+        
+    </div>
+    
+    <div class="cbutton" style="margin-top:20px; margin-bottom:20px;">
+        <!-- <div class="row" style="margin-bottom:20px">Run a Script</div> -->
+        
+    </div>
