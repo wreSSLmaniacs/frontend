@@ -104,12 +104,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/auth.guard.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/auth.guard.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor instantiates required services</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -118,6 +120,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,6 +135,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>To call the functions of login service class</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>_router</td>
@@ -144,6 +151,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>To call the functions of router class</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -181,14 +192,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">src/app/auth.guard.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/auth.guard.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>The user can activate the component url only if this function returns True, which is determined using a function from loginservice.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
@@ -211,8 +224,22 @@ import { LoginService } from &#x27;./login.service&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+/**Description
+ * An essential class that implements CanActivate from router module.
+ * This class been used to prevent the acess of the rest of the site to the user until the user is logged in.
+ */
 export class AuthGuard implements CanActivate {
+
+  /**
+   * Constructor instantiates required services
+   * @param _login To call the functions of login service class
+   * @param _router To call the functions of router class
+   */
   constructor(private _login:LoginService, private _router:Router){}
+
+  /**
+   * The user can activate the component url only if this function returns True, which is determined using a function from loginservice.
+   */
   canActivate():boolean{
     if(this._login.loggedIn()){
       return true

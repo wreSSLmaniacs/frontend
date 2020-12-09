@@ -118,7 +118,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/reg.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/reg.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -183,14 +183,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/app/reg.service.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/app/reg.service.ts:22</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Description
+function which places the POST request and returns and Observable of New user type.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -264,7 +267,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/reg.service.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/reg.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -296,7 +299,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/reg.service.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/reg.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -317,14 +320,19 @@ import { NewUser } from &#x27;./register/newuser&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+/**Description
+ *A service used to register the user. Recive the details from the register component and make the API call.
+ */
 export class RegService {
   postUrl &#x3D; &#x27;http://127.0.0.1:8000/api/profile/add&#x27;
   constructor(private http:HttpClient) { }
-
+  
   httpOptions &#x3D; {
     headers: new HttpHeaders({&#x27;Content-Type&#x27;:&#x27;application/json&#x27;})
   };
-
+  /**Description
+   * function which places the POST request and returns and Observable of New user type.
+   */
   tryreg(user:NewUser):Observable&lt;NewUser&gt;{
     return this.http.post&lt;NewUser&gt;(this.postUrl, user, this.httpOptions)
   }

@@ -101,12 +101,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/token-interceptor.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/token-interceptor.service.ts:16</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Description
+Constructor to create an injector</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -115,6 +118,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -129,6 +133,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <code><p>To prevent a cyclic dependancy we use this injector</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -166,14 +174,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/app/token-interceptor.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/app/token-interceptor.service.ts:28</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This fucntion intercepts all the http calls that the frontend makes</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -182,6 +192,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -193,6 +204,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Takes the incoming request</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>next</td>
@@ -202,6 +217,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>Used to pass on to the next interceptor if present, in our case none.</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -234,12 +253,30 @@ import { LoginService } from &#x27;./login.service&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+
+/**Description
+ * An important class for the frontend part of the authentication of the website.
+ * The injectable class Tokeninterceptor implements HttpInterceptor class.
+ */
+
 export class TokenInterceptorService implements HttpInterceptor{
+  /**Description
+   * Constructor to create an injector
+   * @param injector To prevent a cyclic dependancy we use this injector
+   */
 
   constructor(private injector: Injector) { }
-
+  /**
+   * This fucntion intercepts all the http calls that the frontend makes
+   * @param req Takes the incoming request
+   * @param next Used to pass on to the next interceptor if present, in our case none.
+   */
   intercept(req,next){
     let logser &#x3D; this.injector.get(LoginService);
+    /**Description
+     * If the token is set then, that means the token has been obtained after login, we will try to clone the request to not tamper with the original request.
+     * To the cloned request we add a authization header with the appended unique token of the user, which makes our requests authorized.
+     */
     if(localStorage.getItem(&#x27;token&#x27;)){
         req   &#x3D; req.clone({
         setHeaders: {
