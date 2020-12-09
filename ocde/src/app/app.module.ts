@@ -34,7 +34,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { TimerComponent } from './timer/timer.component';
 import { PastcontestComponent } from './pastcontest/pastcontest.component';
 import { LoadingComponent } from './loading/loading.component';
-
+/**
+ * All the modules that were required for the whole site are declared here
+ */
 @NgModule({
   declarations: [
     AppComponent,

@@ -5,12 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })
+
+/** Description
+ * This component performs the basic task of providing a loading screen
+ */
 export class LoadingComponent implements OnInit {
-
-  /** Description
-   * Thic component performs the basic task of providing a loading screen
-   */
-
   constructor() { }
 
   ngOnInit(): void {
