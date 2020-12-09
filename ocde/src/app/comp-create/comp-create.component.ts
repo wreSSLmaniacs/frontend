@@ -9,6 +9,13 @@ import { CompetitionService } from "../competition.service";
 })
 
 export class CompCreateComponent implements OnInit {
+
+  /**Description
+   * This component is essentially a form. 
+   * It lets you supply a problem and a testcase along with a schedule of your contest.
+   * It uses Angular's NgxDateTimeModule and NgxMomentModule which uses Moment.js to accept Date and Time accurate to the minute.
+   */
+
   @ViewChild('inAcceptor',{static: false}) inbutton : ElementRef;
   @ViewChild('outAcceptor',{static: false}) outbutton : ElementRef;
 
@@ -31,6 +38,9 @@ export class CompCreateComponent implements OnInit {
     })
   }
 
+  /**
+   * A simple boolean function which keeps the Create button disabled till all the relevant information is provided
+   */
   validate(): Boolean {
     if(this.form.get('title').value=='') return false;
     if(this.form.get('problem_st').value=='') return false;
@@ -40,6 +50,11 @@ export class CompCreateComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  /**
+   * The following are standard function to store File type data in a form to facilitate easy upoads
+   * In a request, the file is accesible via request.FILES['filename']
+   */
 
   uploadInput(files) {
     if(files.length>0) {
@@ -62,6 +77,14 @@ export class CompCreateComponent implements OnInit {
       this.outputReady = false;
     }
   }
+
+  /**
+   * The submitForm function is called when a user presses the Create button after providing the relevant information.
+   * This button accumulates all the information into a FormData component and sends it to the server.
+   * Alongside, it clears the form so that you can be ready to create another contest.
+   * 
+   * Note : Use the first 100 or so characters of your problem statement to generate interest. These are displayed when your problem is upcoming!
+   */
 
   submitForm() {
     const formData = new FormData();

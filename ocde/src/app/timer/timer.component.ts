@@ -8,6 +8,15 @@ import { Router } from "@angular/router";
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit {
+  
+  /** Description
+   * This component displays the time remaining accurate to seconds for an event
+   * Event datetime and type (a string specifying "start"/"end") are passed as @Input parameters
+   * The element also refreshes the page when an event expires
+   * The code used is essentially a modification of code that can be found at :
+   * https://medium.com/javascript-in-plain-english/implement-a-countdown-timer-with-rxjs-in-angular-3852f21a4ea0
+   */
+
   @Input() endsAt;
   @Input() type;
 
@@ -16,10 +25,11 @@ export class TimerComponent implements OnInit {
 
 
   constructor(
+    /**
+     * This is needed for the refresh capability
+     */
     private _router: Router
   ) {}
-
-  // code taken from https://medium.com/javascript-in-plain-english/implement-a-countdown-timer-with-rxjs-in-angular-3852f21a4ea0 //
 
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
@@ -35,11 +45,16 @@ export class TimerComponent implements OnInit {
 
   private getTimeDifference() {
     this.timeDifference = this.dDate.getTime() - new Date().getTime();
+    
+    /**
+     * The logic for refresh on event expiration
+     */
     if(this.timeDifference<0) {
       this._router.routeReuseStrategy.shouldReuseRoute = () => false;
       this._router.onSameUrlNavigation = 'reload';
       this._router.navigate(['/dashboard']);
     }
+    
     this.allocateTimeUnits(this.timeDifference);
   }
 
@@ -51,6 +66,9 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit() {
+    /**
+     * Subscription is used to refresh the timer every second
+     */
     this.subscription = interval(1000)
       .subscribe(x => { this.getTimeDifference(); });
     this.dDate = new Date(this.endsAt);

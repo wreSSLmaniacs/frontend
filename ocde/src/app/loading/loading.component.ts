@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
+  /** Description
+   * Thic component performs the basic task of providing a loading screen
+   */
+
   constructor() { }
 
   ngOnInit(): void {

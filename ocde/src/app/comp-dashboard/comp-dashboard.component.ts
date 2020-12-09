@@ -7,7 +7,17 @@ import { Comp } from "../comp"
   templateUrl: './comp-dashboard.component.html',
   styleUrls: ['./comp-dashboard.component.scss']
 })
+
 export class CompDashboardComponent implements OnInit {
+
+  /** Description
+   * This component renders the three types of competitions :
+   * 1. Running
+   * 2. Upcoming
+   * 3. Past
+   * and provides link to appropriate pages.
+   * It uses TimerComponent as a child component.
+   */
 
   upcoming: String = "start:";
   running: String = "end:";

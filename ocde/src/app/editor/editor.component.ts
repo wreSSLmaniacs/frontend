@@ -22,8 +22,6 @@ import { FileService } from '../file.service';
 
 import { File } from '../file';
 import { Navigation } from '@angular/router';
-// import { CompileShallowModuleMetadata } from '@angular/compiler';
-// import { resolve } from 'dns';
 
 @Component({
   selector: 'app-editor',
@@ -32,6 +30,23 @@ import { Navigation } from '@angular/router';
 })
 
 export class EditorComponent implements AfterViewInit {
+
+  /**Description
+   * 
+   * The life of the project, the editor component. Its functionality can be studied in 2 parts
+   * 
+   * 1. Editor :
+   * The editor is created using the "Ace" library
+   * The view uses ngAfterViewInit which is needed for @ViewChild decorator
+   * The code is stored as a formatted string, along with the language and theme
+   * 
+   * The editor supports basic autocomplete and align (beautify) capabilities
+   * The code uses https://medium.com/@ofir3322/create-an-online-ide-with-angular-6-nodejs-part-1-163a939a7929 as a starting point
+   * 
+   * The project also allows for running files via direct uploads
+   * 
+   * 2. Directory Structure
+   */
 
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
   private aceEditor : ace.Ace.Editor;
@@ -544,10 +559,17 @@ int main() {
   uploadSource(event) {
     const file = (event.target as HTMLInputElement).files[0];
 
+    /**
+     * Here, we use the typescript FileReader to upload files the same way we upload editor code
+     * UPDATE : We would like to render the contents of the file into the editor in the next update
+     */
     let fileReader = new FileReader();
     fileReader.onloadend = (e) => {
       this.fileString = fileReader.result;
     }
+
+    /// remove comment to UPDATE :
+    /// this.aceEditor.session.setValue(this.fileString); 
 
     fileReader.readAsText(file)
     
@@ -562,6 +584,11 @@ int main() {
   }
 
   public runCode() {
+    /**
+     * Executed when the user presses the Run button, this function sends the editor content to the server
+     * Along with the code, the "input" contents are also sent to the server
+     * The server responds with the output which is rendered in the output textarea
+     */
     this.code = this.aceEditor.session.getValue();
     const send : RunInput = {
       username : this.uservice.getUser(),
@@ -585,6 +612,11 @@ int main() {
 }
 
   runFile() {
+    /**
+     * Executed when the user presses the Run File button, this function sends the file content to the server
+     * Along with the code, the "input" contents are also sent to the server
+     * The server responds with the output which is rendered in the output textarea
+     */
     const send : RunInput = {
       username : this.uservice.getUser(),
       script : this.fileString,

@@ -9,6 +9,12 @@ import { CompetitionService } from '../competition.service';
 })
 export class PastcontestComponent implements OnInit {
 
+  /**Description
+   * This component lets a user view the contests that are over
+   * It displays the problem statement along with their status
+   * (solved/unsolved) and points obtained 
+   */
+
   id: number;
   startexecution: Boolean = false;
 
@@ -22,9 +28,12 @@ export class PastcontestComponent implements OnInit {
   gotPoints: Boolean = false;
 
   constructor(
-    private cpservice : CompetitionService,
-    private route : ActivatedRoute
+    private cpservice: CompetitionService,
+    private route: ActivatedRoute
   ) {
+    /**
+    * Rendering is done via Angular's parametrized routes
+    */
     this.route.params.subscribe(
       (params) => {
         this.id = params.id;
@@ -34,7 +43,13 @@ export class PastcontestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    while(!this.startexecution) {;}
+    
+    /**
+     * The loop prevents execution till the id is obtained
+     * This id is needed in backend requests
+     */
+    while (!this.startexecution) { ; }
+
     this.cpservice.fetchCompetitionbyId(this.id).subscribe(
       (comp) => {
         this.title = comp.title;
@@ -51,6 +66,10 @@ export class PastcontestComponent implements OnInit {
     );
   }
 
+  /**
+   * A simple boolean function to know the status of requests
+   * Used for loading screen rendering
+   */
   loaded(): Boolean {
     return this.gotContest && this.gotPoints;
   }

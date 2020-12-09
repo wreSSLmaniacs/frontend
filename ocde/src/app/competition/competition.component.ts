@@ -26,6 +26,17 @@ import { CompetitionService } from '../competition.service';
 })
 
 export class CompetitionComponent implements AfterViewInit {
+
+  /**Description:
+   * This component is essentially EditorComponent - File Handling + Live Rendering
+   * 
+   * The component has a Subscription which keeps checking that the contest is running
+   * At the end of a contest, the user is given a prompt and redirected to the profile page
+   * 
+   * UPDATE : In the next update, we would like to make this process happen completely on the frontend by storing the endtime of the contest, reducing API calls
+   * UPDATE : We would still maintain a connection with the server for mid-contest information like errors in problem statements and clarifications
+   */
+
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
 
   id: number;
@@ -106,7 +117,6 @@ export class CompetitionComponent implements AfterViewInit {
     return true;
   }
 
-  // Helpers //
   getPoints() {
     this.cpservice.contestPassed(this.id).subscribe(
       (res) => {
@@ -132,7 +142,6 @@ export class CompetitionComponent implements AfterViewInit {
       this._router.navigate(['/profile']);
     }
   }
-  // // 
 
   public runCode() {
     this.code = this.aceEditor.session.getValue();
