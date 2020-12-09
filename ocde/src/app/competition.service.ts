@@ -9,6 +9,11 @@ import { Comp } from './comp';
 
 export class CompetitionService {
 
+  /**Description
+   * Provides access to multiple API endpoints
+   * The service names are quite self explanatory
+   */
+
   postUrl = 'http://127.0.0.1:8000/api/contest/postcontest';
   getRUrl = 'http://127.0.0.1:8000/api/contest/get/running';
   getUUrl = 'http://127.0.0.1:8000/api/contest/get/upcoming';
