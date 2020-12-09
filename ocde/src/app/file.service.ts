@@ -9,6 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class FileService {
 
+  /**Description
+   * Provides access to multiple API endpoints
+   * The service names are quite self explanatory
+   */
+
   postUrl = 'http://127.0.0.1:8000/api/display';
   renameUrl = 'http://127.0.0.1:8000/api/rename';
 

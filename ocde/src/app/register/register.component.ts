@@ -13,14 +13,20 @@ import { RegService } from '../reg.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  /**
+   * This is our Register Component and this will serve as the registration forum for our project.
+   */
 
-  mynewuser: NewUser;
-  myfile : File = null;
-  link:string="";
-  visible = true;
-  errormessage:String="";
-  imgerr:String="";
+  mynewuser: NewUser; /**<creates an instance of NewUser type */
+  myfile : File = null; /**<creates a File instance */
+  link:string=""; /**<will store the image url */
+  visible = true;/**<A variable used to render conditional frontend */
+  errormessage:String="";/**< To store errormessages */
+  imgerr:String="";/**<To store errors while posting images */
 
+  /**<Description
+   *  We create a Formgroup that we are using to collect the credentials and will POST it to the backend  
+   */
   regForm = new FormGroup({
     first_name: new FormControl('',Validators.required),
     last_name: new FormControl('',Validators.required),
@@ -30,6 +36,9 @@ export class RegisterComponent implements OnInit {
     image:new FormControl('')
   })
 
+  /**
+   * Constructs a Http Header object with the params of content type
+   */
   httpOptions = {
     headers: new HttpHeaders ({ 'Content-Type': 'application/json' })
   };
@@ -43,10 +52,17 @@ export class RegisterComponent implements OnInit {
   imgURL: any;
   public message: string;
 
+  /**Description
+   * This is function that listns to the click on choose file and sends an event
+   */
   onFileListener(event){
     this.myfile = event.target.files[0];
   }
-
+  /**Description
+   * This function is used to pick an image to the file reader and then upload the image
+   * and collect the url from the api to make further requests for the image when required.
+   * @param files To store the file
+   */
   preview(files) {
     
     if (files.length === 0)
@@ -68,6 +84,9 @@ export class RegisterComponent implements OnInit {
     }
   };
 
+  /**Description
+   * Validates all the fields in the input form and returns a boolean to activate/deactivate the register button
+   */
   validate(): Boolean {
     if(this.regForm.get('first_name').value=='') return false;
     if(this.regForm.get('last_name').value=='') return false;
@@ -78,6 +97,9 @@ export class RegisterComponent implements OnInit {
     return true;
   }
 
+  /**Description
+   * Function is used to upload an image to the backend and recieve an url for the image.
+   */
   onUpload(){
     this.visible=false;
     const fd = new FormData();
@@ -97,6 +119,9 @@ export class RegisterComponent implements OnInit {
       });
   };
 
+  /**Description
+   * Function is used to submit the form credentials to the api to get the user registered.
+   */
   onSubmit(){
     this.mynewuser={
       image: this.link,

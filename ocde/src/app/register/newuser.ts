@@ -1,3 +1,6 @@
+/**Description
+ * Creates a NewUser class that basically stores all the user credentials, and is used to send an API request to get the user registered.
+ */
 export class NewUser{
 	username='';
 	email='';
