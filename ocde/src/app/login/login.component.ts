@@ -11,14 +11,27 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  /** Description
+   * This component is the login system for our website.
+   */
+  myuser : User; /**< Implements User interface and creates an instance */
+  notsuccess :string=""; /**A variable to store if the login was a success */
 
-  myuser : User;
-  notsuccess :string="";
+  /**
+   * A Formgroup created that will be send through the POST request
+   */
   
   loginForm = new FormGroup({
-    username:new FormControl('', Validators.required),
+    username:new FormControl('', Validators.required), 
     password:new FormControl('',Validators.required)
   })
+
+  /**Description
+   * We define the constructor of the class hear
+   * @param logserv An instance of class login service
+   * @param _router An instance of the class router
+   * @param locallogserv Another instacne of login service
+   */
 
   constructor(
     private logserv:LoginService,
@@ -29,7 +42,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
+  /**Description
+   * This function will fetch the userid and the userimage after a authenticated login is made.
+   */
   localcall(){
     this.locallogserv.trylogin(this.myuser).subscribe(
       (res:any)=>{
@@ -41,18 +56,27 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
+  /**Description
+   * This function is to submit the form to the backend. We are also storing the username and the password of this user in myuser variable. This variable is sent through the POST request.
+   */
   onSubmit(){
     this.myuser={
       username: this.loginForm.get('username').value,
       password: this.loginForm.get('password').value,
     }
 
+    /**Description
+     * We are trying to make an API call and get a token, with the obtained token we are storing it in local storage, so that we can further use this token to authenticate further API calls.
+     */
+
     this.logserv.trytoken(this.myuser)
       .subscribe(
         (res:any) => {
           // console.log(res)
           this.notsuccess ="";
+          /**
+           * This local call function is to fetch the login details of the user after the token has been obtained.
+           */
           this.localcall();
           localStorage.setItem('token',res.token);
           // localStorage.setItem('userimage',res.image);

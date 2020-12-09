@@ -10,6 +10,9 @@ import { ProfileService } from '../profile.service'
 })
 export class ProfileComponent implements OnInit {
 
+  /**Description
+   * Created the profile component, to display the profile page of the website.
+   */
   user: String;
   userDet: any;
   image: String;
@@ -19,13 +22,21 @@ export class ProfileComponent implements OnInit {
   is_staff: Boolean;
   first_name: String;
   last_name: String;
-
+  /**Description
+   * Constructor to create the instances of the services required.
+   * @param uservice Used to fetch user details is of Loginservice instance.
+   * @param cpservice Used to fetch the points is of Competition service instance.
+   * @param profileservice Used to fetch all the profile details of the logged in user.
+   */
   constructor(
     private uservice: LoginService,
     private cpservice: CompetitionService,
     private profileservice: ProfileService
   ) { }
-
+  
+  /**Description
+   * Quite self-explanatory. Three GET requests to corresponding APIs to get the details of the users and the required display properties.
+   */
   ngOnInit(): void {
     this.user = this.uservice.getUser();
     this.profileservice.getUserDetail(this.user)

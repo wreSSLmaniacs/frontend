@@ -13,6 +13,9 @@ import { CompDashboardComponent } from "./comp-dashboard/comp-dashboard.componen
 import { CompetitionComponent } from "./competition/competition.component";
 import { PastcontestComponent } from "./pastcontest/pastcontest.component";
 
+/**
+ * Specification of all the routes that are used by the site. All the routes are self-explanatory from their names
+ */
 const routes: Routes = [
   { path: 'login',component:LoginComponent },
   { path: 'register', component: RegisterComponent},
