@@ -23,12 +23,6 @@ import { FileService } from '../file.service';
 import { File } from '../file';
 import { Navigation } from '@angular/router';
 
-@Component({
-  selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss']
-})
-
 /**Description
    * 
    * The life of the project, the editor component. Its functionality can be studied in 2 parts
@@ -48,6 +42,13 @@ import { Navigation } from '@angular/router';
    * The structure supports file and folder creation, deletion and renaming
    * Provides a system for modularising code and running with various imports and dependencies
    */
+
+@Component({
+  selector: 'app-editor',
+  templateUrl: './editor.component.html',
+  styleUrls: ['./editor.component.scss']
+})
+
 export class EditorComponent implements AfterViewInit {
 
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;

@@ -2,6 +2,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder } from "@angular/forms";
 import { CompetitionService } from "../competition.service";
 
+/**
+ * Description
+ * This component is essentially a form. 
+ * It lets you supply a problem and a testcase along with a schedule of your contest.
+ * It uses Angular's NgxDateTimeModule and NgxMomentModule which uses Moment.js to accept Date and Time accurate to the minute.
+ */
+
 @Component({
   selector: 'app-comp-create',
   templateUrl: './comp-create.component.html',
@@ -9,12 +16,6 @@ import { CompetitionService } from "../competition.service";
 })
 
 export class CompCreateComponent implements OnInit {
-
-  /**Description
-   * This component is essentially a form. 
-   * It lets you supply a problem and a testcase along with a schedule of your contest.
-   * It uses Angular's NgxDateTimeModule and NgxMomentModule which uses Moment.js to accept Date and Time accurate to the minute.
-   */
 
   @ViewChild('inAcceptor',{static: false}) inbutton : ElementRef;
   @ViewChild('outAcceptor',{static: false}) outbutton : ElementRef;
@@ -55,7 +56,6 @@ export class CompCreateComponent implements OnInit {
    * The following are standard function to store File type data in a form to facilitate easy upoads
    * In a request, the file is accesible via request.FILES['filename']
    */
-
   uploadInput(files) {
     if(files.length>0) {
       const file = files.item(0);
@@ -85,7 +85,6 @@ export class CompCreateComponent implements OnInit {
    * 
    * Note : Use the first 100 or so characters of your problem statement to generate interest. These are displayed when your problem is upcoming!
    */
-
   submitForm() {
     const formData = new FormData();
     formData.append('title',this.form.get('title').value);

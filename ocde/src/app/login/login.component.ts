@@ -5,15 +5,18 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../login.service';
 
+/** Description
+ * This component is the login system for our website.
+ */
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
-  /** Description
-   * This component is the login system for our website.
-   */
+
   myuser : User; /**< Implements User interface and creates an instance */
   notsuccess :string=""; /**A variable to store if the login was a success */
 

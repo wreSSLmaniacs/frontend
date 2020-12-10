@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompetitionService } from '../competition.service';
 
+/**Description
+ * This component lets a user view the contests that are over
+ * It displays the problem statement along with their status
+ * (solved/unsolved) and points obtained 
+ */
+
 @Component({
   selector: 'app-pastcontest',
   templateUrl: './pastcontest.component.html',
   styleUrls: ['./pastcontest.component.scss']
 })
-export class PastcontestComponent implements OnInit {
 
-  /**Description
-   * This component lets a user view the contests that are over
-   * It displays the problem statement along with their status
-   * (solved/unsolved) and points obtained 
-   */
+export class PastcontestComponent implements OnInit {
 
   id: number;
   startexecution: Boolean = false;
@@ -27,13 +28,13 @@ export class PastcontestComponent implements OnInit {
   gotContest: Boolean = false;
   gotPoints: Boolean = false;
 
+  /**
+  * Rendering is done via Angular's parametrized routes
+  */
   constructor(
     private cpservice: CompetitionService,
     private route: ActivatedRoute
   ) {
-    /**
-    * Rendering is done via Angular's parametrized routes
-    */
     this.route.params.subscribe(
       (params) => {
         this.id = params.id;
@@ -42,12 +43,12 @@ export class PastcontestComponent implements OnInit {
     )
   }
 
+  /**
+   * The loop prevents execution till the id is obtained
+   * This id is needed in backend requests
+   */
   ngOnInit(): void {
-    
-    /**
-     * The loop prevents execution till the id is obtained
-     * This id is needed in backend requests
-     */
+
     while (!this.startexecution) { ; }
 
     this.cpservice.fetchCompetitionbyId(this.id).subscribe(

@@ -2,13 +2,6 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription, interval } from "rxjs";
 import { Router } from "@angular/router";
 
-@Component({
-  selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss']
-})
-export class TimerComponent implements OnInit {
-  
   /** Description
    * This component displays the time remaining accurate to seconds for an event
    * Event datetime and type (a string specifying "start"/"end") are passed as @Input parameters
@@ -16,6 +9,14 @@ export class TimerComponent implements OnInit {
    * The code used is essentially a modification of code that can be found at :
    * https://medium.com/javascript-in-plain-english/implement-a-countdown-timer-with-rxjs-in-angular-3852f21a4ea0
    */
+
+@Component({
+  selector: 'app-timer',
+  templateUrl: './timer.component.html',
+  styleUrls: ['./timer.component.scss']
+})
+
+export class TimerComponent implements OnInit {
 
   @Input() endsAt;
   @Input() type;

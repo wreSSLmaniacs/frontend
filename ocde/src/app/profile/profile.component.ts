@@ -3,16 +3,18 @@ import { CompetitionService } from '../competition.service';
 import { LoginService } from "../login.service";
 import { ProfileService } from '../profile.service'
 
+/**Description
+ * Created the profile component, to display the profile page of the website.
+ */
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
 
-  /**Description
-   * Created the profile component, to display the profile page of the website.
-   */
   user: String;
   userDet: any;
   image: String;

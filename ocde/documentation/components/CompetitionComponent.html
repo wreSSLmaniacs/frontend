@@ -64,6 +64,18 @@
     <code>src/app/competition/competition.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Description:
+This component is essentially EditorComponent - File Handling + Live Rendering</p>
+<p>The component has a Subscription which keeps checking that the contest is running
+At the end of a contest, the user is given a prompt and redirected to the profile page</p>
+<p>UPDATE : In the next update, we would like to make this process happen completely on the frontend by storing the endtime of the contest, reducing API calls
+UPDATE : We would still maintain a connection with the server for mid-contest information like errors in problem statements and clarifications</p>
+
+    </p>
 
 
     <p class="comment">
@@ -1017,17 +1029,6 @@
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Description:
-This component is essentially EditorComponent - File Handling + Live Rendering</p>
-<p>The component has a Subscription which keeps checking that the contest is running
-At the end of a contest, the user is given a prompt and redirected to the profile page</p>
-<p>UPDATE : In the next update, we would like to make this process happen completely on the frontend by storing the endtime of the contest, reducing API calls
-UPDATE : We would still maintain a connection with the server for mid-contest information like errors in problem statements and clarifications</p>
-</div>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -1404,6 +1405,16 @@ import &#x27;ace-builds/src-noconflict/ext-beautify&#x27;;
 
 import { CompetitionService } from &#x27;../competition.service&#x27;;
 
+/**Description:
+ * This component is essentially EditorComponent - File Handling + Live Rendering
+ * 
+ * The component has a Subscription which keeps checking that the contest is running
+ * At the end of a contest, the user is given a prompt and redirected to the profile page
+ * 
+ * UPDATE : In the next update, we would like to make this process happen completely on the frontend by storing the endtime of the contest, reducing API calls
+ * UPDATE : We would still maintain a connection with the server for mid-contest information like errors in problem statements and clarifications
+ */
+
 @Component({
   selector: &#x27;app-competition&#x27;,
   templateUrl: &#x27;./competition.component.html&#x27;,
@@ -1411,16 +1422,6 @@ import { CompetitionService } from &#x27;../competition.service&#x27;;
 })
 
 export class CompetitionComponent implements AfterViewInit {
-
-  /**Description:
-   * This component is essentially EditorComponent - File Handling + Live Rendering
-   * 
-   * The component has a Subscription which keeps checking that the contest is running
-   * At the end of a contest, the user is given a prompt and redirected to the profile page
-   * 
-   * UPDATE : In the next update, we would like to make this process happen completely on the frontend by storing the endtime of the contest, reducing API calls
-   * UPDATE : We would still maintain a connection with the server for mid-contest information like errors in problem statements and clarifications
-   */
 
   @ViewChild(&#x27;codeEditor&#x27;) private editor: ElementRef&lt;HTMLElement&gt;;
 

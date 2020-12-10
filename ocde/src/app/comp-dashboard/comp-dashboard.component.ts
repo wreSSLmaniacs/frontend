@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CompetitionService } from "../competition.service";
 import { Comp } from "../comp"
 
+/** Description
+ * This component renders the three types of competitions :
+ * 1. Running
+ * 2. Upcoming
+ * 3. Past
+ * and provides link to appropriate pages.
+ * It uses TimerComponent as a child component.
+ */
+
 @Component({
   selector: 'app-comp-dashboard',
   templateUrl: './comp-dashboard.component.html',
@@ -9,15 +18,6 @@ import { Comp } from "../comp"
 })
 
 export class CompDashboardComponent implements OnInit {
-
-  /** Description
-   * This component renders the three types of competitions :
-   * 1. Running
-   * 2. Upcoming
-   * 3. Past
-   * and provides link to appropriate pages.
-   * It uses TimerComponent as a child component.
-   */
 
   upcoming: String = "start:";
   running: String = "end:";

@@ -7,15 +7,17 @@ import { Router } from '@angular/router'
 
 import { RegService } from '../reg.service'; 
 
+  /**
+   * This is our Register Component and this will serve as the registration forum for our project.
+   */
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
-  /**
-   * This is our Register Component and this will serve as the registration forum for our project.
-   */
 
   mynewuser: NewUser; /**<creates an instance of NewUser type */
   myfile : File = null; /**<creates a File instance */

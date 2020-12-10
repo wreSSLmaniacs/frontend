@@ -64,6 +64,21 @@
     <code>src/app/comp-dashboard/comp-dashboard.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Description
+This component renders the three types of competitions :</p>
+<ol>
+<li>Running</li>
+<li>Upcoming</li>
+<li>Past
+and provides link to appropriate pages.
+It uses TimerComponent as a child component.</li>
+</ol>
+
+    </p>
 
 
     <p class="comment">
@@ -466,20 +481,6 @@
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Description
-This component renders the three types of competitions :</p>
-<ol>
-<li>Running</li>
-<li>Upcoming</li>
-<li>Past
-and provides link to appropriate pages.
-It uses TimerComponent as a child component.</li>
-</ol>
-</div>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -493,6 +494,15 @@ It uses TimerComponent as a child component.</li>
 import { CompetitionService } from &quot;../competition.service&quot;;
 import { Comp } from &quot;../comp&quot;
 
+/** Description
+ * This component renders the three types of competitions :
+ * 1. Running
+ * 2. Upcoming
+ * 3. Past
+ * and provides link to appropriate pages.
+ * It uses TimerComponent as a child component.
+ */
+
 @Component({
   selector: &#x27;app-comp-dashboard&#x27;,
   templateUrl: &#x27;./comp-dashboard.component.html&#x27;,
@@ -500,15 +510,6 @@ import { Comp } from &quot;../comp&quot;
 })
 
 export class CompDashboardComponent implements OnInit {
-
-  /** Description
-   * This component renders the three types of competitions :
-   * 1. Running
-   * 2. Upcoming
-   * 3. Past
-   * and provides link to appropriate pages.
-   * It uses TimerComponent as a child component.
-   */
 
   upcoming: String &#x3D; &quot;start:&quot;;
   running: String &#x3D; &quot;end:&quot;;

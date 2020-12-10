@@ -141,7 +141,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="751" class="link-to-prism">src/app/editor/editor.component.ts:751</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="737" class="link-to-prism">src/app/editor/editor.component.ts:737</a></div>
                             </td>
                         </tr>
 
@@ -170,7 +170,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="750" class="link-to-prism">src/app/editor/editor.component.ts:750</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="736" class="link-to-prism">src/app/editor/editor.component.ts:736</a></div>
                             </td>
                         </tr>
 
@@ -198,7 +198,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="749" class="link-to-prism">src/app/editor/editor.component.ts:749</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="735" class="link-to-prism">src/app/editor/editor.component.ts:735</a></div>
                             </td>
                         </tr>
 
@@ -226,7 +226,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="747" class="link-to-prism">src/app/editor/editor.component.ts:747</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="733" class="link-to-prism">src/app/editor/editor.component.ts:733</a></div>
                             </td>
                         </tr>
 
@@ -255,7 +255,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="748" class="link-to-prism">src/app/editor/editor.component.ts:748</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="734" class="link-to-prism">src/app/editor/editor.component.ts:734</a></div>
                             </td>
                         </tr>
 
@@ -299,15 +299,7 @@ import { FileService } from &#x27;../file.service&#x27;;
 import { File } from &#x27;../file&#x27;;
 import { Navigation } from &#x27;@angular/router&#x27;;
 
-@Component({
-  selector: &#x27;app-editor&#x27;,
-  templateUrl: &#x27;./editor.component.html&#x27;,
-  styleUrls: [&#x27;./editor.component.scss&#x27;]
-})
-
-export class EditorComponent implements AfterViewInit {
-
-  /**Description
+/**Description
    * 
    * The life of the project, the editor component. Its functionality can be studied in 2 parts
    * 
@@ -326,6 +318,14 @@ export class EditorComponent implements AfterViewInit {
    * The structure supports file and folder creation, deletion and renaming
    * Provides a system for modularising code and running with various imports and dependencies
    */
+
+@Component({
+  selector: &#x27;app-editor&#x27;,
+  templateUrl: &#x27;./editor.component.html&#x27;,
+  styleUrls: [&#x27;./editor.component.scss&#x27;]
+})
+
+export class EditorComponent implements AfterViewInit {
 
   @ViewChild(&#x27;codeEditor&#x27;) private editor: ElementRef&lt;HTMLElement&gt;;
   private aceEditor : ace.Ace.Editor;
@@ -430,10 +430,10 @@ int main() {
     }
   }
 
-  openDialog(text: String, text2:String, rename &#x3D; false,oldName&#x3D;&#x27;&#x27;,url&#x3D;&#x27;&#x27;){
-    /**
+   /** Description
      * Function creates a pop up component of Editor-dialog to get name of new File/Folder or new name of existing
      */
+  openDialog(text: String, text2:String, rename &#x3D; false,oldName&#x3D;&#x27;&#x27;,url&#x3D;&#x27;&#x27;){
     var filename;
     let dialogRef &#x3D; this.dialog.open(EditorDialogComponent, {
       data: {filename: filename, text: text, text2: text2}});
@@ -477,12 +477,11 @@ int main() {
 
   // ---------------FOLDER EDITINGS---------------------
 
-  insert(url:string): NavigationModel[] {
-    /**
+  /** Description
      * Create new list of objects containing the obtained files and folders
-     * Input:
-     *    url - local path address of objects inserted
+     * @param url local path address of objects inserted
      */
+  insert(url:string): NavigationModel[] {
     var temp: NavigationModel[] &#x3D; []
     for(var folder of this.folders) {
       const item: NavigationModel &#x3D; {
@@ -508,14 +507,13 @@ int main() {
     return temp;
   }
 
-  insertStructure(table: NavigationModel[], dir: string[], url: string): NavigationModel[] {
-    /**
+  /** Description
      * Insert list of files and folders at given local path location
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    url - local path address of objects inserted
+     * @param table list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param url local path address of objects inserted
      */
+  insertStructure(table: NavigationModel[], dir: string[], url: string): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       return this.insert(url);
     }
@@ -530,13 +528,12 @@ int main() {
     return table;
   }
 
-  deleteStructure(table: NavigationModel[], dir: string[]): NavigationModel[] {
-    /**
+  /** Description
      * Deletes all children of the folder but not folder itself
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
      */
+  deleteStructure(table: NavigationModel[], dir: string[]): NavigationModel[] {
     console.log(dir);
     if(dir.length &#x3D;&#x3D; 0) {
       var empty: NavigationModel[] &#x3D; [];
@@ -552,14 +549,13 @@ int main() {
     return table;
   }
 
-  deleteFolderStruc(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
-    /**
+  /** Description
      * Deletes folder and all its children
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    folder - string for name of folder to be deleted
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param folder string for name of folder to be deleted
      */
+  deleteFolderStruc(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       table &#x3D; table.filter(f&#x3D;&gt; f.isFile ||  f.title !&#x3D; folder)
       return table;
@@ -575,14 +571,13 @@ int main() {
     return table;
   }
 
-  editFolder(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
-    /**
+   /** Description
      * Creates new folder and adds to the list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    folder - string for name of new folder
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param folder string for name of new folder
      */
+  editFolder(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       var item: NavigationModel &#x3D; {
         title: folder,
@@ -604,13 +599,12 @@ int main() {
     return table;
   }
 
-  fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
-    /**
+  /** Description
      * Fix local path values for al children of renamed folder
-     * Input:
-     *    table - list of objects containing files and folders
-     *    url - name of new url of all objects in table
+     * @param table list of objects containing files and folders
+     * @param url name of new url of all objects in table
      */
+  fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
     console.log(url);
     for(var item of table){
       item.url &#x3D; url;
@@ -621,15 +615,14 @@ int main() {
     return table;
   }
 
-  renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
-    /**
+   /** Description
      * Renames an existing folder and updates local path values to objects in this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    newName - string for name of renamed folder
-     *    oldName - string for original name of folder
+     * @param table  list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param newName string for name of renamed folder
+     * @param oldName  string for original name of folder
      */
+  renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       for(var item of table){
         if(!item.isFile &amp;&amp; item.title &#x3D;&#x3D; oldName){
@@ -651,12 +644,11 @@ int main() {
     return table;
   }
 
-  saveFolder(foldername: NavigationModel): void{
-    /**
+  /** Description
      * Function calls FileService method to create new folder on backend database
-     * Input:
-     *    foldername - object containing folder name and local path location
+     * @param foldername object containing folder name and local path location
      */
+  saveFolder(foldername: NavigationModel): void{
     this.fileService.saveFile(
       {
         filename: &quot;trash.trash&quot;,
@@ -675,14 +667,13 @@ int main() {
       }); 
   }
 
-  newNameFolder(oldName: string, newName: string, url: string): void {
-    /**
+  /** Description
      * Function calls FileService method to rename folder on backend database
-     * Input:
-     *    oldName - string for original name of folder
-     *    newName - string for new name of folder
-     *    url - local path location for folder
+     * @param oldName string for original name of folder
+     * @param newName string for new name of folder
+     * @param url local path location for folder
      */
+  newNameFolder(oldName: string, newName: string, url: string): void {
     this.fileService.renameFile(
       {
         newName: newName, 
@@ -701,14 +692,13 @@ int main() {
 
   // ------------------------ FILE HELPERS -------------------
 
-  deleteFileStruc(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
-    /**
+  /** Description
      * Deletes file from this.list of objects
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    file - File object containing filename and code script
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param file File object containing filename and code script
      */
+  deleteFileStruc(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       table &#x3D; table.filter(f&#x3D;&gt; !f.isFile || f.file !&#x3D; file)
       return table;
@@ -724,14 +714,13 @@ int main() {
     return table;
   }
 
-  editFile(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
-    /**
+   /** Description
      * Creates new file and adds to the list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    file - File object containing filename and code script
+     * @param table list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param file File object containing filename and code script
      */
+  editFile(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       var flag: boolean &#x3D; false;
       for(var item of table) {
@@ -764,15 +753,14 @@ int main() {
     return table;
   }
 
-  renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
-    /**
+  /** Description
      * Renames an existing file in list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    newName - string for name of renamed file
-     *    oldName - string for original name of file
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param newName  string for name of renamed file
+     * @param oldName string for original name of file
      */
+  renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length &#x3D;&#x3D; 0) {
       for(var item of table){
         if(item.isFile &amp;&amp; item.title &#x3D;&#x3D; oldName){
@@ -792,13 +780,13 @@ int main() {
     return table;
   }
 
-  saveFile(filename &#x3D; this.currentfile): void{
-    /**
+  
+  /** Description
      * Function calls FileService method to create new file on backend database
-     * Input:
-     *    filename - File object containing filename and code script
+     * @param filename File object containing filename and code script
      */
-    if(!filename){
+  saveFile(filename &#x3D; this.currentfile): void{
+    if(filename.title&#x3D;&#x3D;&#x27;&#x27;){
       return this.openDialog(&quot;File&quot;,&quot;Create New File&quot;);
     }
     this.code &#x3D; this.aceEditor.session.getValue();
@@ -820,14 +808,13 @@ int main() {
       }); 
   }
 
-  newNameFile(oldName: string, newName: string, url: string): void {
-    /**
+  /** Description
      * Function calls FileService method to rename file on backend database
-     * Input:
-     *    oldName - string for original name of file
-     *    newName - string for new name of file
-     *    url - local path location for file
+     * @param oldName string for original name of file
+     * @param newName string for new name of file
+     * @param url local path location for file
      */
+  newNameFile(oldName: string, newName: string, url: string): void {
     this.fileService.renameFile(
       {
         newName: newName, 
@@ -844,13 +831,12 @@ int main() {
       });
   }
 
-  getFiles(newFolder: boolean, deleteFolder: boolean): void {
-    /**
+  /** Description
      * Function executed on ngInit and every time nested folder contents is to be viewed or closed
-     * Input:
-     *    newFolder - True if nested folder contents is to be viewed
-     *    deleteFolder - True if nested folder is closed
+     * @param newFolder True if nested folder contents is to be viewed
+     * @param deleteFolder True if nested folder is closed
      */
+  getFiles(newFolder: boolean, deleteFolder: boolean): void {
     this.fileService.getFiles(this.uservice.getUser(),this.dirk).subscribe(
       files &#x3D;&gt; {this.files&#x3D;files;
       this.folders &#x3D; this.files.filter(f&#x3D;&gt; f.filename &#x3D;&#x3D;&#x3D; &quot;trash.trash&quot;).map(f&#x3D;&gt;f.script)
@@ -936,13 +922,13 @@ int main() {
 
   // ------------------- EXECUTE CODE OPERATIONS -------------------
 
-  uploadSource(event) {
-    const file &#x3D; (event.target as HTMLInputElement).files[0];
-
-    /**
+  /** Description
      * Here, we use the typescript FileReader to upload files the same way we upload editor code
      * UPDATE : We would like to render the contents of the file into the editor in the next update
      */
+  uploadSource(event) {
+    const file &#x3D; (event.target as HTMLInputElement).files[0];
+
     let fileReader &#x3D; new FileReader();
     fileReader.onloadend &#x3D; (e) &#x3D;&gt; {
       this.fileString &#x3D; fileReader.result;
@@ -963,12 +949,12 @@ int main() {
     this.form.get(&#x27;input&#x27;).updateValueAndValidity();
   }
 
-  public runCode() {
-    /**
+  /** Description
      * Executed when the user presses the Run button, this function sends the editor content to the server
      * Along with the code, the &quot;input&quot; contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea
      */
+  public runCode() {
     this.code &#x3D; this.aceEditor.session.getValue();
     const send : RunInput &#x3D; {
       username : this.uservice.getUser(),
@@ -991,12 +977,12 @@ int main() {
       });
 }
 
-  runFile() {
-    /**
+  /** Description
      * Executed when the user presses the Run File button, this function sends the file content to the server
      * Along with the code, the &quot;input&quot; contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea
      */
+  runFile() {
     const send : RunInput &#x3D; {
       username : this.uservice.getUser(),
       script : this.fileString,
