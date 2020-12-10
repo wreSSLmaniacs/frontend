@@ -416,7 +416,7 @@ int main() {
   }
 
   saveFile(filename = this.currentfile): void{
-    if(!filename){
+    if(filename.title==''){
       return this.openDialog("File","Create New File");
     }
     this.code = this.aceEditor.session.getValue();
@@ -508,10 +508,7 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFileStruc(this.list,dirs,file.file);
-    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe(err=>{
-      alert("An error occurred");
-      console.log(err);
-    });
+    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe();
   }
 
   deleteFolder(folder: NavigationModel): void {
@@ -520,10 +517,7 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFolderStruc(this.list,dirs, folder.title);
-    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe(err=>{
-      alert("An error occurred");
-      console.log(err);
-    });
+    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe();
   }
 
   renameFile(file: NavigationModel): void {
