@@ -29,9 +29,7 @@ import { Navigation } from '@angular/router';
   styleUrls: ['./editor.component.scss']
 })
 
-export class EditorComponent implements AfterViewInit {
-
-  /**Description
+/**Description
    * 
    * The life of the project, the editor component. Its functionality can be studied in 2 parts
    * 
@@ -50,6 +48,7 @@ export class EditorComponent implements AfterViewInit {
    * The structure supports file and folder creation, deletion and renaming
    * Provides a system for modularising code and running with various imports and dependencies
    */
+export class EditorComponent implements AfterViewInit {
 
   @ViewChild('codeEditor') private editor: ElementRef<HTMLElement>;
   private aceEditor : ace.Ace.Editor;
@@ -154,10 +153,10 @@ int main() {
     }
   }
 
-  openDialog(text: String, text2:String, rename = false,oldName='',url=''){
-    /**
+   /** Description
      * Function creates a pop up component of Editor-dialog to get name of new File/Folder or new name of existing
      */
+  openDialog(text: String, text2:String, rename = false,oldName='',url=''){
     var filename;
     let dialogRef = this.dialog.open(EditorDialogComponent, {
       data: {filename: filename, text: text, text2: text2}});
@@ -201,12 +200,11 @@ int main() {
 
   // ---------------FOLDER EDITINGS---------------------
 
-  insert(url:string): NavigationModel[] {
-    /**
+  /** Description
      * Create new list of objects containing the obtained files and folders
-     * Input:
-     *    url - local path address of objects inserted
+     * @param url local path address of objects inserted
      */
+  insert(url:string): NavigationModel[] {
     var temp: NavigationModel[] = []
     for(var folder of this.folders) {
       const item: NavigationModel = {
@@ -232,14 +230,13 @@ int main() {
     return temp;
   }
 
-  insertStructure(table: NavigationModel[], dir: string[], url: string): NavigationModel[] {
-    /**
+  /** Description
      * Insert list of files and folders at given local path location
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    url - local path address of objects inserted
+     * @param table list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param url local path address of objects inserted
      */
+  insertStructure(table: NavigationModel[], dir: string[], url: string): NavigationModel[] {
     if(dir.length == 0) {
       return this.insert(url);
     }
@@ -254,13 +251,12 @@ int main() {
     return table;
   }
 
-  deleteStructure(table: NavigationModel[], dir: string[]): NavigationModel[] {
-    /**
+  /** Description
      * Deletes all children of the folder but not folder itself
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
      */
+  deleteStructure(table: NavigationModel[], dir: string[]): NavigationModel[] {
     console.log(dir);
     if(dir.length == 0) {
       var empty: NavigationModel[] = [];
@@ -276,14 +272,13 @@ int main() {
     return table;
   }
 
-  deleteFolderStruc(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
-    /**
+  /** Description
      * Deletes folder and all its children
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    folder - string for name of folder to be deleted
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param folder string for name of folder to be deleted
      */
+  deleteFolderStruc(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length == 0) {
       table = table.filter(f=> f.isFile ||  f.title != folder)
       return table;
@@ -299,14 +294,13 @@ int main() {
     return table;
   }
 
-  editFolder(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
-    /**
+   /** Description
      * Creates new folder and adds to the list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    folder - string for name of new folder
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param folder string for name of new folder
      */
+  editFolder(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length == 0) {
       var item: NavigationModel = {
         title: folder,
@@ -328,13 +322,12 @@ int main() {
     return table;
   }
 
-  fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
-    /**
+  /** Description
      * Fix local path values for al children of renamed folder
-     * Input:
-     *    table - list of objects containing files and folders
-     *    url - name of new url of all objects in table
+     * @param table list of objects containing files and folders
+     * @param url name of new url of all objects in table
      */
+  fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
     console.log(url);
     for(var item of table){
       item.url = url;
@@ -345,15 +338,14 @@ int main() {
     return table;
   }
 
-  renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
-    /**
+   /** Description
      * Renames an existing folder and updates local path values to objects in this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    newName - string for name of renamed folder
-     *    oldName - string for original name of folder
+     * @param table  list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param newName string for name of renamed folder
+     * @param oldName  string for original name of folder
      */
+  renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length == 0) {
       for(var item of table){
         if(!item.isFile && item.title == oldName){
@@ -375,12 +367,11 @@ int main() {
     return table;
   }
 
-  saveFolder(foldername: NavigationModel): void{
-    /**
+  /** Description
      * Function calls FileService method to create new folder on backend database
-     * Input:
-     *    foldername - object containing folder name and local path location
+     * @param foldername object containing folder name and local path location
      */
+  saveFolder(foldername: NavigationModel): void{
     this.fileService.saveFile(
       {
         filename: "trash.trash",
@@ -399,14 +390,13 @@ int main() {
       }); 
   }
 
-  newNameFolder(oldName: string, newName: string, url: string): void {
-    /**
+  /** Description
      * Function calls FileService method to rename folder on backend database
-     * Input:
-     *    oldName - string for original name of folder
-     *    newName - string for new name of folder
-     *    url - local path location for folder
+     * @param oldName string for original name of folder
+     * @param newName string for new name of folder
+     * @param url local path location for folder
      */
+  newNameFolder(oldName: string, newName: string, url: string): void {
     this.fileService.renameFile(
       {
         newName: newName, 
@@ -425,14 +415,13 @@ int main() {
 
   // ------------------------ FILE HELPERS -------------------
 
-  deleteFileStruc(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
-    /**
+  /** Description
      * Deletes file from this.list of objects
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    file - File object containing filename and code script
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param file File object containing filename and code script
      */
+  deleteFileStruc(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length == 0) {
       table = table.filter(f=> !f.isFile || f.file != file)
       return table;
@@ -448,14 +437,13 @@ int main() {
     return table;
   }
 
-  editFile(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
-    /**
+   /** Description
      * Creates new file and adds to the list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    file - File object containing filename and code script
+     * @param table list of objects containing files and folders
+     * @param dir  list of strings containing individual subdirectory names
+     * @param file File object containing filename and code script
      */
+  editFile(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length == 0) {
       var flag: boolean = false;
       for(var item of table) {
@@ -488,15 +476,14 @@ int main() {
     return table;
   }
 
-  renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
-    /**
+  /** Description
      * Renames an existing file in list of objects this.list
-     * Input:
-     *    table - list of objects containing files and folders
-     *    dir - list of strings containing individual subdirectory names
-     *    newName - string for name of renamed file
-     *    oldName - string for original name of file
+     * @param table list of objects containing files and folders
+     * @param dir list of strings containing individual subdirectory names
+     * @param newName  string for name of renamed file
+     * @param oldName string for original name of file
      */
+  renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length == 0) {
       for(var item of table){
         if(item.isFile && item.title == oldName){
@@ -516,12 +503,12 @@ int main() {
     return table;
   }
 
-  saveFile(filename = this.currentfile): void{
-    /**
+  
+  /** Description
      * Function calls FileService method to create new file on backend database
-     * Input:
-     *    filename - File object containing filename and code script
+     * @param filename File object containing filename and code script
      */
+  saveFile(filename = this.currentfile): void{
     if(filename.title==''){
       return this.openDialog("File","Create New File");
     }
@@ -544,14 +531,13 @@ int main() {
       }); 
   }
 
-  newNameFile(oldName: string, newName: string, url: string): void {
-    /**
+  /** Description
      * Function calls FileService method to rename file on backend database
-     * Input:
-     *    oldName - string for original name of file
-     *    newName - string for new name of file
-     *    url - local path location for file
+     * @param oldName string for original name of file
+     * @param newName string for new name of file
+     * @param url local path location for file
      */
+  newNameFile(oldName: string, newName: string, url: string): void {
     this.fileService.renameFile(
       {
         newName: newName, 
@@ -568,13 +554,12 @@ int main() {
       });
   }
 
-  getFiles(newFolder: boolean, deleteFolder: boolean): void {
-    /**
+  /** Description
      * Function executed on ngInit and every time nested folder contents is to be viewed or closed
-     * Input:
-     *    newFolder - True if nested folder contents is to be viewed
-     *    deleteFolder - True if nested folder is closed
+     * @param newFolder True if nested folder contents is to be viewed
+     * @param deleteFolder True if nested folder is closed
      */
+  getFiles(newFolder: boolean, deleteFolder: boolean): void {
     this.fileService.getFiles(this.uservice.getUser(),this.dirk).subscribe(
       files => {this.files=files;
       this.folders = this.files.filter(f=> f.filename === "trash.trash").map(f=>f.script)
@@ -627,10 +612,7 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFileStruc(this.list,dirs,file.file);
-    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe(err=>{
-      alert("An error occurred");
-      console.log(err);
-    });
+    this.fileService.deleteFile(file.title,this.uservice.getUser(), this.dirk).subscribe();
   }
 
   deleteFolder(folder: NavigationModel): void {
@@ -639,10 +621,7 @@ int main() {
     var dirs: string[] = this.dirk.split('/')
     dirs = dirs.splice(1);
     this.list = this.deleteFolderStruc(this.list,dirs, folder.title);
-    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe(err=>{
-      alert("An error occurred");
-      console.log(err);
-    });
+    this.fileService.deleteFolder(this.uservice.getUser(), drk).subscribe();
   }
 
   renameFile(file: NavigationModel): void {
@@ -660,13 +639,13 @@ int main() {
 
   // ------------------- EXECUTE CODE OPERATIONS -------------------
 
-  uploadSource(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-
-    /**
+  /** Description
      * Here, we use the typescript FileReader to upload files the same way we upload editor code
      * UPDATE : We would like to render the contents of the file into the editor in the next update
      */
+  uploadSource(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
     let fileReader = new FileReader();
     fileReader.onloadend = (e) => {
       this.fileString = fileReader.result;
@@ -687,12 +666,12 @@ int main() {
     this.form.get('input').updateValueAndValidity();
   }
 
-  public runCode() {
-    /**
+  /** Description
      * Executed when the user presses the Run button, this function sends the editor content to the server
      * Along with the code, the "input" contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea
      */
+  public runCode() {
     this.code = this.aceEditor.session.getValue();
     const send : RunInput = {
       username : this.uservice.getUser(),
@@ -715,12 +694,12 @@ int main() {
       });
 }
 
-  runFile() {
-    /**
+  /** Description
      * Executed when the user presses the Run File button, this function sends the file content to the server
      * Along with the code, the "input" contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea
      */
+  runFile() {
     const send : RunInput = {
       username : this.uservice.getUser(),
       script : this.fileString,
