@@ -522,7 +522,7 @@ int main() {
      * Input:
      *    filename - File object containing filename and code script
      */
-    if(!filename){
+    if(filename.title==''){
       return this.openDialog("File","Create New File");
     }
     this.code = this.aceEditor.session.getValue();
