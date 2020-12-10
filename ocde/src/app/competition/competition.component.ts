@@ -84,7 +84,7 @@ export class CompetitionComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     while(!this.startexecution) {;}
-    this.subscription = interval(1000)
+    this.subscription = interval(60000)
       .subscribe(x => { this.validate(); });
     this.cpservice.fetchCompetitionbyId(this.id).subscribe(
       (comp) => {
