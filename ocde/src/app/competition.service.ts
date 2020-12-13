@@ -9,7 +9,7 @@ import { Comp } from './comp';
 
 export class CompetitionService {
 
-  /**Description
+  /**
    * Provides access to multiple API endpoints
    * The service names are quite self explanatory
    */

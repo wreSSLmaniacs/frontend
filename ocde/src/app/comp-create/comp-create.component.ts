@@ -3,7 +3,6 @@ import { FormGroup,FormBuilder } from "@angular/forms";
 import { CompetitionService } from "../competition.service";
 
 /**
- * Description
  * This component is essentially a form. 
  * It lets you supply a problem and a testcase along with a schedule of your contest.
  * It uses Angular's NgxDateTimeModule and NgxMomentModule which uses Moment.js to accept Date and Time accurate to the minute.

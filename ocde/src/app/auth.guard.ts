@@ -6,7 +6,7 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
-/**Description
+/**
  * An essential class that implements CanActivate from router module.
  * This class been used to prevent the acess of the rest of the site to the user until the user is logged in.
  */

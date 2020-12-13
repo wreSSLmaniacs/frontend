@@ -191,8 +191,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-function which places the POST request and returns and Observable of New user type.</p>
+                    <div class="io-description"><p>function which places the POST request and returns and Observable of New user type.</p>
 </div>
 
                     <div class="io-description">
@@ -320,7 +319,7 @@ import { NewUser } from &#x27;./register/newuser&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-/**Description
+/**
  *A service used to register the user. Recive the details from the register component and make the API call.
  */
 export class RegService {
@@ -330,7 +329,7 @@ export class RegService {
   httpOptions &#x3D; {
     headers: new HttpHeaders({&#x27;Content-Type&#x27;:&#x27;application/json&#x27;})
   };
-  /**Description
+  /**
    * function which places the POST request and returns and Observable of New user type.
    */
   tryreg(user:NewUser):Observable&lt;NewUser&gt;{

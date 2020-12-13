@@ -6,7 +6,7 @@ import { NewUser } from './register/newuser';
 @Injectable({
   providedIn: 'root'
 })
-/**Description
+/**
  *A service used to register the user. Recive the details from the register component and make the API call.
  */
 export class RegService {
@@ -16,7 +16,7 @@ export class RegService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
   };
-  /**Description
+  /**
    * function which places the POST request and returns and Observable of New user type.
    */
   tryreg(user:NewUser):Observable<NewUser>{

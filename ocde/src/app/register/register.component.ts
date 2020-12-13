@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   errormessage:String="";/**< To store errormessages */
   imgerr:String="";/**<To store errors while posting images */
 
-  /**<Description
+  /**
    *  We create a Formgroup that we are using to collect the credentials and will POST it to the backend  
    */
   regForm = new FormGroup({
@@ -54,13 +54,13 @@ export class RegisterComponent implements OnInit {
   imgURL: any;
   public message: string;
 
-  /**Description
+  /**
    * This is function that listns to the click on choose file and sends an event
    */
   onFileListener(event){
     this.myfile = event.target.files[0];
   }
-  /**Description
+  /**
    * This function is used to pick an image to the file reader and then upload the image
    * and collect the url from the api to make further requests for the image when required.
    * @param files To store the file
@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  /**Description
+  /**
    * Validates all the fields in the input form and returns a boolean to activate/deactivate the register button
    */
   validate(): Boolean {
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
     return true;
   }
 
-  /**Description
+  /**
    * Function is used to upload an image to the backend and recieve an url for the image.
    */
   onUpload(){
@@ -121,7 +121,7 @@ export class RegisterComponent implements OnInit {
       });
   };
 
-  /**Description
+  /**
    * Function is used to submit the form credentials to the api to get the user registered.
    */
   onSubmit(){

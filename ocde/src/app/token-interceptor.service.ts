@@ -8,13 +8,13 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 
-/**Description
+/**
  * An important class for the frontend part of the authentication of the website.
  * The injectable class Tokeninterceptor implements HttpInterceptor class.
  */
 
 export class TokenInterceptorService implements HttpInterceptor{
-  /**Description
+  /**
    * Constructor to create an injector
    * @param injector To prevent a cyclic dependancy we use this injector
    */
@@ -27,7 +27,7 @@ export class TokenInterceptorService implements HttpInterceptor{
    */
   intercept(req,next){
     let logser = this.injector.get(LoginService);
-    /**Description
+    /**
      * If the token is set then, that means the token has been obtained after login, we will try to clone the request to not tamper with the original request.
      * To the cloned request we add a authization header with the appended unique token of the user, which makes our requests authorized.
      */

@@ -19,7 +19,7 @@ import 'ace-builds/src-noconflict/ext-beautify';
 
 import { CompetitionService } from '../competition.service';
 
-/**Description:
+/**
  * This component is essentially EditorComponent - File Handling + Live Rendering
  * 
  * The component has a Subscription which keeps checking that the contest is running

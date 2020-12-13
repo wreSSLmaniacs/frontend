@@ -364,8 +364,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-This is function that listns to the click on choose file and sends an event</p>
+                    <div class="io-description"><p>This is function that listns to the click on choose file and sends an event</p>
 </div>
 
                     <div class="io-description">
@@ -433,8 +432,7 @@ This is function that listns to the click on choose file and sends an event</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-Function is used to submit the form credentials to the api to get the user registered.</p>
+                    <div class="io-description"><p>Function is used to submit the form credentials to the api to get the user registered.</p>
 </div>
 
                     <div class="io-description">
@@ -475,8 +473,7 @@ Function is used to submit the form credentials to the api to get the user regis
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-Function is used to upload an image to the backend and recieve an url for the image.</p>
+                    <div class="io-description"><p>Function is used to upload an image to the backend and recieve an url for the image.</p>
 </div>
 
                     <div class="io-description">
@@ -517,8 +514,7 @@ Function is used to upload an image to the backend and recieve an url for the im
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-This function is used to pick an image to the file reader and then upload the image
+                    <div class="io-description"><p>This function is used to pick an image to the file reader and then upload the image
 and collect the url from the api to make further requests for the image when required.</p>
 </div>
 
@@ -592,8 +588,7 @@ and collect the url from the api to make further requests for the image when req
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-Validates all the fields in the input form and returns a boolean to activate/deactivate the register button</p>
+                    <div class="io-description"><p>Validates all the fields in the input form and returns a boolean to activate/deactivate the register button</p>
 </div>
 
                     <div class="io-description">
@@ -914,8 +909,7 @@ Validates all the fields in the input form and returns a boolean to activate/dea
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>&lt;Description
-We create a Formgroup that we are using to collect the credentials and will POST it to the backend  </p>
+                        <div class="io-description"><p>We create a Formgroup that we are using to collect the credentials and will POST it to the backend  </p>
 </div>
                     </td>
                 </tr>
@@ -982,7 +976,7 @@ export class RegisterComponent implements OnInit {
   errormessage:String&#x3D;&quot;&quot;;/**&lt; To store errormessages */
   imgerr:String&#x3D;&quot;&quot;;/**&lt;To store errors while posting images */
 
-  /**&lt;Description
+  /**
    *  We create a Formgroup that we are using to collect the credentials and will POST it to the backend  
    */
   regForm &#x3D; new FormGroup({
@@ -1010,13 +1004,13 @@ export class RegisterComponent implements OnInit {
   imgURL: any;
   public message: string;
 
-  /**Description
+  /**
    * This is function that listns to the click on choose file and sends an event
    */
   onFileListener(event){
     this.myfile &#x3D; event.target.files[0];
   }
-  /**Description
+  /**
    * This function is used to pick an image to the file reader and then upload the image
    * and collect the url from the api to make further requests for the image when required.
    * @param files To store the file
@@ -1042,7 +1036,7 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  /**Description
+  /**
    * Validates all the fields in the input form and returns a boolean to activate/deactivate the register button
    */
   validate(): Boolean {
@@ -1055,7 +1049,7 @@ export class RegisterComponent implements OnInit {
     return true;
   }
 
-  /**Description
+  /**
    * Function is used to upload an image to the backend and recieve an url for the image.
    */
   onUpload(){
@@ -1077,7 +1071,7 @@ export class RegisterComponent implements OnInit {
       });
   };
 
-  /**Description
+  /**
    * Function is used to submit the form credentials to the api to get the user registered.
    */
   onSubmit(){

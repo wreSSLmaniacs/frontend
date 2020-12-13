@@ -68,8 +68,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Description
-This component is the login system for our website.</p>
+        <p>This component is the login system for our website.</p>
 
     </p>
 
@@ -196,8 +195,7 @@ This component is the login system for our website.</p>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Description
-We define the constructor of the class hear</p>
+                            <div class="io-description"><p>We define the constructor of the class hear</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -307,8 +305,7 @@ We define the constructor of the class hear</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-This function will fetch the userid and the userimage after a authenticated login is made.</p>
+                    <div class="io-description"><p>This function will fetch the userid and the userimage after a authenticated login is made.</p>
 </div>
 
                     <div class="io-description">
@@ -388,8 +385,7 @@ This function will fetch the userid and the userimage after a authenticated logi
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-This function is to submit the form to the backend. We are also storing the username and the password of this user in myuser variable. This variable is sent through the POST request.</p>
+                    <div class="io-description"><p>This function is to submit the form to the backend. We are also storing the username and the password of this user in myuser variable. This variable is sent through the POST request.</p>
 </div>
 
                     <div class="io-description">
@@ -513,7 +509,7 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;
 import { LoginService } from &#x27;../login.service&#x27;;
 
-/** Description
+/**
  * This component is the login system for our website.
  */
 
@@ -537,7 +533,7 @@ export class LoginComponent implements OnInit {
     password:new FormControl(&#x27;&#x27;,Validators.required)
   })
 
-  /**Description
+  /**
    * We define the constructor of the class hear
    * @param logserv An instance of class login service
    * @param _router An instance of the class router
@@ -553,7 +549,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  /**Description
+  /**
    * This function will fetch the userid and the userimage after a authenticated login is made.
    */
   localcall(){
@@ -567,7 +563,7 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-  /**Description
+  /**
    * This function is to submit the form to the backend. We are also storing the username and the password of this user in myuser variable. This variable is sent through the POST request.
    */
   onSubmit(){
@@ -576,7 +572,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get(&#x27;password&#x27;).value,
     }
 
-    /**Description
+    /**
      * We are trying to make an API call and get a token, with the obtained token we are storing it in local storage, so that we can further use this token to authenticate further API calls.
      */
 

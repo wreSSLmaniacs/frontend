@@ -23,7 +23,7 @@ import { FileService } from '../file.service';
 import { File } from '../file';
 import { Navigation } from '@angular/router';
 
-/**Description
+/**
    * 
    * The life of the project, the editor component. Its functionality can be studied in 2 parts
    * 
@@ -40,7 +40,10 @@ import { Navigation } from '@angular/router';
    * 2. Directory Structure
    * The directory is stored as a recursive list of objects of class type NavigationModel
    * The structure supports file and folder creation, deletion and renaming
+   * 
    * Provides a system for modularising code and running with various imports and dependencies
+   * 
+   * The code for directory struture is with help of https://trungk18.com/experience/angular-recursive-view-render/
    */
 
 @Component({
@@ -154,7 +157,7 @@ int main() {
     }
   }
 
-   /** Description
+   /**
      * Function creates a pop up component of Editor-dialog to get name of new File/Folder or new name of existing
      */
   openDialog(text: String, text2:String, rename = false,oldName='',url=''){
@@ -201,7 +204,7 @@ int main() {
 
   // ---------------FOLDER EDITINGS---------------------
 
-  /** Description
+  /**
      * Create new list of objects containing the obtained files and folders
      * @param url local path address of objects inserted
      */
@@ -231,7 +234,7 @@ int main() {
     return temp;
   }
 
-  /** Description
+  /** 
      * Insert list of files and folders at given local path location
      * @param table list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
@@ -252,7 +255,7 @@ int main() {
     return table;
   }
 
-  /** Description
+  /**
      * Deletes all children of the folder but not folder itself
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
@@ -273,7 +276,7 @@ int main() {
     return table;
   }
 
-  /** Description
+  /**
      * Deletes folder and all its children
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
@@ -295,8 +298,8 @@ int main() {
     return table;
   }
 
-   /** Description
-     * Creates new folder and adds to the list of objects this.list
+   /**
+     * Creates new folder and adds to the list of objects  @param this.list
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param folder string for name of new folder
@@ -323,7 +326,7 @@ int main() {
     return table;
   }
 
-  /** Description
+  /**
      * Fix local path values for al children of renamed folder
      * @param table list of objects containing files and folders
      * @param url name of new url of all objects in table
@@ -339,8 +342,8 @@ int main() {
     return table;
   }
 
-   /** Description
-     * Renames an existing folder and updates local path values to objects in this.list
+   /**
+     * Renames an existing folder and updates local path values to objects in @param this.list
      * @param table  list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
      * @param newName string for name of renamed folder
@@ -368,7 +371,7 @@ int main() {
     return table;
   }
 
-  /** Description
+  /**
      * Function calls FileService method to create new folder on backend database
      * @param foldername object containing folder name and local path location
      */
@@ -391,7 +394,7 @@ int main() {
       }); 
   }
 
-  /** Description
+  /**
      * Function calls FileService method to rename folder on backend database
      * @param oldName string for original name of folder
      * @param newName string for new name of folder
@@ -416,8 +419,8 @@ int main() {
 
   // ------------------------ FILE HELPERS -------------------
 
-  /** Description
-     * Deletes file from this.list of objects
+  /**
+     * Deletes file from @param this.list of objects
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param file File object containing filename and code script
@@ -438,8 +441,8 @@ int main() {
     return table;
   }
 
-   /** Description
-     * Creates new file and adds to the list of objects this.list
+   /**
+     * Creates new file and adds to the list of objects @param this.list
      * @param table list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
      * @param file File object containing filename and code script
@@ -477,8 +480,8 @@ int main() {
     return table;
   }
 
-  /** Description
-     * Renames an existing file in list of objects this.list
+  /**
+     * Renames an existing file in list of objects @param this.list
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param newName  string for name of renamed file
@@ -505,7 +508,7 @@ int main() {
   }
 
   
-  /** Description
+  /** 
      * Function calls FileService method to create new file on backend database
      * @param filename File object containing filename and code script
      */
@@ -532,7 +535,7 @@ int main() {
       }); 
   }
 
-  /** Description
+  /**
      * Function calls FileService method to rename file on backend database
      * @param oldName string for original name of file
      * @param newName string for new name of file
@@ -555,7 +558,7 @@ int main() {
       });
   }
 
-  /** Description
+  /**
      * Function executed on ngInit and every time nested folder contents is to be viewed or closed
      * @param newFolder True if nested folder contents is to be viewed
      * @param deleteFolder True if nested folder is closed
@@ -646,7 +649,7 @@ int main() {
 
   // ------------------- EXECUTE CODE OPERATIONS -------------------
 
-  /** Description
+  /**
      * Here, we use the typescript FileReader to upload files the same way we upload editor code
      * UPDATE : We would like to render the contents of the file into the editor in the next update
      */
@@ -673,7 +676,7 @@ int main() {
     this.form.get('input').updateValueAndValidity();
   }
 
-  /** Description
+  /**
      * Executed when the user presses the Run button, this function sends the editor content to the server
      * Along with the code, the "input" contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea
@@ -701,7 +704,7 @@ int main() {
       });
 }
 
-  /** Description
+  /**
      * Executed when the user presses the Run File button, this function sends the file content to the server
      * Along with the code, the "input" contents are also sent to the server
      * The server responds with the output which is rendered in the output textarea

@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-/**Description
+/**
  * A class that has been used to define various functions that place the API calls.
  */
 export class LoginService {
   postUrl = 'http://127.0.0.1:8000/api/login'
   firstry = 'http://127.0.0.1:8000/auth/'
 
-  /**Description
+  /**
    * Constructor creates two instances
    * @param http  An instance of a HttpClient class
    * @param _router An instance of the Router class
@@ -25,7 +25,7 @@ export class LoginService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
   };
-  /**Description
+  /**
    * Function to get the token which will be used in site authentication
    * @param user Takes the login details as the input
    */

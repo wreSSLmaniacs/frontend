@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompetitionService } from "../competition.service";
 import { Comp } from "../comp"
 
-/** Description
+/**
  * This component renders the three types of competitions :
  * 1. Running
  * 2. Upcoming

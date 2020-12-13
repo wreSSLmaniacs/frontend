@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompetitionService } from '../competition.service';
 
-/**Description
+/**
  * This component lets a user view the contests that are over
  * It displays the problem statement along with their status
  * (solved/unsolved) and points obtained 

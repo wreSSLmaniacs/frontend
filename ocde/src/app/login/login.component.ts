@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../login.service';
 
-/** Description
+/**
  * This component is the login system for our website.
  */
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
 
-  /**Description
+  /**
    * We define the constructor of the class hear
    * @param logserv An instance of class login service
    * @param _router An instance of the class router
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  /**Description
+  /**
    * This function will fetch the userid and the userimage after a authenticated login is made.
    */
   localcall(){
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-  /**Description
+  /**
    * This function is to submit the form to the backend. We are also storing the username and the password of this user in myuser variable. This variable is sent through the POST request.
    */
   onSubmit(){
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password').value,
     }
 
-    /**Description
+    /**
      * We are trying to make an API call and get a token, with the obtained token we are storing it in local storage, so that we can further use this token to authenticate further API calls.
      */
 

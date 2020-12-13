@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-/** Description
+/**
  * This component performs the basic task of providing a loading screen
  */
 

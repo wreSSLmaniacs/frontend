@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class FileService {
 
-  /**Description
+  /**
    * Provides access to multiple API endpoints
    * The service names are quite self explanatory
    */

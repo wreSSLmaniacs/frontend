@@ -1,0 +1,4 @@
+BugFixes:
+1. Change isRunning query from 1 second to 1 minute interval
+2. Fix new file pop up on saving file
+3. Error message fixed on running code

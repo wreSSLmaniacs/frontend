@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription, interval } from "rxjs";
 import { Router } from "@angular/router";
 
-  /** Description
+  /**
    * This component displays the time remaining accurate to seconds for an event
    * Event datetime and type (a string specifying "start"/"end") are passed as @Input parameters
    * The element also refreshes the page when an event expires

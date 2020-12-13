@@ -209,8 +209,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-Function has been used to make a POST request and return the profile of the user.</p>
+                    <div class="io-description"><p>Function has been used to make a POST request and return the profile of the user.</p>
 </div>
 
                     <div class="io-description">
@@ -251,8 +250,7 @@ Function has been used to make a POST request and return the profile of the user
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Description
-Function has been used to make a POST request and return the details of the user to display in the profile.</p>
+                    <div class="io-description"><p>Function has been used to make a POST request and return the details of the user to display in the profile.</p>
 </div>
 
                     <div class="io-description">
@@ -413,7 +411,7 @@ import { Profile } from &#x27;./profile/profile&#x27;
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-/**Description
+/**
  * A class that has been used to make two service requests- The service to get the user and the service to get the details
  */
 export class ProfileService {
@@ -426,14 +424,14 @@ export class ProfileService {
     headers: new HttpHeaders({&#x27;Content-Type&#x27;:&#x27;application/json&#x27;})
   };
 
-  /**Description
+  /**
    * Function has been used to make a POST request and return the profile of the user.
    */
   getUser(){
     return this.http.post&lt;Profile&gt;(this.getUrl, this.httpOptions)
   }
 
-  /**Description
+  /**
    * Function has been used to make a POST request and return the details of the user to display in the profile.
    */
   getUserDetail(username : String){
