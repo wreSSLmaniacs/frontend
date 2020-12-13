@@ -27,14 +27,23 @@ export class CompetitionService {
 
   constructor(private http : HttpClient) { }
 
+  /**
+   * @returns List of all running competitions
+   */
   fetchRunningCompetetions() : Observable<Comp[]> {
     return this.http.get<Comp[]>(this.getRUrl);
   }
 
+  /**
+   * @returns List of all upcoming competitions
+   */
   fetchUpcomingCompetetions() : Observable<Comp[]> {
     return this.http.get<Comp[]>(this.getUUrl);
   }
 
+  /**
+   * @returns List of all past competitions
+   */
   fetchPastCompetetions() : Observable<Comp[]> {
     return this.http.get<Comp[]>(this.getPUrl);
   }
@@ -43,18 +52,30 @@ export class CompetitionService {
     return this.http.post<any>(this.postUrl,formData);
   }
 
+  /**
+   * @returns Competition details of contest with given id
+   */
   fetchCompetitionbyId(index) : Observable<Comp> {
     return this.http.get<Comp>(`${this.getUrl}/${index}`);
   }
 
+  /**
+   * @returns Success status of code
+   */
   submitCode(id,code) : Observable<String> {
     return this.http.post<String>(`${this.submitCodeUrl}/${id}`,code);
   }
 
+  /**
+   * @returns Success status of file
+   */
   submitFile(id,code) : Observable<String> {
     return this.http.post<String>(`${this.submitFileUrl}/${id}`,code);
   }
 
+  /**
+   * @returns Total points of given user
+   */
   fetchPoints() : Observable<number> {
     return this.http.get<number>(`${this.getPointsUrl}/${localStorage.getItem('username')}`);
   }

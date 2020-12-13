@@ -40,6 +40,7 @@ export class CompCreateComponent implements OnInit {
 
   /**
    * A simple boolean function which keeps the Create button disabled till all the relevant information is provided
+   * @returns True if all input fields are filled
    */
   validate(): Boolean {
     if(this.form.get('title').value=='') return false;

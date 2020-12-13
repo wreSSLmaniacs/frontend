@@ -424,8 +424,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">src/app/register/register.component.ts:127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">src/app/register/register.component.ts:128</a></div>
                 </td>
             </tr>
 
@@ -465,8 +465,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="105"
-                            class="link-to-prism">src/app/register/register.component.ts:105</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/register/register.component.ts:106</a></div>
                 </td>
             </tr>
 
@@ -580,8 +580,8 @@ and collect the url from the api to make further requests for the image when req
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="92"
-                            class="link-to-prism">src/app/register/register.component.ts:92</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/register/register.component.ts:93</a></div>
                 </td>
             </tr>
 
@@ -591,8 +591,14 @@ and collect the url from the api to make further requests for the image when req
                     <div class="io-description"><p>Validates all the fields in the input form and returns a boolean to activate/deactivate the register button</p>
 </div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>True if all input fields are filled</p>
 
                     </div>
                 </td>
@@ -1038,6 +1044,7 @@ export class RegisterComponent implements OnInit {
 
   /**
    * Validates all the fields in the input form and returns a boolean to activate/deactivate the register button
+   * @returns True if all input fields are filled
    */
   validate(): Boolean {
     if(this.regForm.get(&#x27;first_name&#x27;).value&#x3D;&#x3D;&#x27;&#x27;) return false;

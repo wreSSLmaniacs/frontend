@@ -286,8 +286,8 @@ It displays the problem statement along with their status
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="74"
-                            class="link-to-prism">src/app/pastcontest/pastcontest.component.ts:74</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/app/pastcontest/pastcontest.component.ts:75</a></div>
                 </td>
             </tr>
 
@@ -298,8 +298,14 @@ It displays the problem statement along with their status
 Used for loading screen rendering</p>
 </div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>True if all related API requests are over</p>
 
                     </div>
                 </td>
@@ -668,6 +674,7 @@ export class PastcontestComponent implements OnInit {
   /**
    * A simple boolean function to know the status of requests
    * Used for loading screen rendering
+   * @returns True if all related API requests are over
    */
   loaded(): Boolean {
     return this.gotContest &amp;&amp; this.gotPoints;

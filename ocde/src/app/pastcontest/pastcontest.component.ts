@@ -70,6 +70,7 @@ export class PastcontestComponent implements OnInit {
   /**
    * A simple boolean function to know the status of requests
    * Used for loading screen rendering
+   * @returns True if all related API requests are over
    */
   loaded(): Boolean {
     return this.gotContest && this.gotPoints;

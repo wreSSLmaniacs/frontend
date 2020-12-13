@@ -88,6 +88,7 @@ export class RegisterComponent implements OnInit {
 
   /**
    * Validates all the fields in the input form and returns a boolean to activate/deactivate the register button
+   * @returns True if all input fields are filled
    */
   validate(): Boolean {
     if(this.regForm.get('first_name').value=='') return false;

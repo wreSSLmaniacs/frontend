@@ -288,8 +288,8 @@ It uses Angular&#39;s NgxDateTimeModule and NgxMomentModule which uses Moment.js
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:53</a></div>
                 </td>
             </tr>
 
@@ -327,8 +327,8 @@ It uses Angular&#39;s NgxDateTimeModule and NgxMomentModule which uses Moment.js
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:87</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:88</a></div>
                 </td>
             </tr>
 
@@ -371,8 +371,8 @@ Alongside, it clears the form so that you can be ready to create another contest
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:59</a></div>
                 </td>
             </tr>
 
@@ -440,8 +440,8 @@ In a request, the file is accesible via request.FILES[&#39;filename&#39;]</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="69"
-                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:69</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:70</a></div>
                 </td>
             </tr>
 
@@ -506,8 +506,8 @@ In a request, the file is accesible via request.FILES[&#39;filename&#39;]</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/app/comp-create/comp-create.component.ts:45</a></div>
                 </td>
             </tr>
 
@@ -517,8 +517,14 @@ In a request, the file is accesible via request.FILES[&#39;filename&#39;]</p>
                     <div class="io-description"><p>A simple boolean function which keeps the Create button disabled till all the relevant information is provided</p>
 </div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>True if all input fields are filled</p>
 
                     </div>
                 </td>
@@ -770,6 +776,7 @@ export class CompCreateComponent implements OnInit {
 
   /**
    * A simple boolean function which keeps the Create button disabled till all the relevant information is provided
+   * @returns True if all input fields are filled
    */
   validate(): Boolean {
     if(this.form.get(&#x27;title&#x27;).value&#x3D;&#x3D;&#x27;&#x27;) return false;

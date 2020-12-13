@@ -159,6 +159,11 @@ int main() {
 
    /**
      * Function creates a pop up component of Editor-dialog to get name of new File/Folder or new name of existing
+     * @param text Text displayed on pop up window
+     * @param text2 Heading displayed on pop up window
+     * @param rename True if file/folder rename is called
+     * @param oldName original name of file/folder - non empty only if rename is True
+     * @param url path where new file/folder created or renamed
      */
   openDialog(text: String, text2:String, rename = false,oldName='',url=''){
     var filename;
@@ -207,6 +212,7 @@ int main() {
   /**
      * Create new list of objects containing the obtained files and folders
      * @param url local path address of objects inserted
+     * @returns New list containing details of all files and folders at given url
      */
   insert(url:string): NavigationModel[] {
     var temp: NavigationModel[] = []
@@ -239,6 +245,7 @@ int main() {
      * @param table list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
      * @param url local path address of objects inserted
+     * @returns New nested list containing details of all files and folders
      */
   insertStructure(table: NavigationModel[], dir: string[], url: string): NavigationModel[] {
     if(dir.length == 0) {
@@ -259,6 +266,7 @@ int main() {
      * Deletes all children of the folder but not folder itself
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
+     * @returns Updated nested list containing files and folders
      */
   deleteStructure(table: NavigationModel[], dir: string[]): NavigationModel[] {
     console.log(dir);
@@ -281,6 +289,7 @@ int main() {
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param folder string for name of folder to be deleted
+     * @returns Updated nested list with given folder deleted
      */
   deleteFolderStruc(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length == 0) {
@@ -299,10 +308,11 @@ int main() {
   }
 
    /**
-     * Creates new folder and adds to the list of objects  @param this.list
+     * Creates new folder and adds to the list of objects in this.list
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param folder string for name of new folder
+     * @returns Updated nested list after adding given folder
      */
   editFolder(table: NavigationModel[], dir: string[], folder: string): NavigationModel[] {
     if(dir.length == 0) {
@@ -330,6 +340,7 @@ int main() {
      * Fix local path values for al children of renamed folder
      * @param table list of objects containing files and folders
      * @param url name of new url of all objects in table
+     * @returns Updated nested list containing new urls after renaming
      */
   fixUrl(table: NavigationModel[],url: string): NavigationModel[] {
     console.log(url);
@@ -343,11 +354,12 @@ int main() {
   }
 
    /**
-     * Renames an existing folder and updates local path values to objects in @param this.list
+     * Renames an existing folder and updates local path values to objects in this.list
      * @param table  list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
      * @param newName string for name of renamed folder
      * @param oldName  string for original name of folder
+     * @returns Updated list with renamed folders and urls
      */
   renameListFolder(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length == 0) {
@@ -420,10 +432,11 @@ int main() {
   // ------------------------ FILE HELPERS -------------------
 
   /**
-     * Deletes file from @param this.list of objects
+     * Deletes file from this.list of objects
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param file File object containing filename and code script
+     * @returns Updated nested list after removing file
      */
   deleteFileStruc(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length == 0) {
@@ -442,10 +455,11 @@ int main() {
   }
 
    /**
-     * Creates new file and adds to the list of objects @param this.list
+     * Creates new file and adds to the list of objects this.list
      * @param table list of objects containing files and folders
      * @param dir  list of strings containing individual subdirectory names
      * @param file File object containing filename and code script
+     * @returns Updated nested list after adding file
      */
   editFile(table: NavigationModel[], dir: string[], file: File): NavigationModel[] {
     if(dir.length == 0) {
@@ -481,11 +495,12 @@ int main() {
   }
 
   /**
-     * Renames an existing file in list of objects @param this.list
+     * Renames an existing file in list of objects this.list
      * @param table list of objects containing files and folders
      * @param dir list of strings containing individual subdirectory names
      * @param newName  string for name of renamed file
      * @param oldName string for original name of file
+     * @returns Updated list with renamed file
      */
   renameListFile(table: NavigationModel[], dir: string[], newName: string, oldName: string): NavigationModel[] {
     if(dir.length == 0) {

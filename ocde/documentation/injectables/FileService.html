@@ -201,8 +201,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">src/app/file.service.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/file.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -267,7 +267,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>File details sent to delete</p>
+
                     </div>
                 </td>
             </tr>
@@ -295,8 +296,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/app/file.service.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/file.service.ts:63</a></div>
                 </td>
             </tr>
 
@@ -349,7 +350,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>File object containing success status</p>
+
                     </div>
                 </td>
             </tr>
@@ -377,8 +379,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/file.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/file.service.ts:46</a></div>
                 </td>
             </tr>
 
@@ -443,7 +445,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>Content of file at given path</p>
+
                     </div>
                 </td>
             </tr>
@@ -471,8 +474,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app/file.service.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/file.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -525,7 +528,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>List of all files and folders in immediate subdirectory of dirk</p>
+
                     </div>
                 </td>
             </tr>
@@ -553,8 +557,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/file.service.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/app/file.service.ts:72</a></div>
                 </td>
             </tr>
 
@@ -619,7 +623,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>File details sent to post</p>
+
                     </div>
                 </td>
             </tr>
@@ -647,8 +652,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/file.service.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/file.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -713,7 +718,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>File details sent to post</p>
+
                     </div>
                 </td>
             </tr>
@@ -861,34 +867,52 @@ export class FileService {
     headers : new HttpHeaders({&#x27;Content-Type&#x27;:&#x27;application/json&#x27;})
   };
 
+  /**
+   * @returns File details sent to post
+   */
   saveFile(input: File, username: String, dirk: String): Observable&lt;File&gt;{
     const url &#x3D; &#x60;${this.postUrl}/${username}/${dirk}&#x60;;
     return this.http.post&lt;File&gt;(url,input,this.httpOptions);
   }
 
+  /**
+   * @returns List of all files and folders in immediate subdirectory of dirk
+   */
   getFiles(username: String, dirk: String): Observable&lt;File[]&gt; {
     const url &#x3D; &#x60;${this.postUrl}/${username}/${dirk}&#x60;;
     console.log(url);
     return this.http.get&lt;File[]&gt;(url);
   }
 
+  /**
+   * @returns Content of file at given path
+   */
   getFile(id: String, username: String, dirk: String): Observable&lt;File&gt; {
     const url &#x3D; &#x60;${this.postUrl}/${username}/${dirk}/${id}&#x60;;
     return this.http.get&lt;File&gt;(url)
   }
 
+  /**
+   * @returns File details sent to delete
+   */
   deleteFile(id: String, username: String, dirk: String): Observable&lt;File&gt; {
     const url &#x3D; &#x60;${this.postUrl}/${username}/${dirk}/${id}&#x60;;
     console.log(url);
     return this.http.delete&lt;File&gt;(url);
   }
 
+  /**
+   * @returns File object containing success status
+   */
   deleteFolder(username: String, dirk: String): Observable&lt;File&gt; {
     const url &#x3D; &#x60;${this.postUrl}/${username}/${dirk}&#x60;;
     console.log(url);
     return this.http.delete&lt;File&gt;(url);
   }
 
+  /**
+   * @returns File details sent to post
+   */
   renameFile(input: RenameFile, dirk: string, username:string): Observable&lt;RenameFile&gt;{
     const url &#x3D; &#x60;${this.renameUrl}/${username}/${dirk}&#x60;;
     console.log(input);
